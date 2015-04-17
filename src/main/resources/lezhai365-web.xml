@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ - Copyright 1999-2011 Alibaba Group.
+ -  
+ - Licensed under the Apache License, Version 2.0 (the "License");
+ - you may not use this file except in compliance with the License.
+ - You may obtain a copy of the License at
+ -  
+ -      http://www.apache.org/licenses/LICENSE-2.0
+ -  
+ - Unless required by applicable law or agreed to in writing, software
+ - distributed under the License is distributed on an "AS IS" BASIS,
+ - WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ - See the License for the specific language governing permissions and
+ - limitations under the License.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-3.0.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+       http://code.alibabatech.com/schema/dubbo
+       http://code.alibabatech.com/schema/dubbo/dubbo.xsd ">
+
+    <dubbo:application name="www.lezhai365.com-master" /> 
+    <dubbo:registry address="${dubbo.registry}" />
+    <!--<dubbo:registry address="zookeeper://192.168.1.110:2181" />-->  
+    <!--base-api  start-->
+    <!-- 乐宅365 基础用户相关服务调用(base-api)-->
+    <dubbo:reference  id="userAccountService" interface="com.lezhai365.base.spi.user.IUserAccountService" />
+    <dubbo:reference  id="personalUserService"  interface="com.lezhai365.base.spi.user.IPersonalUserService"/>
+    <dubbo:reference  id="pmcUserService"  interface="com.lezhai365.base.spi.user.IPmcUserService"/>
+    <dubbo:reference  id="merchantUserService"  interface="com.lezhai365.base.spi.user.IMerchantUserService"/>
+    <dubbo:reference  id="housingEstateService" interface="com.lezhai365.base.spi.estate.IHousingEstateService" />
+    <!-- 乐宅365 调用 基础地理位置相关服务-->
+    <dubbo:reference id="locationService"   interface="com.lezhai365.base.spi.location.ILocationService" />
+    <!-- 乐宅365 发送邮件相关服务-->
+    <dubbo:reference id="mailService"   interface="com.lezhai365.base.spi.mail.IMailService" />
+    <!-- 调用SNS相关业务服务-->
+    <dubbo:reference id="ogoodsService"     interface="com.lezhai365.sns.spi.ogoods.IOgoodsService" />
+    <dubbo:reference id="activityService"   interface="com.lezhai365.sns.spi.activity.IActivityService" /> 
+    <dubbo:reference id="questionService"   interface="com.lezhai365.sns.spi.question.IQuestionService" />
+    <dubbo:reference id="feedService"   interface="com.lezhai365.sns.spi.feed.IFeedService" />
+    <dubbo:reference id="twitterService"   interface="com.lezhai365.sns.spi.feed.ITwitterService" />
+    <dubbo:reference id="messageService"   interface="com.lezhai365.base.spi.message.IMessageService" />
+
+    <!-- 乐宅365 物业系统相关服务调用-->
+    <dubbo:reference id="noticeService"   interface="com.lezhai365.pms.spi.office.INoticeService" />
+    <dubbo:reference id="complaintService" interface="com.lezhai365.pms.spi.service.IComplaintService"  />
+    <dubbo:reference id="repairService" interface="com.lezhai365.pms.spi.service.IRepairService"  />
+    <dubbo:reference id="ownerInfoService" interface="com.lezhai365.pms.spi.customer.IOwnerInfoService"  />
+    <dubbo:reference id="pmsParameterService" interface="com.lezhai365.pms.spi.system.IPmsParameterService"  />
+    <dubbo:reference id="pmsInitService" interface="com.lezhai365.pms.spi.init.IPmsInitService"  />
+    <dubbo:reference id="pmsService" interface="com.lezhai365.pms.spi.system.IPmsService"  />
+    <dubbo:reference id="financeCollectService" interface="com.lezhai365.pms.spi.finance.IFinanceCollectService"  />
+    <dubbo:reference id="houseService" interface="com.lezhai365.pms.spi.material.IHouseService"  />
+
+    <dubbo:reference id="SNSUserService" interface="com.lezhai365.pms.spi.sns.ISNSUserService"  />
+    <dubbo:reference id="SNSUserHouseService" interface="com.lezhai365.pms.spi.sns.ISNSUserHouseService" />
+    <dubbo:reference id="SNSFinanceCollectService" interface="com.lezhai365.pms.spi.sns.ISNSFinanceCollectService"  />
+    <dubbo:reference id="SNSRepairService" interface="com.lezhai365.pms.spi.sns.ISNSRepairService"  />
+    <dubbo:reference id="SNSComplaintService" interface="com.lezhai365.pms.spi.sns.ISNSComplaintService"  />
+    <dubbo:reference id="topicService" interface="com.lezhai365.sns.spi.topic.ITopicService"  />
+
+    <!--base-api  end-->
+</beans>
