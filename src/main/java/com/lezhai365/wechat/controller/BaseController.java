@@ -4,10 +4,15 @@ import com.lezhai365.base.spi.user.IUserAccountService;
 import com.lezhai365.common.config.WebAppConfig;
 import com.lezhai365.common.model.CacheUser;
 import com.lezhai365.common.web.CommonController;
+import com.lezhai365.wechat.util.SignUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * @author :  Minty.Tong [tonglei@lezhai365.com]
@@ -20,50 +25,41 @@ import javax.servlet.http.HttpServletResponse;
  * @copyright :  Copyright(c) 2014 西安乐宅网络科技有限公司
  * @description :
  */
-@SuppressWarnings("ALL")
 @Controller
-public class BaseController extends CommonController{
+public class BaseController{
 
-    //登录页面视图地址
-    public static String SIGIN_VIEW_PAGE = "redirect:/account/signin";
+    public static String APPID = "";
+
+    public static String APPSECRET = "";
+
 
     @Autowired
     public IUserAccountService userAccountService;
 
-     /**
-     * <p>
-     * 根据cookie中的leid从redis cache中取,cache user
-     * 如果，cookie中存在leid,cache中不存在,则调用业务(UserAccountService.getCacheUser())
-     * 如果，cookie中不存在leid,需要用户重新登录
-     * </p>
-     *
+    /**
+     * 微信验证成为开发者
      * @param response
-     * @return CacheUser
+     * @param signature
+     * @param timestamp
+     * @param echostr
+     * @param nonce
+     * @throws IOException
      */
-    public CacheUser getCacheUser(HttpServletResponse response) {
-        CacheUser cacheUser = null;
-        String userId = "";
-        String time = "";
-        String strUserId = getLeIdFromClient();
-        String[] objs = getUserIdAndTimeFromClient(strUserId);
-        if (objs != null) {
-            userId = objs[0];
-            time = objs[1];
-        }
+    @RequestMapping(value="/wechatcheck/signin")
+    public void wechatCheck(
+            HttpServletResponse response,
+            @RequestParam String signature,//微信加密签名
+            @RequestParam String timestamp,// 时间戳
+            @RequestParam String echostr,  // 随机字符串
+            @RequestParam String nonce) throws IOException {   // 随机数
 
-        if (!"".equals(userId)) {
-            Object obj = redisCache.get(userId);
-            if (obj != null) {
-                cacheUser = (CacheUser) obj;
-            } else {
-                cacheUser = userAccountService.cacheUser(Long.parseLong(userId));
-            }
-            //重新设置cacheUser的存活时间
-            cacheUser.setExpireAt(WebAppConfig.APP_TOKEN_KEY_IDLE);
-            redisCache.put(userId, cacheUser,WebAppConfig.APP_TOKEN_KEY_IDLE);
-           //重置cookie的存活时间
-            updateCookie(response);
+        PrintWriter out = response.getWriter();
+        // 通过检验signature对请求进行校验，若校验成功则原样返回echostr，表示接入成功，否则接入失败
+        if (SignUtil.checkSignature(signature, timestamp, nonce)) {
+            out.print(echostr);
         }
-        return cacheUser;
+        out.close();
+        out = null;
     }
+
 }
