@@ -1,0 +1,531 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+/* line 5, ../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+/* line 22, ../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+html {
+  line-height: 1;
+}
+
+/* line 24, ../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none;
+}
+
+/* line 26, ../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 28, ../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+/* line 30, ../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+  quotes: none;
+}
+/* line 103, ../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+/* line 32, ../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none;
+}
+
+/* line 116, ../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block;
+}
+
+/* line 99, ../sass/_variables.scss */
+body {
+  background: #ebebeb;
+}
+
+.mobileframe {
+  background: #EEE;
+  overflow: hidden;
+  height: 640px;
+  margin-bottom: 40px;
+  position: relative;
+}
+/* mobile fram with bg*/
+.mobileframe.bg{
+  background: #FFF url(../img/bg.png) no-repeat left bottom;
+  background-size: contain;
+}
+
+/* line 103, ../sass/_variables.scss */
+.wx-icon {
+  text-align: center;
+  display: block;
+}
+
+/* line 108, ../sass/_variables.scss */
+.wx-icon-apple {
+  background: #4fab3d;
+  color: #ffffff;
+}
+/* line 94, ../sass/_variables.scss */
+.wx-icon-apple.wx-yang {
+  color: #4fab3d;
+}
+
+/* line 111, ../sass/_variables.scss */
+.wx-icon-bostonblue {
+  background: #3b91b4;
+  color: #ffffff;
+}
+/* line 94, ../sass/_variables.scss */
+.wx-icon-bostonblue.wx-yang {
+  color: #3b91b4;
+}
+
+/* line 114, ../sass/_variables.scss */
+.wx-icon-sanmarino {
+  background: #456cac;
+  color: #ffffff;
+}
+/* line 94, ../sass/_variables.scss */
+.wx-icon-sanmarino.wx-yang {
+  color: #456cac;
+}
+
+/* line 117, ../sass/_variables.scss */
+.wx-icon-blueviolet {
+  background: #6456b7;
+  color: #ffffff;
+}
+/* line 94, ../sass/_variables.scss */
+.wx-icon-blueviolet.wx-yang {
+  color: #6456b7;
+}
+
+/* line 120, ../sass/_variables.scss */
+.wx-icon-deeplilac {
+  background: #9955bb;
+  color: #ffffff;
+}
+/* line 94, ../sass/_variables.scss */
+.wx-icon-deeplilac.wx-yang {
+  color: #9955bb;
+}
+
+/* line 123, ../sass/_variables.scss */
+.wx-icon-mulberry {
+  background: #c54b8c;
+  color: #ffffff;
+}
+/* line 94, ../sass/_variables.scss */
+.wx-icon-mulberry.wx-yang {
+  color: #c54b8c;
+}
+
+/* line 126, ../sass/_variables.scss */
+.wx-icon-darkcoral {
+  background: #cd5b45;
+  color: #ffffff;
+}
+/* line 94, ../sass/_variables.scss */
+.wx-icon-darkcoral.wx-yang {
+  color: #cd5b45;
+}
+
+/* line 129, ../sass/_variables.scss */
+.wx-icon-rawsienna {
+  background: #d27d46;
+  color: #ffffff;
+}
+/* line 94, ../sass/_variables.scss */
+.wx-icon-rawsienna.wx-yang {
+  color: #d27d46;
+}
+
+/* line 132, ../sass/_variables.scss */
+.wx-icon-tussock {
+  background: #c5884b;
+  color: #ffffff;
+}
+/* line 94, ../sass/_variables.scss */
+.wx-icon-tussock.wx-yang {
+  color: #c5884b;
+}
+
+/* line 135, ../sass/_variables.scss */
+.wx-icon-turmeric {
+  background: #cabb48;
+  color: #ffffff;
+}
+/* line 94, ../sass/_variables.scss */
+.wx-icon-turmeric.wx-yang {
+  color: #cabb48;
+}
+
+/* line 138, ../sass/_variables.scss */
+.wx-icon-wattle {
+  background: #dcd747;
+  color: #ffffff;
+}
+/* line 94, ../sass/_variables.scss */
+.wx-icon-wattle.wx-yang {
+  color: #dcd747;
+}
+
+/* line 141, ../sass/_variables.scss */
+.wx-icon-androidgreen {
+  background: #a4c639;
+  color: #ffffff;
+}
+/* line 94, ../sass/_variables.scss */
+.wx-icon-androidgreen.wx-yang {
+  color: #a4c639;
+}
+
+/* line 144, ../sass/_variables.scss */
+.wx-yang {
+  background: transparent;
+}
+/* line 146, ../sass/_variables.scss */
+.wx-yang * {
+  display: block;
+}
+
+/* line 151, ../sass/_variables.scss */
+.wx-item {
+  display: block;
+}
+
+/* line 1, ../sass/_messages.scss */
+.wx-messages {
+  list-style: none;
+}
+/* line 3, ../sass/_messages.scss */
+.wx-messages > .wx-item {
+  background: #ffffff;
+  padding: 8px 12px;
+  border-top: 1px solid #ededed;
+}
+/* line 7, ../sass/_messages.scss */
+.wx-messages > .wx-item:first-child {
+  border-top: none;
+}
+/* line 10, ../sass/_messages.scss */
+.wx-messages > .wx-item .wx-icon {
+  width: 48px;
+  height: 48px;
+  line-height: 48px;
+  font-size: 32px;
+  margin-right: 10px;
+  float: left;
+}
+/* line 86, ../sass/_variables.scss */
+.wx-messages > .wx-item .wx-icon.wx-yang {
+  font-size: 48px;
+}
+/* line 15, ../sass/_messages.scss */
+.wx-messages > .wx-item .wx-name {
+  height: 26px;
+  line-height: 26px;
+  font-size: 16px;
+  color: #353535;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-right: 60px;
+}
+
+/* line 19, ../sass/_messages.scss */
+.wx-messages > .wx-item .wx-content {
+  height: 22px;
+  line-height: 22px;
+  font-size: 14px;
+  color: #aaaaaa;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-right: 40px;
+}
+/* line 23, ../sass/_messages.scss */
+.wx-messages > .wx-item .wx-time {
+  height: 20px;
+  line-height: 20px;
+  font-size: 12px;
+  color: #bbbbbb;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  float: right;
+}
+
+/* line 1, ../sass/_contacts.scss */
+.wx-contacts {
+  background: #ffffff;
+  list-style: none;
+  padding: 0 12px;
+}
+/* line 5, ../sass/_contacts.scss */
+.wx-contacts > .wx-item {
+  padding: 8px 0;
+  border-top: 1px solid #ededed;
+}
+/* line 8, ../sass/_contacts.scss */
+.wx-contacts > .wx-item:first-child {
+  border-top: none;
+}
+/* line 11, ../sass/_contacts.scss */
+.wx-contacts > .wx-item .wx-icon {
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+  font-size: 24px;
+  margin-right: 10px;
+  float: left;
+}
+/* line 86, ../sass/_variables.scss */
+.wx-contacts > .wx-item .wx-icon.wx-yang {
+  font-size: 36px;
+}
+/* line 16, ../sass/_contacts.scss */
+.wx-contacts > .wx-item .wx-name {
+  height: 36px;
+  line-height: 36px;
+  font-size: 16px;
+  color: #353535;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* line 1, ../sass/_functions.scss */
+.wx-functions {
+  background: #ffffff;
+  /*padding: 0 12px;*/
+}
+/* line 4, ../sass/_functions.scss */
+.wx-functions > .wx-item {
+  padding: 12px 0;
+  border-top: 1px solid #ededed;
+}
+/* line 66, ../sass/_variables.scss */
+.wx-functions > .wx-item:first-child {
+  border-top: none;
+}
+/* line 7, ../sass/_functions.scss */
+.wx-functions > .wx-item .wx-icon {
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  font-size: 16px;
+  margin: 0 14px;
+  float: left;
+}
+/* line 86, ../sass/_variables.scss */
+.wx-functions > .wx-item .wx-icon.wx-yang {
+  font-size: 24px;
+}
+/* line 12, ../sass/_functions.scss */
+.wx-functions > .wx-item .wx-name {
+  height: 24px;
+  line-height: 24px;
+  font-size: 15px;
+  color: #333333;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.wx-item .wx-header {
+  height: 26px;
+  line-height: 26px;
+  font-size: 18px;
+  color: #333333;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align:center;
+}
+
+.wx-item .wx-header  .wx-icon{
+
+}
+
+
+/* line 1, ../sass/_settings.scss */
+.wx-settings {
+  background: #ffffff;
+  padding: 0 12px;
+}
+/* line 4, ../sass/_settings.scss */
+.wx-settings > .wx-item {
+  padding: 0 8px;
+  border-top: 1px solid #ededed;
+}
+/* line 66, ../sass/_variables.scss */
+.wx-settings > .wx-item:first-child {
+  border-top: none;
+}
+/* line 7, ../sass/_settings.scss */
+.wx-settings > .wx-item .wx-content {
+  height: 48px;
+  line-height: 48px;
+  font-size: 14px;
+  color: #aaaaaa;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  float: right;
+}
+/* line 11, ../sass/_settings.scss */
+.wx-settings > .wx-item .wx-name {
+  height: 48px;
+  line-height: 48px;
+  font-size: 16px;
+  color: #353535;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* line 2, ../sass/_group.scss */
+.wx-group > .wx-title {
+  height: 20px;
+  line-height: 20px;
+  font-size: 12px;
+  color: #888888;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-top: 3px;
+  padding: 0 12px;
+}
+/* line 6, ../sass/_group.scss */
+.wx-group > .wx-title:empty {
+  margin-top: 0;
+}
+
+.wx-group > .wx-space {
+  height: 10px;
+  line-height: 10px;
+  font-size: 12px;
+  color: #888888;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+}
+
+.bg .wx-group > .wx-space{
+  background: #EEE;
+}
+
+/*custom*/
+.wx-detail{
+  padding:14px 18px 28px 18px;
+  line-height: 26px;
+  text-indent: 24px;
+
+}
+.c-label{
+  display: inline-block;
+  height: 16px;
+  width: 16px;
+  vertical-align: middle;
+  background: #0DCCCC;
+}
+
+.text-indent-none{
+  text-indent: 0;
+}
+
+.text-c{
+  color: #0DCCCC;
+}
+
+.plc {
+  padding-left: 14px;
+}
+.wx-item .status{
+  font-size: 14px;
+  padding-top: 8px;
+  padding-left: 4px;
+  text-align:right;
+}
+.lh{
+  line-height: 24px;
+}
+
+.fiexd-b{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+.img-thumbnail{
+  width: 100px;
+  height: 100px;
+  border-radius: 0;
+}
+
+form .wx-name{
+  display: inline-block;
+}
+form .textarea{
+  width: 90%;
+  margin-left: 5%;
+  resize: inherit;
+}
+.feild {
+  float: right;
+  margin-right: 10px;
+  width: 61%;
+  /*border: transparent;*/
+}
+
+.upload-space{
+  height: 120px;
+  line-height: 120px;
+  font-size: 12px;
+  color: #888888;
+  overflow: hidden;
+}
+
+/*环保积分*/
+
+.env-box{
+  background: url(../img/env-box-bg.png) no-repeat left bottom;
+  background-size: contain;
+  height: 172px;
+  width: 100%;
+  padding:80px 40%
+}
+.env-box .env-statis{
+}
