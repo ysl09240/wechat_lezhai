@@ -519,13 +519,73 @@ form .textarea{
 }
 
 /*环保积分*/
-
+.env {}
+.env .wx-item{
+  padding:18px 12px;
+}
 .env-box{
   background: url(../img/env-box-bg.png) no-repeat left bottom;
   background-size: contain;
   height: 172px;
   width: 100%;
-  padding:80px 40%
+  padding: 105px 20% 1px 20%;
 }
 .env-box .env-statis{
+  padding: 10px;
+  background: #FFF;
+  border-radius: 3px;
+  box-shadow: 1px 1px 3px 0;
 }
+
+.env-statis .count{
+  font-weight:bold;
+}
+.env-statis .text-r {
+  color:rgb(243,93,48);
+}
+
+.env-statis li{
+  float: left;
+}
+
+.env-statis li
+{
+  margin-left: 18px;
+}
+.env-statis .line {
+  height: 35px;
+  width: 2px;
+  border: 1px solid #888888;
+}
+
+.c-tab {
+  border: 1px solid #0DCCCC;
+  margin-top: 10px;
+  border-radius: 3px;
+}
+
+.c-tab .c-tab-item{
+  float:left;
+  padding: 8px 7%;
+  background: #FFF;
+}
+
+.c-tab-item.select {
+  background:#0DCCCC;
+  color:#FFF;
+}
+
+.c-tab-item a {
+  color:#0DCCCC;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.c-tab-item.select a {
+  color:#FFF;
+}
+
+.wx-item.bt-none{
+  border-top:none;
+}
+
