@@ -43,7 +43,7 @@ public class OwnersInfomationController extends BaseController {
     public ModelAndView profileView(
             @RequestParam String tab){
         ModelAndView mv = new ModelAndView();
-        Long userId = 110l;
+        Long userId = 351l;
         Map<String, Object> profile = personalUserService.queryPersonalDetail(userId);
         List<Map<String, Object>> estateList = housingEstateService.getEstateSimpleListByUserId(userId);
         mv.addObject("profile", profile);

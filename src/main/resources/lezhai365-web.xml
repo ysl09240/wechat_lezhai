@@ -33,8 +33,8 @@
        http://code.alibabatech.com/schema/dubbo/dubbo.xsd ">
 
     <dubbo:application name="www.lezhai365.com-master" /> 
-    <dubbo:registry address="${dubbo.registry}" />
-    <!--<dubbo:registry address="zookeeper://192.168.1.110:2181" />-->  
+    <!--<dubbo:registry address="${dubbo.registry}" />-->
+    <dubbo:registry address="zookeeper://127.0.0.1:2181" />
     <!--base-api  start-->
     <!-- 乐宅365 基础用户相关服务调用(base-api)-->
     <dubbo:reference  id="userAccountService" interface="com.lezhai365.base.spi.user.IUserAccountService" />
@@ -65,6 +65,11 @@
     <dubbo:reference id="financeCollectService" interface="com.lezhai365.pms.spi.finance.IFinanceCollectService"  />
     <dubbo:reference id="houseService" interface="com.lezhai365.pms.spi.material.IHouseService"  />
 
+    <!-- wechat 相关服务调用 -->
+    <dubbo:reference id="ownersInfomationService" interface="com.lezhai365.pms.spi.wechat.IOwnersInfomationService"  />
+    <dubbo:reference id="propertyManagerService" interface="com.lezhai365.pms.spi.wechat.IPropertyManagerService"  />
+    <dubbo:reference id="propertyServiceService" interface="com.lezhai365.pms.spi.wechat.IPropertyServiceService"  />
+    <dubbo:reference id="wasteIntegralService" interface="com.lezhai365.pms.spi.waste.IWasteIntegralService" />
     <dubbo:reference id="SNSUserService" interface="com.lezhai365.pms.spi.sns.ISNSUserService"  />
     <dubbo:reference id="SNSUserHouseService" interface="com.lezhai365.pms.spi.sns.ISNSUserHouseService" />
     <dubbo:reference id="SNSFinanceCollectService" interface="com.lezhai365.pms.spi.sns.ISNSFinanceCollectService"  />

@@ -3,9 +3,7 @@ package com.lezhai365.wechat.account;
 import com.lezhai365.pms.sns.PersonalAuth;
 import com.lezhai365.pms.sns.PersonalCheck;
 import com.lezhai365.wechat.controller.BaseController;
-import de.ruedigermoeller.serialization.annotations.Conditional;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -22,7 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping(value="/account")
 public class AccountController extends BaseController {
-
+    public  static Long userId = 8l;
     @RequestMapping(value="/applyAuth")
     public ModelAndView applyAuthenticationView(){
         ModelAndView mv = new ModelAndView();

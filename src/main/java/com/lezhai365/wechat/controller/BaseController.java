@@ -33,8 +33,8 @@ public class BaseController{
     public static String APPSECRET = "";
 
 
-    @Autowired
-    public IUserAccountService userAccountService;
+//    @Autowired
+//    public IUserAccountService userAccountService;
 
     /**
      * 微信验证成为开发者
