@@ -2,16 +2,15 @@ package com.lezhai365.wechat.propertyservice;
 
 import com.lezhai365.common.model.Page;
 import com.lezhai365.common.model.ResultObject;
+import com.lezhai365.pms.model.ComplaintInfo;
+import com.lezhai365.pms.model.FaultInfo;
 import com.lezhai365.pms.spi.waste.IWasteIntegralService;
 import com.lezhai365.pms.spi.wechat.IPropertyManagerService;
 import com.lezhai365.pms.spi.wechat.IPropertyServiceService;
 import com.lezhai365.wechat.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
@@ -38,39 +37,65 @@ public class PropertyServiceController extends BaseController {
 
     //账单查询
     @RequestMapping(value = "/billslist")
-    public ModelAndView getBillsList(){
+    public ModelAndView getBillsList(
+            @RequestParam(value = "pageSize", defaultValue = "10")Integer pageSize,
+            @RequestParam(value = "pageIndex", defaultValue = "1")Integer pageIndex){
         ModelAndView mv = new ModelAndView();
-
+        Long estateId = 110l;
+        Long houseInfoId = 110l;
+        Page<Map<String,Object>> billsList = propertyServiceService.queryPayBillsListByHouseInfoId(houseInfoId,estateId,pageIndex,pageSize);
+        mv.addObject("billsList",billsList);
+        mv.setViewName("");
         return mv;
     }
 
 
 
     //报修查询
-    public ModelAndView getFaultInfoList(){
+    public ModelAndView getFaultInfoList(
+            @RequestParam(value = "pageSize", defaultValue = "10")Integer pageSize,
+            @RequestParam(value = "pageIndex", defaultValue = "1")Integer pageIndex){
         ModelAndView mv = new ModelAndView();
+        Long estateId = 110l;
+        Long houseInfoId = 110l;
+        Page<Map<String,Object>> faultInfoList = propertyServiceService.queryFaultsByHouseInfoId(houseInfoId,estateId,pageIndex,pageSize);
+        mv.addObject("faultInfoList",faultInfoList);
+        mv.setViewName("");
 
         return mv;
     }
 
 
     //新增报修
-    public ModelAndView addFaultInfo(){
+    public ModelAndView addFaultInfo(
+            @ModelAttribute FaultInfo faultInfo){
         ModelAndView mv = new ModelAndView();
-
+        int flag = propertyServiceService.addFaultInfo(faultInfo);
+        if(flag>0){
+            mv.setViewName("");
+        }
         return mv;
     }
 
     //投诉查询
-    public ModelAndView getComplaintsList(){
+    public ModelAndView getComplaintsList(
+            @RequestParam(value = "pageSize", defaultValue = "10")Integer pageSize,
+            @RequestParam(value = "pageIndex", defaultValue = "1")Integer pageIndex){
         ModelAndView mv = new ModelAndView();
-
+        Long estateId = 110l;
+        Long houseInfoId = 110l;
+        Page<Map<String,Object>> complaintList = propertyServiceService.queryComplaintByHouseInfoId(houseInfoId,estateId,pageIndex,pageSize);
+        mv.addObject("complaintList",complaintList);
         return mv;
     }
     //新增投诉
-    public ModelAndView addComplaintInfo(){
+    public ModelAndView addComplaintInfo(
+            @ModelAttribute ComplaintInfo complaintInfo){
         ModelAndView mv = new ModelAndView();
-
+        int flag = propertyServiceService.addComplaintInfo(complaintInfo);
+        if(flag>0){
+            mv.setViewName("");
+        }
         return mv;
     }
 
