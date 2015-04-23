@@ -564,8 +564,8 @@ form .textarea{
   border-radius: 3px;
 }
 
-.c-tab .c-tab-item{
-  float:left;
+.c-tab .c-tab-item{;
+  float:left
   padding: 8px 7%;
   background: #FFF;
 }
