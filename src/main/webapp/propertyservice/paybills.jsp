@@ -39,16 +39,18 @@
                             <div class="wx-space"></div>
                             <ul class="wx-messages">
                                 <li class="wx-item">
-                                    <div class="pull-right prm pts text-c">￥778.87 </div>
+                                    <div class="pull-right prm pts text-c">￥<fmt:formatNumber pattern="0.00">${sumNotPayMap.sumMoney}</fmt:formatNumber> </div>
                                     <div class="wx-name">未缴金额合计:</div>
                                 </li>
                             </ul>
                         </div>
 
+                        <c:forEach var="item" items="${billsMap}">
+
                         <div class="wx-group">
-                            <%--<div class="wx-title">3月</div>--%>
+                            <div class="wx-title">${item.key}</div>
                             <ul class="wx-messages">
-                                <c:forEach var="bill" items="${billsList.content}">
+                                <c:forEach var="bill" items="${item.value}">
                                     <li class="wx-item">
                                         <div class="pull-right prm pts">
                                             <div class="fee">￥${bill.amountMoney}</div>
@@ -67,6 +69,7 @@
                                 </c:forEach>
                             </ul>
                         </div>
+                        </c:forEach>
                         <div class="wx-group fiexd-b">
                             <ul class="wx-functions">
                                 <li class="wx-item">
