@@ -15,8 +15,8 @@
     <title>wx demo</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="./assets/css/wx.css">
-    <link rel="stylesheet" href="./assets/css/common-space.css">
+    <link rel="stylesheet" href="/assets/css/wx.css">
+    <link rel="stylesheet" href="/assets/css/common-space.css">
     <style>
         body {padding-top: 40px; background: #666666; font-family: "Heiti SC", "DroidSansFallback",  "微软雅黑";}
     </style>

@@ -95,10 +95,24 @@ public class PropertyManagerController extends BaseController {
      * 服务指南
      * @return
      */
+    @RequestMapping(value="/guide")
     public ModelAndView getPropertyGuide(){
         ModelAndView mv = new ModelAndView();
+            mv.setViewName("propertymanager/guide");
         //common method
-        mv.setViewName("");
+        return mv;
+    }
+    /**
+     * 服务指南详情
+     * @return
+     */
+    @RequestMapping(value="/detail/guide")
+    public ModelAndView getPropertyGuideDetail(
+            @RequestParam Integer item){
+        ModelAndView mv = new ModelAndView();
+
+        mv.setViewName("propertymanager/guide_detail_"+item);
+        //common method
         return mv;
     }
 
@@ -106,9 +120,10 @@ public class PropertyManagerController extends BaseController {
      * 常用电话
      * @return
      */
+    @RequestMapping(value="/commonphone")
     public ModelAndView getCommonPhone(){
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("");
+        mv.setViewName("propertymanager/common_phone");
         return mv;
     }
 
