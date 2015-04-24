@@ -36,8 +36,8 @@
                             </li>
                         </ul>
                     </div>
-                    ${pmcId}
-                    <form id="addComplaintForm" action="/${pmcId}/service/do/addcomplaint">
+                    ${signinName}
+                    <form id="addComplaintForm" action="/${signinName}/service/do/addcomplaint">
                         <div class="wx-group">
                             <div class="upload-space"></div>
                             <ul class="wx-functions">

@@ -73,7 +73,7 @@
                         <div class="wx-group fiexd-b">
                             <ul class="wx-functions">
                                 <li class="wx-item">
-                                    <div class="wx-header "><a href="/${pmcId}/service/faultview" class="text-c">新增报修</a></div>
+                                    <div class="wx-header "><a href="/${signinName}/service/faultview" class="text-c">新增报修</a></div>
                                 </li>
                             </ul>
                         </div>

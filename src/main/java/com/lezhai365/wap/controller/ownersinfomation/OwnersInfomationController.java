@@ -25,7 +25,7 @@ import java.util.Map;
  * @description :
  */
 @Controller
-@RequestMapping(value="/{pmcId}/infomation")
+@RequestMapping(value="/{signinName}/infomation")
 public class OwnersInfomationController extends BaseController {
     @Autowired
     ISNSUserService SNSUserService;
