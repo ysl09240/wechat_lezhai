@@ -1,5 +1,6 @@
 package com.lezhai365.wap.controller.propertyservice;
 
+import com.lezhai365.common.model.CacheUser;
 import com.lezhai365.common.model.Page;
 import com.lezhai365.pms.model.ComplaintInfo;
 import com.lezhai365.pms.model.FaultInfo;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -40,42 +42,49 @@ public class PropertyServiceController extends BaseController {
     //账单查询
     @RequestMapping(value = "/billslist")
     public ModelAndView getBillsList(
+            HttpServletResponse response,
             @PathVariable Long pmcId,
             @RequestParam(value = "pageSize", defaultValue = "10")Integer pageSize,
             @RequestParam(value = "pageIndex", defaultValue = "1")Integer pageIndex){
         ModelAndView mv = new ModelAndView();
-        Long estateId = 103558l;
-        Long houseInfoId = 3464l;
-        Page<Map<String,Object>> billsPage = propertyServiceService.queryPayBillsListByHouseInfoId(houseInfoId, estateId, pageIndex, pageSize);
-        List<Map<String,Object>> billsList = billsPage.getContent();
 
-        /**
-         * {
-         *   "2015-02":[{},{}]
-         *   "2015-03":[{},{}]
-         *   "2015-04":[{},{}]
-         *   "2015-05":[{},{}]
-         * }
-         */
-        Map<String,List<Object>> billsMap = new HashMap<>();
-        for(Map<String,Object> map : billsList){
-           String key = (String) map.get("month");
-            if (billsMap.containsKey(key)){
-                List value= billsMap.get(key);
-                value.add(map);
-            } else {
-                List value = new ArrayList<Object>();
-                value.add(map);
-                billsMap.put(key,value);
+        CacheUser user = getCacheUser(response);
+        if(user != null ){
+            Long estateId = 103558l;
+            Long houseInfoId = 3464l;
+            Page<Map<String,Object>> billsPage = propertyServiceService.queryPayBillsListByHouseInfoId(houseInfoId, estateId, pageIndex, pageSize);
+            List<Map<String,Object>> billsList = billsPage.getContent();
+
+            /**
+             * {
+             *   "2015-02":[{},{}]
+             *   "2015-03":[{},{}]
+             *   "2015-04":[{},{}]
+             *   "2015-05":[{},{}]
+             * }
+             */
+            Map<String,List<Object>> billsMap = new HashMap<>();
+            for(Map<String,Object> map : billsList){
+                String key = (String) map.get("month");
+                if (billsMap.containsKey(key)){
+                    List value= billsMap.get(key);
+                    value.add(map);
+                } else {
+                    List value = new ArrayList<Object>();
+                    value.add(map);
+                    billsMap.put(key,value);
+                }
             }
+
+            Map<String,Object> sumNotPayMap = propertyServiceService.querySumNotPayBills(houseInfoId,estateId);
+
+            mv.addObject("sumNotPayMap",sumNotPayMap);
+            mv.addObject("billsMap",billsMap);
+            mv.setViewName("propertyservice/paybills");
+            mv.addObject("pmcId", pmcId);
+        } else{
+            mv.setViewName("redirect:/account/signin");
         }
-
-        Map<String,Object> sumNotPayMap = propertyServiceService.querySumNotPayBills(houseInfoId,estateId);
-
-        mv.addObject("sumNotPayMap",sumNotPayMap);
-        mv.addObject("billsMap",billsMap);
-        mv.setViewName("propertyservice/paybills");
-        mv.addObject("pmcId",pmcId);
         return mv;
     }
 
@@ -84,17 +93,24 @@ public class PropertyServiceController extends BaseController {
     //报修查询
     @RequestMapping(value="/faultlist")
     public ModelAndView getFaultInfoList(
+            HttpServletResponse response,
             @PathVariable Long pmcId,
             @RequestParam(value = "pageSize", defaultValue = "10")Integer pageSize,
             @RequestParam(value = "pageIndex", defaultValue = "1")Integer pageIndex){
         ModelAndView mv = new ModelAndView();
-        Long estateId = 103558l;
-        Long houseInfoId = 3464l;
-        Page<Map<String,Object>> faultInfoList = propertyServiceService.queryFaultsByHouseInfoId(houseInfoId,estateId,pageIndex,pageSize);
-        mv.addObject("faultInfoList",faultInfoList);
-        mv.setViewName("propertyservice/faults");
-        mv.addObject("pmcId",pmcId);
 
+        CacheUser user = getCacheUser(response);
+        if(user != null ){
+            Long estateId = 103558l;
+            Long houseInfoId = 3464l;
+            Page<Map<String,Object>> faultInfoList = propertyServiceService.queryFaultsByHouseInfoId(houseInfoId,estateId,pageIndex,pageSize);
+            mv.addObject("faultInfoList",faultInfoList);
+            mv.setViewName("propertyservice/faults");
+            mv.addObject("pmcId", pmcId);
+
+        } else{
+            mv.setViewName("redirect:/account/signin");
+        }
         return mv;
     }
 
