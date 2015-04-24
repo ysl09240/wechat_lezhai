@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/assets/css/wx.css">
     <link rel="stylesheet" href="/assets/css/common-space.css">
+
     <style>
         body {padding-top: 40px; background: #666666; font-family: "Heiti SC", "DroidSansFallback",  "微软雅黑";}
     </style>
@@ -63,7 +64,7 @@
                         <div class="wx-group fiexd-b">
                             <ul class="wx-functions">
                                 <li class="wx-item">
-                                    <div class="wx-header "><a href="/service/complaintview" class="text-c">新增投诉</a></div>
+                                    <div class="wx-header "><a href="/${pmcId}/service/complaintview" class="text-c">新增投诉</a></div>
                                 </li>
                             </ul>
                         </div>

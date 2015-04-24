@@ -30,7 +30,7 @@ import java.util.Map;
  * @description :
  */
 @Controller
-@RequestMapping(value="/account")
+@RequestMapping(value="/{pmcId}/account")
 public class AccountController extends BaseController {
 
     public  static Long userId = 8l;
