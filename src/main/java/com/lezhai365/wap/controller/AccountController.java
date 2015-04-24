@@ -8,6 +8,7 @@ import com.lezhai365.common.web.util.CookieUtil;
 import com.lezhai365.wechat.OauthService;
 import com.lezhai365.wechat.UserService;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,7 +31,7 @@ import java.util.Map;
  * @description :
  */
 @Controller
-@RequestMapping(value="/{pmcId}/account")
+@RequestMapping(value="/{signinName}/account")
 public class AccountController extends BaseController {
 
     public  static Long userId = 8l;
@@ -48,6 +49,7 @@ public class AccountController extends BaseController {
      */
     @RequestMapping(value="/wc_callback")
     public ModelAndView applyAuthenticationView(
+            @PathVariable String signinName,
             @RequestParam("code") String code,
             @RequestParam("state") String state){
 
@@ -67,7 +69,8 @@ public class AccountController extends BaseController {
         //TODO 带上微信用户信息,跳转到账号绑定页面
         mv.addObject("tokenInfo", tokenInfo);
         mv.addObject("userInfo", userInfo);
-        mv.setViewName("");
+        mv.addObject("signinName", signinName);
+        mv.setViewName("account/signup");
 
         return mv;
     }
