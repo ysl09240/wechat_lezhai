@@ -31,7 +31,7 @@ import java.util.Map;
  * @description :
  */
 @Controller
-@RequestMapping(value="/{signinName}/account")
+@RequestMapping(value="/account")
 public class AccountController extends BaseController {
 
     public  static Long userId = 8l;
@@ -47,9 +47,9 @@ public class AccountController extends BaseController {
      * @param state
      * @return
      */
-    @RequestMapping(value="/wc_callback")
+    @RequestMapping(value="/wx_callback")
     public ModelAndView applyAuthenticationView(
-            @PathVariable String signinName,
+            @RequestParam("pmcSigninName") String pmcSigninName,
             @RequestParam("code") String code,
             @RequestParam("state") String state){
 
@@ -69,7 +69,7 @@ public class AccountController extends BaseController {
         //TODO 带上微信用户信息,跳转到账号绑定页面
         mv.addObject("tokenInfo", tokenInfo);
         mv.addObject("userInfo", userInfo);
-        mv.addObject("signinName", signinName);
+        mv.addObject("signinName", pmcSigninName);
         mv.setViewName("account/signup");
 
         return mv;

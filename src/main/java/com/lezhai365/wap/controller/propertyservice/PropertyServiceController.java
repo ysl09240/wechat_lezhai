@@ -83,7 +83,7 @@ public class PropertyServiceController extends BaseController {
             mv.setViewName("propertyservice/paybills");
             mv.addObject("signinName", signinName);
         } else{
-            mv.setViewName("redirect:/"+signinName+"/account/signin");
+            mv.setViewName("redirect:/account/signin?pmcSigninName=" + signinName);
         }
         return mv;
     }
@@ -109,7 +109,7 @@ public class PropertyServiceController extends BaseController {
             mv.addObject("signinName", signinName);
 
         } else{
-            mv.setViewName("redirect:/"+signinName+"/account/signin");
+            mv.setViewName("redirect:/account/signin?pmcSigninName=" + signinName);
         }
         return mv;
     }
