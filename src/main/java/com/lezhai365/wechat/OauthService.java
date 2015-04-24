@@ -1,8 +1,10 @@
 package com.lezhai365.wechat;
 
+import com.alibaba.fastjson.JSONObject;
 import com.lezhai365.wechat.utils.ConfigUtil;
 import com.lezhai365.wechat.utils.HttpUtil;
 import com.lezhai365.wechat.utils.SignatureUtil;
+import org.apache.commons.lang.StringUtils;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -11,6 +13,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 /**
  * @author :  Huzi.Wang [huzi.wh@gmail.com]
@@ -44,56 +47,78 @@ public class OauthService {
     }
 
     /**
-     * 获取code
+     * 获取 code url
      *
      * @return
      * @throws UnsupportedEncodingException
      */
-    public String getCode() throws UnsupportedEncodingException {
+    public String getCodeUrl() throws UnsupportedEncodingException {
         Map<String, String> params = new HashMap<String, String>();
         params.put("appid", getAppid());
         params.put("response_type", "code");
         params.put("redirect_uri", ConfigUtil.REDIRECT_URI);
         params.put("scope", ConfigUtil.SCOPE); // snsapi_base（不弹出授权页面，只能拿到用户openid）snsapi_userinfo
         // （弹出授权页面，这个可以通过 openid 拿到昵称、性别、所在地）
-        params.put("state", "3");
+        params.put("state", "365#wechat_redirect");
         String para = SignatureUtil.createSign(params, false);
         return CODE_URI + "?" + para;
     }
 
     /**
+     *
      * 通过code 换取 access_token
-     * @param code
-     * @return
-     * @throws IOException
-     * @throws NoSuchProviderException
+     *
+     * @param code String
+     * @return Map<String,Object>
+     * @throws InterruptedException
+     * @throws ExecutionException
      * @throws NoSuchAlgorithmException
      * @throws KeyManagementException
+     * @throws IOException
+     * @throws NoSuchProviderException
      */
-    public String getToken(String code) throws Exception {
+    public JSONObject getTokenInfo(String code) throws Exception {
         Map<String, String> params = new HashMap<String, String>();
+        JSONObject tokenInfo = null;
         params.put("appid", getAppid());
         params.put("secret", getSecret());
         params.put("code", code);
         params.put("grant_type", "authorization_code");
-        return HttpUtil.get(TOKEN_URI, params);
+
+        String jsonStr = HttpUtil.get(TOKEN_URI, params);
+
+        if(StringUtils.isNotEmpty(jsonStr)){
+            JSONObject obj = JSONObject.parseObject(jsonStr);
+            if(obj.get("errcode") != null){
+                throw new Exception(obj.getString("errmsg"));
+            }
+            tokenInfo =  obj;
+        }
+
+        return tokenInfo;
     }
 
     /**
      * 刷新 access_token
      * @param refreshToken
      * @return
-     * @throws IOException
-     * @throws NoSuchProviderException
+     * @throws InterruptedException
+     * @throws ExecutionException
      * @throws NoSuchAlgorithmException
      * @throws KeyManagementException
+     * @throws IOException
+     * @throws NoSuchProviderException
      */
-    public String getRefreshToken(String refreshToken) throws Exception {
+    public Map<String,Object>  getRefreshToken(String refreshToken) throws InterruptedException, ExecutionException, NoSuchAlgorithmException, KeyManagementException, IOException, NoSuchProviderException {
         Map<String, String> params = new HashMap<String, String>();
         params.put("appid", getAppid());
         params.put("grant_type", "refresh_token");
         params.put("refresh_token", refreshToken);
-        return HttpUtil.get(REFRESH_TOKEN_URI, params);
+
+        String jsonStr = HttpUtil.get(REFRESH_TOKEN_URI, params);
+        Map<String,Object> tokenInfo = JSONObject.parseObject(jsonStr);
+
+        return tokenInfo;
     }
 
     public String getAppid() {
@@ -114,7 +139,7 @@ public class OauthService {
 
     public static void main(String[] args) throws UnsupportedEncodingException {
         OauthService ou = new OauthService();
-        String code = ou.getCode();
+        String code = ou.getCodeUrl();
         System.out.println(code);
     }
 }

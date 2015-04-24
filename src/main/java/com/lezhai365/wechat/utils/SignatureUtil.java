@@ -10,10 +10,7 @@ import java.net.URLEncoder;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -200,5 +197,20 @@ public class SignatureUtil {
             }
         }
         return false;
+    }
+
+    public static final boolean checkSignature(String token,String signature,String timestamp,String nonce){
+        List<String> params = new ArrayList<String>();
+        params.add(token);
+        params.add(timestamp);
+        params.add(nonce);
+        Collections.sort(params, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return o1.compareTo(o2);
+            }
+        });
+        String temp = params.get(0)+params.get(1)+params.get(2);
+        return SHA1.encode(temp).equals(signature);
     }
 }
