@@ -17,6 +17,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/assets/css/wx.css">
     <link rel="stylesheet" href="/assets/css/common-space.css">
+    <script src="/assets/libs/jquery/jquery-1.9.1.min.js"></script>
+    <script src="/assets/libs/jquery/plugins/jquery.validate.min.js"></script>
+    <script src="/assets/app/propertyservice/faultValidate.js"></script>
     <style>
         body {padding-top: 40px; background: #666666; font-family: "Heiti SC", "DroidSansFallback",  "微软雅黑";}
     </style>
@@ -34,7 +37,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <form method="post" action="/service/do/addfault">
+                        <form id="addFaultForm" method="post" action="/service/do/addfault">
                             <div class="wx-group">
                                 <div class="upload-space"></div>
                                 <ul class="wx-functions">
@@ -110,6 +113,7 @@
                                         <div class="wx-name">联系电话</div>
                                         <input class="feild" name="contactNumber"/>
                                     </li>
+                                    <span class="errorMessage" style="color:red"></span>
                                 </ul>
                             </div>
                             <div class="wx-group fiexd-b">

@@ -24,7 +24,7 @@ import java.util.Map;
  * @description :
  */
 @Controller
-@RequestMapping(value="/manager")
+@RequestMapping(value="/{pmcId}/manager")
 public class PropertyManagerController extends BaseController {
     @Autowired
     IPropertyManagerService propertyManagerService;

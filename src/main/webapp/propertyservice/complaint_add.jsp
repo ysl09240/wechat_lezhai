@@ -11,12 +11,14 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
     <title>wx demo</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/assets/css/wx.css">
     <link rel="stylesheet" href="/assets/css/common-space.css">
+    <script src="/assets/libs/jquery/jquery-1.9.1.min.js"></script>
+    <script src="/assets/libs/jquery/plugins/jquery.validate.min.js"></script>
+    <script src="/assets/app/propertyservice/complaintValidate.js"></script>
     <style>
         body {padding-top: 40px; background: #666666; font-family: "Heiti SC", "DroidSansFallback",  "微软雅黑";}
     </style>
@@ -34,7 +36,8 @@
                             </li>
                         </ul>
                     </div>
-                    <form action="/service/do/addcomplaint">
+                    ${pmcId}
+                    <form id="addComplaintForm" action="/${pmcId}/service/do/addcomplaint">
                         <div class="wx-group">
                             <div class="upload-space"></div>
                             <ul class="wx-functions">
@@ -63,8 +66,9 @@
                                     <i class="fa fa-coffee"></i>
                                 </span>
                                     <div class="wx-name">联系电话</div>
-                                    <input class="feild" name="contactNumber"/>
+                                    <input id="contactNumber" class="feild" name="contactNumber"/>
                                 </li>
+                                    <span class="errorMessage" style="color:red"></span>
                             </ul>
                         </div>
                         <div class="wx-group fiexd-b">
