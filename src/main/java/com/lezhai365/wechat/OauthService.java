@@ -1,8 +1,8 @@
-package com.lezhai365.wechat.base;
+package com.lezhai365.wechat;
 
-import com.lezhai365.wechat.util.ConfigUtil;
-import com.lezhai365.wechat.util.HttpUtil;
-import com.lezhai365.wechat.util.SignatureUtil;
+import com.lezhai365.wechat.utils.ConfigUtil;
+import com.lezhai365.wechat.utils.HttpUtil;
+import com.lezhai365.wechat.utils.SignatureUtil;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;

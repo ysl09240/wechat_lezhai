@@ -1,4 +1,4 @@
-package com.lezhai365.wechat.util;
+package com.lezhai365.wechat.utils;
 
 import java.io.IOException;
 import java.io.InputStream;

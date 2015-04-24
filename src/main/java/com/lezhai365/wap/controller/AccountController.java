@@ -1,9 +1,9 @@
-package com.lezhai365.wechat.account;
+package com.lezhai365.wap.controller;
 
 import com.lezhai365.pms.sns.PersonalAuth;
 import com.lezhai365.pms.sns.PersonalCheck;
-import com.lezhai365.wechat.base.OauthService;
-import com.lezhai365.wechat.controller.BaseController;
+import com.lezhai365.wechat.OauthService;
+import com.lezhai365.wap.controller.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

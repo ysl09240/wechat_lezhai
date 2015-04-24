@@ -1,11 +1,6 @@
-package com.lezhai365.wechat.controller;
+package com.lezhai365.wap.controller;
 
-import com.lezhai365.base.spi.user.IUserAccountService;
-import com.lezhai365.common.config.WebAppConfig;
-import com.lezhai365.common.model.CacheUser;
-import com.lezhai365.common.web.CommonController;
-import com.lezhai365.wechat.util.SignUtil;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.lezhai365.wechat.utils.SignUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

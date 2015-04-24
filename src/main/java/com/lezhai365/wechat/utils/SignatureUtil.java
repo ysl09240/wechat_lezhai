@@ -1,4 +1,4 @@
-package com.lezhai365.wechat.util;
+package com.lezhai365.wechat.utils;
 
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -20,7 +20,7 @@ import java.util.concurrent.ExecutionException;
  * @author :  Huzi.Wang [huzi.wh@gmail.com]
  * @version :  1.0
  * @encoding : UTF-8
- * @package : com.lezhai365.wechat.util
+ * @package : com.lezhai365.wechat.utils
  * @link :  http://lezhai365.com
  * @created on   :  2015-04-23
  * @copyright :  Copyright(c) 2013 西安乐宅网络科技有限公司

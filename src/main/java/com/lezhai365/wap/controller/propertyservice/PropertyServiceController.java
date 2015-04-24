@@ -1,13 +1,12 @@
-package com.lezhai365.wechat.propertyservice;
+package com.lezhai365.wap.controller.propertyservice;
 
 import com.lezhai365.common.model.Page;
-import com.lezhai365.common.model.ResultObject;
 import com.lezhai365.pms.model.ComplaintInfo;
 import com.lezhai365.pms.model.FaultInfo;
 import com.lezhai365.pms.spi.system.IPmsParameterService;
 import com.lezhai365.pms.spi.waste.IWasteIntegralService;
 import com.lezhai365.pms.spi.wechat.IPropertyServiceService;
-import com.lezhai365.wechat.controller.BaseController;
+import com.lezhai365.wap.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +19,7 @@ import java.util.*;
  * @author :  SongLin.Yang [ysl09240@gmail.com]
  * @version :  1.0
  * @encoding : UTF-8
- * @package : com.lezhai365.wechat.controller
+ * @package : com.lezhai365.wap.controller
  * @link :  http://lezhai365.com
  * @created on   :  15-4-20
  * @copyright :  Copyright(c) 2013 西安乐宅网络科技有限公司
