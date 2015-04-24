@@ -13,8 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * @author :  SongLin.Yang [ysl09240@gmail.com]
@@ -46,8 +46,34 @@ public class PropertyServiceController extends BaseController {
         ModelAndView mv = new ModelAndView();
         Long estateId = 103558l;
         Long houseInfoId = 3464l;
-        Page<Map<String,Object>> billsList = propertyServiceService.queryPayBillsListByHouseInfoId(houseInfoId,estateId,pageIndex,pageSize);
-        mv.addObject("billsList",billsList);
+        Page<Map<String,Object>> billsPage = propertyServiceService.queryPayBillsListByHouseInfoId(houseInfoId, estateId, pageIndex, pageSize);
+        List<Map<String,Object>> billsList = billsPage.getContent();
+
+        /**
+         * {
+         *   "2015-02":[{},{}]
+         *   "2015-03":[{},{}]
+         *   "2015-04":[{},{}]
+         *   "2015-05":[{},{}]
+         * }
+         */
+        Map<String,List<Object>> billsMap = new HashMap<>();
+        for(Map<String,Object> map : billsList){
+           String key = (String) map.get("month");
+            if (billsMap.containsKey(key)){
+                List value= billsMap.get(key);
+                value.add(map);
+            } else {
+                List value = new ArrayList<Object>();
+                value.add(map);
+                billsMap.put(key,value);
+            }
+        }
+
+        Map<String,Object> sumNotPayMap = propertyServiceService.querySumNotPayBills(houseInfoId,estateId);
+
+        mv.addObject("sumNotPayMap",sumNotPayMap);
+        mv.addObject("billsMap",billsMap);
         mv.setViewName("propertyservice/paybills");
         return mv;
     }
@@ -143,53 +169,16 @@ public class PropertyServiceController extends BaseController {
     }
 
     //环保积分
-    /**
-     * 查询我的积分和累计消费积分
-     * <pre>
-     *     url:http://localhost/mobile/{version}/waste/wasteIntegral/houseInfo/list
-     * </pre>
-     * @return ResultObject 返回的值
-     * <pre>
-     *  *     ResultObject中数据的格式
-     *       {
-     *        success:[true|false]  //请求是否成功    true:请求成功 false:请求失败
-     *        msg：'',              //服务端返回的提示信息
-     *        code:'',              //请求状态码 200成功
-     *        data:
-    {
-    "success": true,
-    "msg": null,
-    "code": "200",
-    "data": {
-    "id": 1,
-    "housingEstateId": 101560, //小区ID
-    "houseOwnerId": 2710,//业主ID
-    "num": 2710,//房间编号
-    "validIntegral": 3500,//有效积分
-    "usedIntegral": 0,//使用积分
-    "totalIntegral": 0,//总积分
-    "qrCode": "6231251",//二维码编号
-    "qrCodePic": null,//二维码图片
-    "createdTime": 1425704928716,//添加时间
-    "lastTime": 1425704928716,//最后积分时间
-    "name": "王冬强",//业主姓名
-    "mobilePhone": "13474294206"//业主电话
-    },
-    "login": true
-    }
-     * </pre>
-     * @throws Exception
-     */
-    @RequestMapping(value = {"/wasteIntegral/houseInfo/list"},method = RequestMethod.GET)
-    public ModelAndView queryWasteIntegralById(@RequestParam Long housingEstateId,
-                                               @RequestParam Long houseInfoId) throws Exception {
-        ResultObject resultObject = new ResultObject();
-        int result = 0;
+    @RequestMapping(value="/integral/list")
+    public ModelAndView getWasteIntegral(
+            @RequestParam String flag,
+            @RequestParam(value = "pageSize", defaultValue = "10") int pageSize,
+            @RequestParam(value = "pageIndex", defaultValue = "1") int pageIndex){
+        ModelAndView mv = new ModelAndView();
+        //我的积分
         Map<String, Object> integralInfo = wasteIntegralService.queryWasteIntegralByHouseInfoId(housingEstateId, houseInfoId);
-        resultObject.setSuccess(true);
-        resultObject.setCode("200");
         if (integralInfo != null){
-            resultObject.setData(integralInfo);
+            mv.addObject("integralInfo",integralInfo);
         }else{
             integralInfo = new HashMap<>();
             integralInfo.put("housingEstateId", "0");
@@ -197,216 +186,38 @@ public class PropertyServiceController extends BaseController {
             integralInfo.put("validIntegral", "0");
             integralInfo.put("usedIntegral", "0");
             integralInfo.put("totalIntegral", "0");
-            integralInfo.put("lastTime", System.currentTimeMillis());
+            integralInfo.put("lastTimeStr", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
             integralInfo.put("houseInfoId", "0");
-            resultObject.setData(integralInfo);
+            mv.addObject("integralInfo",integralInfo);
         }
-        return null;
-    }
-    /**
-     * 查询积分历史列表
-     * <pre>
-     *     url:http://localhost/mobile/{version}/waste/integralLog/list
-     * </pre>
-     * @return ResultObject 返回的值
-     * <pre>
-     *  *     ResultObject中数据的格式
-     *       {
-     *        success:[true|false]  //请求是否成功    true:请求成功 false:请求失败
-     *        msg：'',              //服务端返回的提示信息
-     *        code:'',              //请求状态码 200成功
-     *        data:
-     *        {
-    "success": true,
-    "msg": null,
-    "code": "200",
-    "data": {
-    "pageIndex": 1,
-    "next": 1,
-    "previous": 1,
-    "totalPage": 1,
-    "totalElements": 7,
-    "pageSize": 10,
-    "pageList": [
-    "1"
-    ],
-    "pageListSize": 10,
-    "content": [
-    {
-    "id": 9,
-    "housingEstateId": 101560, 小区ID
-    "houseOwnerId": 2710, 业主ID
-    "num": 2710, 房间ID
-    "wasteIntegralId": null,  积分ID
-    "wasteInfoId": null, 分类ID
-    "integralGrade": 600, 本次积分
-    "weight": 300, 本次垃圾重量
-    "unitPrice": 200, 本次积分单价
-    "isValided": 0, 是否有效
-    "remarks": null,
-    "createdTime": 1426219242652, 创建时间
-    "name": "王冬强", 业主名称
-    "mobilePhone": "13474294206", 业主电话
-    "wasteName": null 垃圾名称
-    }
-    ],
-    "offset": 10,
-    "first": false,
-    "last": true
-    },
-    "login": true
-    }
-     * </pre>
-     * @throws Exception
-     */
-    @RequestMapping(value = "/integralLog/list",method = RequestMethod.GET)
-    public ModelAndView queryWasteIntegraLogList(
-           @RequestParam(value = "pageSize", defaultValue = "10") int pageSize,
-           @RequestParam(value = "pageIndex", defaultValue = "1") int pageIndex){
-        ResultObject resultObject=new ResultObject();
         Map<String,Object> paramMap = new HashMap();
-
         paramMap.put("housingEstateId", housingEstateId);
         paramMap.put("houseInfoId", houseInfoId);
         paramMap.put("pageIndex", pageIndex);
         paramMap.put("pageSize", pageSize);
+        switch (flag){
+                case "iHistory"://积分查询
+                    Page<Map<String,Object>>  integralHistoryPage = wasteIntegralService.queryWasteIntegralLogList(paramMap);
+                    mv.addObject("integralHistoryPage",integralHistoryPage);
+                    break;
+                case "iExchange"://积分兑换
+                    Page<Map<String, Object>> integralExchangePage = wasteIntegralService.queryExchangeLogList(paramMap);
+                    mv.addObject("integralExchangePage",integralExchangePage);
+                    break;
+                case "iAdjust"://积分调整
+                    Page<Map<String, Object>> integralAdjustPage = wasteIntegralService.queryWasteIntegralChangeList(paramMap);
+                    mv.addObject("integralAdjustPage",integralAdjustPage);
+                    break;
+                default:
+                    integralHistoryPage = wasteIntegralService.queryWasteIntegralLogList(paramMap);
+                    mv.addObject("integralHistoryPage",integralHistoryPage);
+                    break;
 
-        Page<Map<String, Object>> integraLogPage = wasteIntegralService.queryWasteIntegralLogList(paramMap);
-        resultObject.setData(integraLogPage);
-        return null;
+        }
+        mv.setViewName("propertyservice/integral");
+        mv.addObject("flag",flag);
+        return mv;
     }
-
-    /**
-     * 查询兑换商品列表
-     * <pre>
-     *     url:http://localhost/mobile/{version}/waste/exchangeLog/list
-     * </pre>
-     * @return ResultObject 返回的值
-     * <pre>
-     *  *     ResultObject中数据的格式
-     *       {
-     *        success:[true|false]  //请求是否成功    true:请求成功 false:请求失败
-     *        msg：'',              //服务端返回的提示信息
-     *        code:'',              //请求状态码 200成功
-     *        data:
-     *        {
-    "success": true,
-    "msg": null,
-    "code": "200",
-    "data": {
-    "pageIndex": 1,
-    "next": 1,
-    "previous": 1,
-    "totalPage": 1,
-    "totalElements": 3,
-    "pageSize": 10,
-    "pageList": [
-    "1"
-    ],
-    "pageListSize": 10,
-    "content": [
-    {
-    "id": 6,
-    "housingEstateId": 101560, 小区ID
-    "houseOwnerId": 2710, 业主ID
-    "num": 2710, 房间编号
-    "wasteIntegralId": null, 积分编号
-    "goodsName": "洗手液", 商品名称
-    "goodsPrice": 200, 商品单价
-    "goodsNumber": 1, 商品数量
-    "needIntegral": 200,需要积分
-    "usedIntegral": 200,使用积分
-    "createdTime": 1426046424272,创建时间
-    "name": "王冬强",业主名称
-    "mobilePhone": "13474294206" 业主电话
-    }]}
-    }
-
-     * </pre>
-     * @throws Exception
-     */
-    @RequestMapping(value = "/exchangeLog/list",method = RequestMethod.GET)
-    public ModelAndView queryExchangeLogList(
-        @RequestParam(value = "pageSize", defaultValue = "10") int pageSize,
-        @RequestParam(value = "pageIndex", defaultValue = "1") int pageIndex){
-        ResultObject resultObject=new ResultObject();
-        Map<String,Object> paramMap = new HashMap();
-
-        paramMap.put("housingEstateId", housingEstateId);
-        paramMap.put("houseInfoId", houseInfoId);
-        paramMap.put("pageIndex", pageIndex);
-        paramMap.put("pageSize", pageSize);
-
-        Page<Map<String, Object>> exchangeLogPage = wasteIntegralService.queryExchangeLogList(paramMap);
-        resultObject.setData(exchangeLogPage);
-        return null;
-    }
-
-    /**
-     * 查询积分调整历史
-     * <pre>
-     *     url:http://localhost/mobile/{version}/waste/integralChange/list
-     * </pre>
-     * @return ResultObject 返回的值
-     * <pre>
-     *  *     ResultObject中数据的格式
-     *       {
-     *        success:[true|false]  //请求是否成功    true:请求成功 false:请求失败
-     *        msg：'',              //服务端返回的提示信息
-     *        code:'',              //请求状态码 200成功
-     *        data:
-     *        {
-    "success": true,
-    "msg": null,
-    "code": "200",
-    "data": {
-    "pageIndex": 1,
-    "next": 1,
-    "previous": 1,
-    "totalPage": 1,
-    "totalElements": 7,
-    "pageSize": 10,
-    "pageList": [
-    "1"
-    ],
-    "pageListSize": 10,
-    "content": [
-    {
-    "id": 11,
-    "housingEstateId": 101560, //小区ID
-    "houseOwnerId": 2710, //业主ID
-    "wasteIntegralLogId": 3, //积分历史ID
-    "oldIntegral": 800, //原始积分
-    "newIntegral": 1000, //修改后积分
-    "remarks": null, //备注
-    "userId": null, //用户ID
-    "updateTime": 1426044026758, //修改时间
-    "name": "王冬强", //业主姓名
-    "mobilePhone": "13474294206" //业主电话
-    }
-    ]
-    }
-     * </pre>
-     * @throws Exception
-     */
-    @RequestMapping(value = {"/integralChange/list"},method = RequestMethod.GET)
-    public ModelAndView queryIntegralLogList(
-        @RequestParam(value = "pageSize", defaultValue = "10") int pageSize,
-        @RequestParam(value = "pageIndex", defaultValue = "1") int pageIndex) throws Exception {
-        ResultObject resultObject=new ResultObject();
-        Map<String,Object> paramMap = new HashMap();
-
-        paramMap.put("housingEstateId", housingEstateId);
-        paramMap.put("houseInfoId", houseInfoId);
-        paramMap.put("pageIndex", pageIndex);
-        paramMap.put("pageSize", pageSize);
-
-        Page<Map<String, Object>> exchangeLogPage = wasteIntegralService.queryWasteIntegralChangeList(paramMap);
-        resultObject.setData(exchangeLogPage);
-        return null;
-    }
-
-
 
 
 
