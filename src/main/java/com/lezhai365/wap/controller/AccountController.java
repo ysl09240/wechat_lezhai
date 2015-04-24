@@ -90,20 +90,14 @@ public class AccountController extends BaseController {
         //获取当前cookie
         Cookie cookie = CookieUtil.getCookie(WebAppConfig.APP_TOKEN_KEY);
         String codeUrl = "/error.jsp";
-        //判断是否有登录用户，有则自动跳转到系统首页，否则跳转到登录页面
-        if (cookie == null) {
-            //TODO: get code
 
+        //默认采用微信登录，如果用户没有登录，直接跳转到微信登录授权页面
+        if (cookie == null) {
             try {
                 codeUrl = oauthService.getCodeUrl();
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
-
-            //TODO:1.获取用户的access_token,openId,unionId
-
-            //TODO:2.检查该用户是否已经登录过wap.lezhai365.com,如果已经登录过就进入业务页面,否则进入登录页面
-
             result.setViewName(this.redirectURI(codeUrl));
 
         } else {
