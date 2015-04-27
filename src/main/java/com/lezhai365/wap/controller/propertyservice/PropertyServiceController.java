@@ -43,13 +43,13 @@ public class PropertyServiceController extends BaseController {
     @RequestMapping(value = "/billslist")
     public ModelAndView getBillsList(
             HttpServletResponse response,
-            @PathVariable Long signinName,
+            @PathVariable String signinName,
             @RequestParam(value = "pageSize", defaultValue = "10")Integer pageSize,
             @RequestParam(value = "pageIndex", defaultValue = "1")Integer pageIndex){
         ModelAndView mv = new ModelAndView();
 
-        CacheUser user = getCacheUser(response);
-        if(user != null ){
+//        CacheUser user = getCacheUser(response);
+//        if(user != null ){
             Long estateId = 103558l;
             Long houseInfoId = 3464l;
             Page<Map<String,Object>> billsPage = propertyServiceService.queryPayBillsListByHouseInfoId(houseInfoId, estateId, pageIndex, pageSize);
@@ -82,9 +82,9 @@ public class PropertyServiceController extends BaseController {
             mv.addObject("billsMap",billsMap);
             mv.setViewName("propertyservice/paybills");
             mv.addObject("signinName", signinName);
-        } else{
+//        } else{
             mv.setViewName("redirect:/account/signin?pmcSigninName=" + signinName);
-        }
+//        }
         return mv;
     }
 
@@ -94,13 +94,13 @@ public class PropertyServiceController extends BaseController {
     @RequestMapping(value="/faultlist")
     public ModelAndView getFaultInfoList(
             HttpServletResponse response,
-            @PathVariable Long signinName,
+            @PathVariable String signinName,
             @RequestParam(value = "pageSize", defaultValue = "10")Integer pageSize,
             @RequestParam(value = "pageIndex", defaultValue = "1")Integer pageIndex){
         ModelAndView mv = new ModelAndView();
 
-        CacheUser user = getCacheUser(response);
-        if(user != null ){
+//        CacheUser user = getCacheUser(response);
+//        if(user != null ){
             Long estateId = 103558l;
             Long houseInfoId = 3464l;
             Page<Map<String,Object>> faultInfoList = propertyServiceService.queryFaultsByHouseInfoId(houseInfoId,estateId,pageIndex,pageSize);
@@ -108,15 +108,15 @@ public class PropertyServiceController extends BaseController {
             mv.setViewName("propertyservice/faults");
             mv.addObject("signinName", signinName);
 
-        } else{
+//        } else{
             mv.setViewName("redirect:/account/signin?pmcSigninName=" + signinName);
-        }
+//        }
         return mv;
     }
 
     @RequestMapping(value="/faultview")
     public ModelAndView faultView(
-            @PathVariable Long signinName){
+            @PathVariable String signinName){
         ModelAndView mv = new ModelAndView();
         String repairFaultType="repair_fault_type";
         String repairEmergencyType="repair_emergency_type";
@@ -137,7 +137,7 @@ public class PropertyServiceController extends BaseController {
     //新增报修
     @RequestMapping(value="/do/addfault",method = RequestMethod.POST)
     public ModelAndView addFaultInfo(
-            @PathVariable Long signinName,
+            @PathVariable String signinName,
             @ModelAttribute FaultInfo faultInfo){
         ModelAndView mv = new ModelAndView();
         faultInfo.setHousingEstateId(housingEstateId);
@@ -154,7 +154,7 @@ public class PropertyServiceController extends BaseController {
     //投诉查询
     @RequestMapping(value="/complaintlist")
     public ModelAndView getComplaintsList(
-            @PathVariable Long signinName,
+            @PathVariable String signinName,
             @RequestParam(value = "pageSize", defaultValue = "10")Integer pageSize,
             @RequestParam(value = "pageIndex", defaultValue = "1")Integer pageIndex){
         ModelAndView mv = new ModelAndView();
@@ -173,7 +173,7 @@ public class PropertyServiceController extends BaseController {
      */
     @RequestMapping(value="/complaintview")
     public ModelAndView complaintView(
-            @PathVariable Long signinName){
+            @PathVariable String signinName){
         ModelAndView mv = new ModelAndView();
         mv.addObject("signinName",signinName);
         mv.setViewName("propertyservice/complaint_add");
@@ -183,7 +183,7 @@ public class PropertyServiceController extends BaseController {
     //新增投诉
     @RequestMapping(value="/do/addcomplaint")
     public ModelAndView addComplaintInfo(
-            @PathVariable Long signinName,
+            @PathVariable String signinName,
             @ModelAttribute ComplaintInfo complaintInfo){
         complaintInfo.setHouseInfoId(houseInfoId);
         complaintInfo.setHousingEstateId(housingEstateId);
