@@ -1,4 +1,4 @@
-package com.lezhai365.wap.controller;
+package com.lezhai365.mp.controller;
 
 import com.lezhai365.base.spi.user.IUserAccountService;
 import com.lezhai365.common.config.WebAppConfig;

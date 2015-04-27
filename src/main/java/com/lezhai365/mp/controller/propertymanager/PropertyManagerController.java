@@ -1,10 +1,10 @@
-package com.lezhai365.wap.controller.propertymanager;
+package com.lezhai365.mp.controller.propertymanager;
 
 import com.lezhai365.common.model.Page;
+import com.lezhai365.mp.controller.BaseController;
 import com.lezhai365.pms.model.Notice;
 import com.lezhai365.pms.spi.office.INoticeService;
 import com.lezhai365.pms.spi.wechat.IPropertyManagerService;
-import com.lezhai365.wap.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

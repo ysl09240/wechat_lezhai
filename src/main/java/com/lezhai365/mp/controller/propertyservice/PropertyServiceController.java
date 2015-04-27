@@ -1,13 +1,13 @@
-package com.lezhai365.wap.controller.propertyservice;
+package com.lezhai365.mp.controller.propertyservice;
 
 import com.lezhai365.common.model.CacheUser;
 import com.lezhai365.common.model.Page;
+import com.lezhai365.mp.controller.BaseController;
 import com.lezhai365.pms.model.ComplaintInfo;
 import com.lezhai365.pms.model.FaultInfo;
 import com.lezhai365.pms.spi.system.IPmsParameterService;
 import com.lezhai365.pms.spi.waste.IWasteIntegralService;
 import com.lezhai365.pms.spi.wechat.IPropertyServiceService;
-import com.lezhai365.wap.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -43,7 +43,7 @@ public class PropertyServiceController extends BaseController {
     @RequestMapping(value = "/billslist")
     public ModelAndView getBillsList(
             HttpServletResponse response,
-            @PathVariable Long signinName,
+            @PathVariable String signinName,
             @RequestParam(value = "pageSize", defaultValue = "10")Integer pageSize,
             @RequestParam(value = "pageIndex", defaultValue = "1")Integer pageIndex){
         ModelAndView mv = new ModelAndView();
@@ -83,7 +83,6 @@ public class PropertyServiceController extends BaseController {
             mv.setViewName("propertyservice/paybills");
             mv.addObject("signinName", signinName);
         } else{
-            System.out.println("bill list go weixin oauth");
             mv.setViewName("redirect:/account/signin?pmcSigninName=" + signinName);
         }
         return mv;
@@ -95,7 +94,7 @@ public class PropertyServiceController extends BaseController {
     @RequestMapping(value="/faultlist")
     public ModelAndView getFaultInfoList(
             HttpServletResponse response,
-            @PathVariable Long signinName,
+            @PathVariable String signinName,
             @RequestParam(value = "pageSize", defaultValue = "10")Integer pageSize,
             @RequestParam(value = "pageIndex", defaultValue = "1")Integer pageIndex){
         ModelAndView mv = new ModelAndView();
@@ -110,7 +109,6 @@ public class PropertyServiceController extends BaseController {
             mv.addObject("signinName", signinName);
 
         } else{
-            System.out.println("bill list go weixin oauth");
             mv.setViewName("redirect:/account/signin?pmcSigninName=" + signinName);
         }
         return mv;

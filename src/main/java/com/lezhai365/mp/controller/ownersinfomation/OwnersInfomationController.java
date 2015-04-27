@@ -1,10 +1,10 @@
-package com.lezhai365.wap.controller.ownersinfomation;
+package com.lezhai365.mp.controller.ownersinfomation;
 
 import com.lezhai365.base.spi.estate.IHousingEstateService;
 import com.lezhai365.base.spi.user.IPersonalUserService;
+import com.lezhai365.mp.controller.BaseController;
 import com.lezhai365.pms.spi.sns.ISNSUserHouseService;
 import com.lezhai365.pms.spi.sns.ISNSUserService;
-import com.lezhai365.wap.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
