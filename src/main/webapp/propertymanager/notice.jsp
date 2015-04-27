@@ -20,7 +20,7 @@
 </head>
 <html>
     <body>
-    <div class="container-fluid pln">
+    <div class="wx-page">
         <div class="row">
 
             <div class="col-lg-4 col-sm-6">

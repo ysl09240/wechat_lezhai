@@ -75,7 +75,7 @@ body {
 .mobileframe {
   background: #EEE;
   overflow: hidden;
-  height: 640px;
+  max-height: 640px;
   margin-bottom: 40px;
   position: relative;
 }
@@ -668,3 +668,7 @@ form .textarea{
   padding: 12px;
 }
 
+.wx-page{
+  padding: 0px;
+  overflow-x: hidden;
+}
