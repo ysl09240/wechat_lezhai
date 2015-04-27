@@ -83,6 +83,7 @@ public class PropertyServiceController extends BaseController {
             mv.setViewName("propertyservice/paybills");
             mv.addObject("signinName", signinName);
         } else{
+            System.out.println("bill list go weixin oauth");
             mv.setViewName("redirect:/account/signin?pmcSigninName=" + signinName);
         }
         return mv;
@@ -109,6 +110,7 @@ public class PropertyServiceController extends BaseController {
             mv.addObject("signinName", signinName);
 
         } else{
+            System.out.println("bill list go weixin oauth");
             mv.setViewName("redirect:/account/signin?pmcSigninName=" + signinName);
         }
         return mv;

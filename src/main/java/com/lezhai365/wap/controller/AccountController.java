@@ -53,6 +53,7 @@ public class AccountController extends BaseController {
             @RequestParam("code") String code,
             @RequestParam("state") String state){
 
+        System.out.println("-----------wx callback-------------------");
         ModelAndView mv = new ModelAndView();
         JSONObject tokenInfo = null;
         JSONObject userInfo = null;
@@ -87,9 +88,12 @@ public class AccountController extends BaseController {
      */
     @RequestMapping(value = "/signin", method = RequestMethod.GET)
     public ModelAndView signinView(
+            @RequestParam("pmcSigninName") String pmcSigninName,
             HttpServletRequest request,
             HttpServletResponse response) {
         ModelAndView result = new ModelAndView();
+
+        System.out.println("-------------go signin----------------------");
         //获取当前cookie
         Cookie cookie = CookieUtil.getCookie(WebAppConfig.APP_TOKEN_KEY);
         String codeUrl = "/error.jsp";
@@ -97,7 +101,9 @@ public class AccountController extends BaseController {
         //默认采用微信登录，如果用户没有登录，直接跳转到微信登录授权页面
         if (cookie == null) {
             try {
-                codeUrl = oauthService.getCodeUrl();
+                codeUrl = oauthService.getCodeUrl(pmcSigninName);
+                System.out.println("coder url:");
+                System.out.println(codeUrl);
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }

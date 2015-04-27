@@ -52,7 +52,7 @@ public class OauthService {
      * @return
      * @throws UnsupportedEncodingException
      */
-    public String getCodeUrl() throws UnsupportedEncodingException {
+    public String getCodeUrl(String pmcSigninName) throws UnsupportedEncodingException {
         Map<String, String> params = new HashMap<String, String>();
         params.put("appid", getAppid());
         params.put("response_type", "code");
@@ -60,6 +60,7 @@ public class OauthService {
         params.put("scope", ConfigUtil.SCOPE); // snsapi_base（不弹出授权页面，只能拿到用户openid）snsapi_userinfo
         // （弹出授权页面，这个可以通过 openid 拿到昵称、性别、所在地）
         params.put("state", "365#wechat_redirect");
+        params.put("pmcSigninName",pmcSigninName);
         String para = SignatureUtil.createSign(params, false);
         return CODE_URI + "?" + para;
     }
@@ -139,7 +140,7 @@ public class OauthService {
 
     public static void main(String[] args) throws UnsupportedEncodingException {
         OauthService ou = new OauthService();
-        String code = ou.getCodeUrl();
-        System.out.println(code);
+//        String code = ou.getCodeUrl();
+//        System.out.println(code);
     }
 }
