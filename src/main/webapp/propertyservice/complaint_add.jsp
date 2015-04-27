@@ -11,7 +11,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>wx demo</title>
+    <title>新增投诉-房间1-1101</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/assets/css/wx.css">
@@ -19,24 +19,13 @@
     <script src="/assets/libs/jquery/jquery-1.9.1.min.js"></script>
     <script src="/assets/libs/jquery/plugins/jquery.validate.min.js"></script>
     <script src="/assets/app/propertyservice/complaintValidate.js"></script>
-    <style>
-        body {padding-top: 40px; background: #666666; font-family: "Heiti SC", "DroidSansFallback",  "微软雅黑";}
-    </style>
 </head>
 <html>
     <body>
-        <div class="container">
+        <div class="wx-page">
             <div class="row">
             <div class="col-lg-4 col-sm-6">
                 <div class="mobileframe">
-                    <div class="wx-group">
-                        <ul class="wx-functions">
-                            <li class="wx-item">
-                                <div class="wx-header">新增投诉-房间1-1101</div>
-                            </li>
-                        </ul>
-                    </div>
-                    ${signinName}
                     <form id="addComplaintForm" action="/${signinName}/service/do/addcomplaint">
                         <div class="wx-group">
                             <div class="upload-space"></div>

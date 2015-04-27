@@ -13,7 +13,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
-    <title>wx demo</title>
+    <title>环保积分房间1-1101</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/assets/css/wx.css">
@@ -24,17 +24,10 @@
 </head>
 <html>
     <body>
-        <div class="container">
+        <div class="wx-page">
             <div class="row">
                 <div class="col-lg-4 col-sm-6">
                     <div class="mobileframe">
-                        <div class="wx-group">
-                            <ul class="wx-functions">
-                                <li class="wx-item">
-                                    <div class="wx-header">环保积分房间1-1101</div>
-                                </li>
-                            </ul>
-                        </div>
                         <div class="wx-group">
                             <div class="wx-space"></div>
                             <div class="env-box">

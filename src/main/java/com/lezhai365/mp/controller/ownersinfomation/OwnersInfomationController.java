@@ -1,12 +1,15 @@
-package com.lezhai365.mp.controller.ownersinfomation;
+package com.lezhai365.wap.controller.ownersinfomation;
 
+import com.lezhai365.base.model.user.UserAccounts;
 import com.lezhai365.base.spi.estate.IHousingEstateService;
 import com.lezhai365.base.spi.user.IPersonalUserService;
-import com.lezhai365.mp.controller.BaseController;
+import com.lezhai365.base.spi.user.IUserAccountService;
 import com.lezhai365.pms.spi.sns.ISNSUserHouseService;
 import com.lezhai365.pms.spi.sns.ISNSUserService;
+import com.lezhai365.wap.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -35,18 +38,22 @@ public class OwnersInfomationController extends BaseController {
     IHousingEstateService housingEstateService;
     @Autowired
     IPersonalUserService personalUserService;
+    @Autowired
+    IUserAccountService userAccountService;
+
     /**
      * 我的房产
      * 我的小区
      */
-
+    @RequestMapping(value="/myestate")
     public ModelAndView profileView(
+            @PathVariable String signinName,
             @RequestParam String tab){
         ModelAndView mv = new ModelAndView();
         Long userId = 351l;
-        Map<String, Object> profile = personalUserService.queryPersonalDetail(userId);
+        UserAccounts userAccounts = userAccountService.queryUserInfoBySigninName(signinName);
+        userId = userAccounts.getId();
         List<Map<String, Object>> estateList = housingEstateService.getEstateSimpleListByUserId(userId);
-        mv.addObject("profile", profile);
         mv.addObject("estateList", estateList);
         try {
             mv.addObject("authList",SNSUserService.queryPersonalAuthDetail(userId));
@@ -60,6 +67,18 @@ public class OwnersInfomationController extends BaseController {
         }
         return mv;
     }
+
+    @RequestMapping(value="/myhouse")
+    public ModelAndView myHouse(){
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("");
+        return mv;
+    }
+
+
+
+
+
 
 
 
