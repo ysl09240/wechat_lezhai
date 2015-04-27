@@ -10,5 +10,29 @@ package com.lezhai365.wechat.model;
  * @copyright :  Copyright(c) 2013 西安乐宅网络科技有限公司
  * @description :
  */
-public class TextOutMessage {
+
+public class TextOutMessage extends OutMessage{
+
+    private String	MsgType	= "text";
+    // 文本消息
+    private String	Content;
+
+    public TextOutMessage() {
+    }
+
+    public TextOutMessage(String content) {
+        Content = content;
+    }
+
+    public String getMsgType() {
+        return MsgType;
+    }
+
+    public String getContent() {
+        return Content;
+    }
+
+    public void setContent(String content) {
+        Content = content;
+    }
 }

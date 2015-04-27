@@ -18,7 +18,7 @@ import java.util.Map;
  * @description :
  */
 public class UserService {
-    private static final String USER_INFO_URI = "https://api.weixin.qq.com/sns/userinfo";
+    private static final String USER_INFO_URI = "https://api.weixin.qq.com/cgi-bin/user/info";
     private static final String USER_GET_URI = "https://api.weixin.qq.com/cgi-bin/user/get";
 
     /**

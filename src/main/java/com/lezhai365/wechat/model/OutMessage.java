@@ -11,4 +11,40 @@ package com.lezhai365.wechat.model;
  * @description :
  */
 public class OutMessage {
+    private String	ToUserName;
+    private String	FromUserName;
+    private Long	CreateTime;
+    private int		FuncFlag	= 0;
+
+    public String getToUserName() {
+        return ToUserName;
+    }
+
+    public void setToUserName(String toUserName) {
+        ToUserName = toUserName;
+    }
+
+    public String getFromUserName() {
+        return FromUserName;
+    }
+
+    public void setFromUserName(String fromUserName) {
+        FromUserName = fromUserName;
+    }
+
+    public Long getCreateTime() {
+        return CreateTime;
+    }
+
+    public void setCreateTime(Long createTime) {
+        CreateTime = createTime;
+    }
+
+    public int getFuncFlag() {
+        return FuncFlag;
+    }
+
+    public void setFuncFlag(int funcFlag) {
+        FuncFlag = funcFlag;
+    }
 }

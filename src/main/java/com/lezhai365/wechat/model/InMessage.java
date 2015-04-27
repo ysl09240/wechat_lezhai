@@ -20,6 +20,7 @@ public class InMessage {
     private String FromUserName;
     private Long CreateTime;
     private String MsgType = "text";
+
     private Long MsgId;
     // 文本消息
     private String Content;
@@ -347,6 +348,43 @@ public class InMessage {
     }
 
     public Boolean isVerify(){
+
         return this.MsgType.equals(MsgTypes.VERIFY.getType());
+    }
+
+    @Override
+    public String toString() {
+        return "InMessage{" +
+                "ToUserName='" + ToUserName + '\'' +
+                ", FromUserName='" + FromUserName + '\'' +
+                ", CreateTime=" + CreateTime +
+                ", MsgType='" + MsgType + '\'' +
+                ", MsgId=" + MsgId +
+                ", Content='" + Content + '\'' +
+                ", PicUrl='" + PicUrl + '\'' +
+                ", Location_X='" + Location_X + '\'' +
+                ", Location_Y='" + Location_Y + '\'' +
+                ", Scale=" + Scale +
+                ", Label='" + Label + '\'' +
+                ", Title='" + Title + '\'' +
+                ", Description='" + Description + '\'' +
+                ", Url='" + Url + '\'' +
+                ", MediaId='" + MediaId + '\'' +
+                ", Format='" + Format + '\'' +
+                ", Recognition='" + Recognition + '\'' +
+                ", ThumbMediaId='" + ThumbMediaId + '\'' +
+                ", Event='" + Event + '\'' +
+                ", EventKey='" + EventKey + '\'' +
+                ", Ticket='" + Ticket + '\'' +
+                ", Precision='" + Precision + '\'' +
+                ", Latitude='" + Latitude + '\'' +
+                ", Longitude='" + Longitude + '\'' +
+                ", Status='" + Status + '\'' +
+                ", TotalCount='" + TotalCount + '\'' +
+                ", FilterCount='" + FilterCount + '\'' +
+                ", SentCount='" + SentCount + '\'' +
+                ", ErrorCount='" + ErrorCount + '\'' +
+                ", SceneValue='" + SceneValue + '\'' +
+                '}';
     }
 }

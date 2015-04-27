@@ -1,5 +1,6 @@
 package com.lezhai365.wechat;
 
+import com.alibaba.fastjson.JSONObject;
 import com.lezhai365.wechat.model.InMessage;
 import com.lezhai365.wechat.model.TextOutMessage;
 import com.lezhai365.wechat.utils.XStreamUtil;
@@ -21,14 +22,23 @@ import java.util.Date;
  * @copyright :  Copyright(c) 2013 西安乐宅网络科技有限公司
  * @description :
  */
-public class WeChatService extends WeiXinApi {
-    public String processWxMsg(InputStream xmlInputStream){
+public class WeChatService extends WeChatOpenApi {
+
+    /**
+     * 处理微信消息
+     *
+     * @param xmlInputStream
+     * @return
+     * @throws Exception
+     */
+    public String processWxMsg(InputStream xmlInputStream) throws Exception {
         String result = "";
         //转换微信post过来的xml内容
         XStream xs = XStreamUtil.init(false);
         xs.ignoreUnknownElements();
         xs.alias("xml", InMessage.class);
 
+        TextOutMessage oms  = new TextOutMessage();
         InMessage msg = (InMessage) xs.fromXML(xmlInputStream);
         String event = msg.getEvent();
         String MsgType = msg.getMsgType();
@@ -37,15 +47,24 @@ public class WeChatService extends WeiXinApi {
         System.out.println("=============================================");
 
 
+
+
         if(msg.getMsgType().equals("event")){
+            System.out.println("事件是:" + event);
             switch (event) {
                 case "subscribe"://关注
-                    System.out.println("关注");
-                    // 获取用户信息，
-
+                    // 微信用户信息公众账号的时候绑定账号信息，
+                    String access_token = getAccessToken("wxc25645bdef1d5f57","bd9108b26ac432faed9a1a24aae92510");
+                    UserService us = new UserService();
+                    JSONObject userInfo = us.getUserInfo(access_token, msg.getFromUserName());
+//                    System.out.println("用户信息如下：--------------------------------------------------------");
+//                    System.out.println(userInfo);
+                     oms.setContent("感谢您的关注!");
                     break;
                 case "unsubscribe"://取消关注
+                    //标注用户已经取消关注
                     System.out.println("取消关注");
+
                     break;
                 case "SCAN"://扫描
                     System.out.println("扫描");
@@ -88,12 +107,15 @@ public class WeChatService extends WeiXinApi {
         } else {
             switch (MsgType) {
                 case "text"://文本格式
+                    oms.setContent("您发的消息是:" + msg.getContent());
                     System.out.println("文本消息");
                     break;
                 case "image"://图片格式
+                    oms.setContent("您发的消息是:" + msg.getPicUrl());
                     System.out.println("图片");
                     break;
                 case "voice"://声音
+                    oms.setContent("您发的消息是:" + msg.getRecognition());
                     System.out.println("声音");
                     break;
                 case "video"://视频
@@ -112,17 +134,13 @@ public class WeChatService extends WeiXinApi {
                     break;
             }
         }
+
         //return msg;
-
         xs = XStreamUtil.init(true);
-
-        TextOutMessage oms  = new TextOutMessage();
-        oms.setContent("欢迎光临!");
         oms.setCreateTime(new Date().getTime());
         oms.setToUserName(msg.getFromUserName());
         oms.setFromUserName(msg.getToUserName());
         xs.alias("xml", oms.getClass());
-
         result = xs.toXML(oms);
 
         return result;
