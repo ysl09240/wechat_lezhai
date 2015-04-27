@@ -7,6 +7,7 @@ import com.lezhai365.pms.spi.wechat.IPropertyManagerService;
 import com.lezhai365.wap.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -50,12 +51,14 @@ public class PropertyManagerController extends BaseController {
      */
     @RequestMapping(value="/notice")
     public ModelAndView getNoticeList(
+            @PathVariable String signinName,
             @RequestParam(value = "pageSize", defaultValue = "10")Integer pageSize,
             @RequestParam(value = "pageIndex", defaultValue = "1")Integer pageIndex){
         ModelAndView mv = new ModelAndView();
 //        Long estateId = 110l;
         Page<Map<String,Object>> noticeList = propertyManagerService.queryNoticeListSNS(pageSize,pageIndex,estateId);
         mv.addObject("noticeList",noticeList);
+        mv.addObject("signinName",signinName);
         mv.setViewName("propertymanager/notice");
         return mv;
 

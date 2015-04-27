@@ -40,8 +40,7 @@
                                     <span class="wx-icon wx-icon-sanmarino wx-yang">
                                         <i class="fa fa-coffee"></i>
                                     </span>
-                                    ${notice.id}
-                                    <div class="wx-name">${notice.title}</div>
+                                    <div class="wx-name"><a href="/${signinName}/manager/detail/notice">${notice.title}</a></div>
                                     <div class="text-right prm text-muted"><span>2015-06-12</span></div>
                                 </li>
                             </c:forEach>
