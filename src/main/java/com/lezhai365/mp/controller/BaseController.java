@@ -4,6 +4,7 @@ import com.lezhai365.base.spi.user.IUserAccountService;
 import com.lezhai365.common.config.WebAppConfig;
 import com.lezhai365.common.model.CacheUser;
 import com.lezhai365.common.web.CommonController;
+import com.lezhai365.pms.model.weixin.UserWx;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -66,4 +67,5 @@ public class BaseController extends CommonController{
         }
         return cacheUser;
     }
+
 }

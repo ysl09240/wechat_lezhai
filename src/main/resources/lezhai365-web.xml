@@ -69,6 +69,12 @@
     <dubbo:reference id="ownersInfomationService" interface="com.lezhai365.pms.spi.wechat.IOwnersInfomationService"  />
     <dubbo:reference id="propertyManagerService" interface="com.lezhai365.pms.spi.wechat.IPropertyManagerService"  />
     <dubbo:reference id="propertyServiceService" interface="com.lezhai365.pms.spi.wechat.IPropertyServiceService"  />
+    <dubbo:reference id="userWxAuthService" interface="com.lezhai365.pms.spi.wechat.IUserWxAuthService"  />
+    <dubbo:reference id="userWxService" interface="com.lezhai365.pms.spi.wechat.IUserWxService"  />
+    <dubbo:reference id="mpInfoService" interface="com.lezhai365.pms.spi.wechat.IMpInfoService"  />
+
+
+
     <dubbo:reference id="wasteIntegralService" interface="com.lezhai365.pms.spi.waste.IWasteIntegralService" />
     <dubbo:reference id="SNSUserService" interface="com.lezhai365.pms.spi.sns.ISNSUserService"  />
     <dubbo:reference id="SNSUserHouseService" interface="com.lezhai365.pms.spi.sns.ISNSUserHouseService" />

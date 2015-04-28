@@ -247,6 +247,15 @@ public class PropertyServiceController extends BaseController {
         return mv;
     }
 
-
+    /**
+     * 积分规格说明
+     * @return
+     */
+    @RequestMapping(value="/integralintro")
+    public ModelAndView integralIntroView(){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("propertyservice/integralintro");
+        return mv;
+    }
 
 }
