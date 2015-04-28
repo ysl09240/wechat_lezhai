@@ -1,5 +1,9 @@
 package com.lezhai365.mp.controller;
 
+import com.alibaba.fastjson.JSONObject;
+import com.lezhai365.utils.Decoder;
+import com.lezhai365.wechat.OauthService;
+import com.lezhai365.wechat.UserService;
 import com.lezhai365.wechat.WeChatService;
 import com.lezhai365.wechat.utils.SignatureUtil;
 import com.thoughtworks.xstream.XStream;
@@ -30,6 +34,7 @@ import java.io.InputStream;
 @RequestMapping(value="/{pmcSiginName}/wechat")
 public class WeChatController {
 
+    OauthService oauthService = new OauthService();
     WeChatService weChatService = new WeChatService();
 
     /**
@@ -66,14 +71,15 @@ public class WeChatController {
             // 1.获取对应物业公司公众账号的token
             String token = "3lezhai65";
             if(SignatureUtil.checkSignature(token,signature,timestamp,nonce)){
+                //第一次认证的时候创建菜单
+                weChatService.menuCreate(pmcSiginName);
                 result = echostr;
             }
         } else {
             System.out.println("---------------------message---------------");
             try {
                 InputStream inputStream = request.getInputStream();
-                result = weChatService.processWxMsg(inputStream);
-
+                result = weChatService.processWxMsg(pmcSiginName,inputStream);
             } catch (IOException e) {
                 System.out.println("error");
                 e.printStackTrace();
@@ -83,4 +89,34 @@ public class WeChatController {
         return result;
     }
 
+    /**
+     *
+     * 网页授权回调接口
+     *
+     * @param code
+     * @param state
+     * @return
+     */
+    @RequestMapping(value="/callback")
+    public ModelAndView callback(
+            @PathVariable String pmcSiginName,
+            @RequestParam(required = false) String code,
+            @RequestParam(required = false) String state) throws Exception {
+
+        System.out.println("-----------wx callback-------------------");
+        String refer = Decoder.symmetricDecrypto(state);
+        ModelAndView mv = new ModelAndView();
+        JSONObject tokenInfo = null;
+        try {
+            //TODO 根据 code 获取 token
+            tokenInfo = oauthService.getTokenInfo(code);
+            //TODO 根据access_token 和openid获取
+            String openId = tokenInfo.getString("openid");
+            mv.setViewName("redirect:" + refer + "?openid=" + openId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return mv;
+    }
 }

@@ -36,8 +36,8 @@ public class ConfigUtil {
         }
 
         //set value
-        APPID = props.getProperty("AppId", "wx88e6ce5736b6184c");
-        APPSECRET = props.getProperty("AppSecret", "245aec90f10d924766d4afabdc99bbbf");
+        APPID = props.getProperty("AppId");
+        APPSECRET = props.getProperty("AppSecret");
         SCOPE = props.getProperty("scope");
         REDIRECT_URI = props.getProperty("redirect_uri");
 

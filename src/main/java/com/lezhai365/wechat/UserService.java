@@ -19,6 +19,7 @@ import java.util.Map;
  */
 public class UserService {
     private static final String USER_INFO_URI = "https://api.weixin.qq.com/cgi-bin/user/info";
+    private static final String OAUTH_USER_INFO_URI = "https://api.weixin.qq.com/sns/userinfo";
     private static final String USER_GET_URI = "https://api.weixin.qq.com/cgi-bin/user/get";
 
     /**
@@ -38,7 +39,7 @@ public class UserService {
         params.put("lang","zh_CN");
 
         String  jsonStr = HttpUtil.get(USER_INFO_URI, params);
-
+        System.out.println("");
         if(StringUtils.isNotEmpty(jsonStr)){
             JSONObject obj = JSONObject.parseObject(jsonStr);
             if(obj.get("errcode") != null){
@@ -46,6 +47,7 @@ public class UserService {
             }
             userInfo =  obj;
         }
+
         return userInfo;
     }
 
