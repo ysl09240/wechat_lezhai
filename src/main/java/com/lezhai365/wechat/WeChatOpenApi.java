@@ -1,8 +1,11 @@
 package com.lezhai365.wechat;
 
 import com.alibaba.fastjson.JSONObject;
+import com.lezhai365.wechat.utils.ConfigUtil;
 import com.lezhai365.wechat.utils.HttpUtil;
+import org.apache.commons.io.FileUtils;
 
+import java.io.File;
 import java.util.Map;
 
 /**
@@ -30,6 +33,53 @@ public class WeChatOpenApi {
     public static String getAccessToken(String appid, String secret) throws Exception {
         String jsonStr = HttpUtil.get(ACCESSTOKEN_URL.concat("&appid=") + appid + "&secret=" + secret);
         Map<String, Object> map = JSONObject.parseObject(jsonStr);
+        System.out.println("------------token");
+        System.out.println(map);
         return map.get("access_token").toString();
     }
+
+    /**
+     * 创建菜单
+     * @param pmcSignName
+     * @return
+     * @throws Exception
+     */
+    public String menuCreate(String pmcSignName) throws Exception {
+        String accessToken = getAccessToken(ConfigUtil.APPID,ConfigUtil.APPSECRET);
+        String url = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=" + accessToken;
+        String menuFile = WeChatOpenApi.class.getResource("/").getPath()+ "WeChatMenu.json";
+        String menuStr = FileUtils.readFileToString(new File(menuFile),"utf-8");
+        menuStr = menuStr.replaceAll("SIGNNAME",pmcSignName);
+        String res = HttpUtil.post(url,menuStr);
+        System.out.println("------------------------");
+        System.out.println(res);
+        return res;
+    }
+
+    public String menuGet(){
+
+        return "";
+    }
+
+    public String menuDelete(){
+
+        return "";
+    }
+
+    public String getAppId() {
+        return appId;
+    }
+
+    public void setAppId(String appId) {
+        this.appId = appId;
+    }
+
+    public String getAppSecret() {
+        return appSecret;
+    }
+
+    public void setAppSecret(String appSecret) {
+        this.appSecret = appSecret;
+    }
+
 }

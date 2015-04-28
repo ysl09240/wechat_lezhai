@@ -1,12 +1,10 @@
-package com.lezhai365.wap.controller.ownersinfomation;
+package com.lezhai365.mp.controller.ownersinfomation;
 
-import com.lezhai365.base.model.user.UserAccounts;
 import com.lezhai365.base.spi.estate.IHousingEstateService;
 import com.lezhai365.base.spi.user.IPersonalUserService;
 import com.lezhai365.base.spi.user.IUserAccountService;
 import com.lezhai365.pms.spi.sns.ISNSUserHouseService;
 import com.lezhai365.pms.spi.sns.ISNSUserService;
-import com.lezhai365.wap.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,7 +27,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping(value="/{signinName}/infomation")
-public class OwnersInfomationController extends BaseController {
+public class OwnersInfomationController {
     @Autowired
     ISNSUserService SNSUserService;
     @Autowired
@@ -51,8 +49,8 @@ public class OwnersInfomationController extends BaseController {
             @RequestParam String tab){
         ModelAndView mv = new ModelAndView();
         Long userId = 351l;
-        UserAccounts userAccounts = userAccountService.queryUserInfoBySigninName(signinName);
-        userId = userAccounts.getId();
+//        UserAccounts userAccounts = userAccountService.queryUserInfoBySigninName(signinName);
+//        userId = userAccounts.getId();
         List<Map<String, Object>> estateList = housingEstateService.getEstateSimpleListByUserId(userId);
         mv.addObject("estateList", estateList);
         try {

@@ -24,6 +24,7 @@ import java.util.Date;
  */
 public class WeChatService extends WeChatOpenApi {
 
+
     /**
      * 处理微信消息
      *
@@ -31,7 +32,7 @@ public class WeChatService extends WeChatOpenApi {
      * @return
      * @throws Exception
      */
-    public String processWxMsg(InputStream xmlInputStream) throws Exception {
+    public String processWxMsg(String pmcSignName,InputStream xmlInputStream) throws Exception {
         String result = "";
         //转换微信post过来的xml内容
         XStream xs = XStreamUtil.init(false);
@@ -59,7 +60,8 @@ public class WeChatService extends WeChatOpenApi {
                     JSONObject userInfo = us.getUserInfo(access_token, msg.getFromUserName());
 //                    System.out.println("用户信息如下：--------------------------------------------------------");
 //                    System.out.println(userInfo);
-                     oms.setContent("感谢您的关注!");
+                    oms.setContent("欢迎关注[万千家物业服务]<a href=\""+new OauthService().getCodeUrl(pmcSignName)+"\">点击绑定业主信息</a>");
+//                     oms.setContent("感谢您的关注!");
                     break;
                 case "unsubscribe"://取消关注
                     //标注用户已经取消关注
@@ -92,13 +94,13 @@ public class WeChatService extends WeChatOpenApi {
                     System.out.println("用户删除卡券");
                     break;
                 case "user_view_card"://用户浏览会员卡
-                    System.out.println("用户浏览会员卡");
+//                    System.out.println("用户浏览会员卡");
                     break;
                 case "user_consume_card"://用户核销卡券
                     System.out.println("用户核销卡券");
                     break;
                 case "merchant_order"://微小店用户下单付款
-                    System.out.println("微小店用户下单付款");
+//                    System.out.println("微小店用户下单付款");
                     break;
                 default:
                     System.out.println("unkonw event");
@@ -122,7 +124,7 @@ public class WeChatService extends WeChatOpenApi {
                     System.out.println("视频");
                     break;
                 case "shortvideo"://小视频
-                    System.out.println("小视频");
+//                    System.out.println("小视频");
                     break;
                 case "location"://上传地理位置
                     System.out.println("地理位置");

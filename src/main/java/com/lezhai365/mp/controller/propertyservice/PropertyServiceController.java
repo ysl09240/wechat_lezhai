@@ -8,6 +8,7 @@ import com.lezhai365.pms.model.FaultInfo;
 import com.lezhai365.pms.spi.system.IPmsParameterService;
 import com.lezhai365.pms.spi.waste.IWasteIntegralService;
 import com.lezhai365.pms.spi.wechat.IPropertyServiceService;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -44,170 +45,167 @@ public class PropertyServiceController extends BaseController {
     public ModelAndView getBillsList(
             HttpServletResponse response,
             @PathVariable String signinName,
-            @RequestParam(value = "pageSize", defaultValue = "10")Integer pageSize,
-            @RequestParam(value = "pageIndex", defaultValue = "1")Integer pageIndex){
+            @RequestParam String openid,
+            @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+            @RequestParam(value = "pageIndex", defaultValue = "1") Integer pageIndex) {
         ModelAndView mv = new ModelAndView();
 
-        CacheUser user = getCacheUser(response);
-        if(user != null ){
-            Long estateId = 103558l;
-            Long houseInfoId = 3464l;
-            Page<Map<String,Object>> billsPage = propertyServiceService.queryPayBillsListByHouseInfoId(houseInfoId, estateId, pageIndex, pageSize);
-            List<Map<String,Object>> billsList = billsPage.getContent();
+        Long estateId = 103558l;
+        Long houseInfoId = 3464l;
+        Page<Map<String, Object>> billsPage = propertyServiceService.queryPayBillsListByHouseInfoId(houseInfoId, estateId, pageIndex, pageSize);
+        List<Map<String, Object>> billsList = billsPage.getContent();
 
-            /**
-             * {
-             *   "2015-02":[{},{}]
-             *   "2015-03":[{},{}]
-             *   "2015-04":[{},{}]
-             *   "2015-05":[{},{}]
-             * }
-             */
-            Map<String,List<Object>> billsMap = new HashMap<>();
-            for(Map<String,Object> map : billsList){
-                String key = (String) map.get("month");
-                if (billsMap.containsKey(key)){
-                    List value= billsMap.get(key);
-                    value.add(map);
-                } else {
-                    List value = new ArrayList<Object>();
-                    value.add(map);
-                    billsMap.put(key,value);
-                }
+        /**
+         * {
+         *   "2015-02":[{},{}]
+         *   "2015-03":[{},{}]
+         *   "2015-04":[{},{}]
+         *   "2015-05":[{},{}]
+         * }
+         */
+        Map<String, List<Object>> billsMap = new HashMap<>();
+        for (Map<String, Object> map : billsList) {
+            String key = (String) map.get("month");
+            if (billsMap.containsKey(key)) {
+                List value = billsMap.get(key);
+                value.add(map);
+            } else {
+                List value = new ArrayList<Object>();
+                value.add(map);
+                billsMap.put(key, value);
             }
-
-            Map<String,Object> sumNotPayMap = propertyServiceService.querySumNotPayBills(houseInfoId,estateId);
-
-            mv.addObject("sumNotPayMap",sumNotPayMap);
-            mv.addObject("billsMap",billsMap);
-            mv.setViewName("propertyservice/paybills");
-            mv.addObject("signinName", signinName);
-        } else{
-            mv.setViewName("redirect:/account/signin?pmcSigninName=" + signinName);
         }
+
+        Map<String, Object> sumNotPayMap = propertyServiceService.querySumNotPayBills(houseInfoId, estateId);
+
+        mv.addObject("sumNotPayMap", sumNotPayMap);
+        mv.addObject("billsMap", billsMap);
+        mv.setViewName("propertyservice/paybills");
+        mv.addObject("signinName", signinName);
+
         return mv;
     }
-
 
 
     //报修查询
-    @RequestMapping(value="/faultlist")
+    @RequestMapping(value = "/faultlist")
     public ModelAndView getFaultInfoList(
             HttpServletResponse response,
             @PathVariable String signinName,
-            @RequestParam(value = "pageSize", defaultValue = "10")Integer pageSize,
-            @RequestParam(value = "pageIndex", defaultValue = "1")Integer pageIndex){
+            @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+            @RequestParam(value = "pageIndex", defaultValue = "1") Integer pageIndex) {
         ModelAndView mv = new ModelAndView();
 
         CacheUser user = getCacheUser(response);
-        if(user != null ){
+        if (user != null) {
             Long estateId = 103558l;
             Long houseInfoId = 3464l;
-            Page<Map<String,Object>> faultInfoList = propertyServiceService.queryFaultsByHouseInfoId(houseInfoId,estateId,pageIndex,pageSize);
-            mv.addObject("faultInfoList",faultInfoList);
+            Page<Map<String, Object>> faultInfoList = propertyServiceService.queryFaultsByHouseInfoId(houseInfoId, estateId, pageIndex, pageSize);
+            mv.addObject("faultInfoList", faultInfoList);
             mv.setViewName("propertyservice/faults");
             mv.addObject("signinName", signinName);
 
-        } else{
+        } else {
             mv.setViewName("redirect:/account/signin?pmcSigninName=" + signinName);
         }
         return mv;
     }
 
-    @RequestMapping(value="/faultview")
+    @RequestMapping(value = "/faultview")
     public ModelAndView faultView(
-            @PathVariable Long signinName){
+            @PathVariable Long signinName) {
         ModelAndView mv = new ModelAndView();
-        String repairFaultType="repair_fault_type";
-        String repairEmergencyType="repair_emergency_type";
+        String repairFaultType = "repair_fault_type";
+        String repairEmergencyType = "repair_emergency_type";
         Long pmcId = 649l;
         //从session中获取物业公司的id
-        Map<String,Object> repairFaultValue=null;
-        Map<String,Object> repairEmergencyValue=null;
+        Map<String, Object> repairFaultValue = null;
+        Map<String, Object> repairEmergencyValue = null;
         //当前小区id
-        repairFaultValue=pmsParameterService.queryInitParamsValue(repairFaultType,pmcId,housingEstateId);
-        repairEmergencyValue=pmsParameterService.queryInitParamsValue(repairEmergencyType,pmcId,housingEstateId);
-        mv.addObject("repairFaultValue",repairFaultValue);
-        mv.addObject("repairEmergencyValue",repairEmergencyValue);
-        mv.addObject("signinName",signinName);
+        repairFaultValue = pmsParameterService.queryInitParamsValue(repairFaultType, pmcId, housingEstateId);
+        repairEmergencyValue = pmsParameterService.queryInitParamsValue(repairEmergencyType, pmcId, housingEstateId);
+        mv.addObject("repairFaultValue", repairFaultValue);
+        mv.addObject("repairEmergencyValue", repairEmergencyValue);
+        mv.addObject("signinName", signinName);
         mv.setViewName("propertyservice/faults_add");
         return mv;
     }
 
     //新增报修
-    @RequestMapping(value="/do/addfault",method = RequestMethod.POST)
+    @RequestMapping(value = "/do/addfault", method = RequestMethod.POST)
     public ModelAndView addFaultInfo(
             @PathVariable Long signinName,
-            @ModelAttribute FaultInfo faultInfo){
+            @ModelAttribute FaultInfo faultInfo) {
         ModelAndView mv = new ModelAndView();
         faultInfo.setHousingEstateId(housingEstateId);
         faultInfo.setHouseInfoId(houseInfoId);
 
         int flag = propertyServiceService.addFaultInfo(faultInfo);
-        if(flag>0){
-            mv.setViewName("redirect:/"+signinName+"/service/faultlist");
+        if (flag > 0) {
+            mv.setViewName("redirect:/" + signinName + "/service/faultlist");
         }
-        mv.addObject("signinName",signinName);
+        mv.addObject("signinName", signinName);
         return mv;
     }
 
     //投诉查询
-    @RequestMapping(value="/complaintlist")
+    @RequestMapping(value = "/complaintlist")
     public ModelAndView getComplaintsList(
             @PathVariable Long signinName,
-            @RequestParam(value = "pageSize", defaultValue = "10")Integer pageSize,
-            @RequestParam(value = "pageIndex", defaultValue = "1")Integer pageIndex){
+            @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+            @RequestParam(value = "pageIndex", defaultValue = "1") Integer pageIndex) {
         ModelAndView mv = new ModelAndView();
         Long estateId = 103558l;
         Long houseInfoId = 3464l;
-        Page<Map<String,Object>> complaintList = propertyServiceService.queryComplaintByHouseInfoId(houseInfoId,estateId,pageIndex,pageSize);
-        mv.addObject("complaintList",complaintList);
-        mv.addObject("signinName",signinName);
+        Page<Map<String, Object>> complaintList = propertyServiceService.queryComplaintByHouseInfoId(houseInfoId, estateId, pageIndex, pageSize);
+        mv.addObject("complaintList", complaintList);
+        mv.addObject("signinName", signinName);
         mv.setViewName("propertyservice/complaints");
         return mv;
     }
 
     /**
      * 添加投诉页面跳转
+     *
      * @return
      */
-    @RequestMapping(value="/complaintview")
+    @RequestMapping(value = "/complaintview")
     public ModelAndView complaintView(
-            @PathVariable Long signinName){
+            @PathVariable Long signinName) {
         ModelAndView mv = new ModelAndView();
-        mv.addObject("signinName",signinName);
+        mv.addObject("signinName", signinName);
         mv.setViewName("propertyservice/complaint_add");
         return mv;
     }
 
     //新增投诉
-    @RequestMapping(value="/do/addcomplaint")
+    @RequestMapping(value = "/do/addcomplaint")
     public ModelAndView addComplaintInfo(
             @PathVariable Long signinName,
-            @ModelAttribute ComplaintInfo complaintInfo){
+            @ModelAttribute ComplaintInfo complaintInfo) {
         complaintInfo.setHouseInfoId(houseInfoId);
         complaintInfo.setHousingEstateId(housingEstateId);
         ModelAndView mv = new ModelAndView();
         int flag = propertyServiceService.addComplaintInfo(complaintInfo);
-        if(flag>0){
-            mv.setViewName("redirect:/"+signinName+"/service/complaintlist");
+        if (flag > 0) {
+            mv.setViewName("redirect:/" + signinName + "/service/complaintlist");
         }
-        mv.addObject("signinName",signinName);
+        mv.addObject("signinName", signinName);
         return mv;
     }
 
     //环保积分
-    @RequestMapping(value="/integralslist")
+    @RequestMapping(value = "/integralslist")
     public ModelAndView getWasteIntegral(
             @RequestParam String flag,
             @RequestParam(value = "pageSize", defaultValue = "10") int pageSize,
-            @RequestParam(value = "pageIndex", defaultValue = "1") int pageIndex){
+            @RequestParam(value = "pageIndex", defaultValue = "1") int pageIndex) {
         ModelAndView mv = new ModelAndView();
         //我的积分
         Map<String, Object> integralInfo = wasteIntegralService.queryWasteIntegralByHouseInfoId(housingEstateId, houseInfoId);
-        if (integralInfo != null){
-            mv.addObject("integralInfo",integralInfo);
-        }else{
+        if (integralInfo != null) {
+            mv.addObject("integralInfo", integralInfo);
+        } else {
             integralInfo = new HashMap<>();
             integralInfo.put("housingEstateId", "0");
             integralInfo.put("houseOwnerId", "0");
@@ -216,37 +214,36 @@ public class PropertyServiceController extends BaseController {
             integralInfo.put("totalIntegral", "0");
             integralInfo.put("lastTimeStr", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
             integralInfo.put("houseInfoId", "0");
-            mv.addObject("integralInfo",integralInfo);
+            mv.addObject("integralInfo", integralInfo);
         }
-        Map<String,Object> paramMap = new HashMap();
+        Map<String, Object> paramMap = new HashMap();
         paramMap.put("housingEstateId", housingEstateId);
         paramMap.put("houseInfoId", houseInfoId);
         paramMap.put("pageIndex", pageIndex);
         paramMap.put("pageSize", pageSize);
-        switch (flag){
-                case "iHistory"://积分查询
-                    Page<Map<String,Object>>  integralHistoryPage = wasteIntegralService.queryWasteIntegralLogList(paramMap);
-                    mv.addObject("integralHistoryPage",integralHistoryPage);
-                    break;
-                case "iExchange"://积分兑换
-                    Page<Map<String, Object>> integralExchangePage = wasteIntegralService.queryExchangeLogList(paramMap);
-                    mv.addObject("integralExchangePage",integralExchangePage);
-                    break;
-                case "iAdjust"://积分调整
-                    Page<Map<String, Object>> integralAdjustPage = wasteIntegralService.queryWasteIntegralChangeList(paramMap);
-                    mv.addObject("integralAdjustPage",integralAdjustPage);
-                    break;
-                default:
-                    integralHistoryPage = wasteIntegralService.queryWasteIntegralLogList(paramMap);
-                    mv.addObject("integralHistoryPage",integralHistoryPage);
-                    break;
+        switch (flag) {
+            case "iHistory"://积分查询
+                Page<Map<String, Object>> integralHistoryPage = wasteIntegralService.queryWasteIntegralLogList(paramMap);
+                mv.addObject("integralHistoryPage", integralHistoryPage);
+                break;
+            case "iExchange"://积分兑换
+                Page<Map<String, Object>> integralExchangePage = wasteIntegralService.queryExchangeLogList(paramMap);
+                mv.addObject("integralExchangePage", integralExchangePage);
+                break;
+            case "iAdjust"://积分调整
+                Page<Map<String, Object>> integralAdjustPage = wasteIntegralService.queryWasteIntegralChangeList(paramMap);
+                mv.addObject("integralAdjustPage", integralAdjustPage);
+                break;
+            default:
+                integralHistoryPage = wasteIntegralService.queryWasteIntegralLogList(paramMap);
+                mv.addObject("integralHistoryPage", integralHistoryPage);
+                break;
 
         }
         mv.setViewName("propertyservice/integral");
-        mv.addObject("flag",flag);
+        mv.addObject("flag", flag);
         return mv;
     }
-
 
 
 }

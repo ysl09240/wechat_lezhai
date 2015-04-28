@@ -1,6 +1,8 @@
 package com.lezhai365.wechat;
 
+import com.alibaba.dubbo.common.URL;
 import com.alibaba.fastjson.JSONObject;
+import com.lezhai365.utils.Encoder;
 import com.lezhai365.wechat.utils.ConfigUtil;
 import com.lezhai365.wechat.utils.HttpUtil;
 import com.lezhai365.wechat.utils.SignatureUtil;
@@ -52,19 +54,31 @@ public class OauthService {
      * @return
      * @throws UnsupportedEncodingException
      */
-    public String getCodeUrl(String pmcSigninName) throws UnsupportedEncodingException {
+    public static String getCodeUrl(String pmcSigninName) throws UnsupportedEncodingException {
         Map<String, String> params = new HashMap<String, String>();
-        params.put("appid", getAppid());
+        params.put("appid", ConfigUtil.APPID);
         params.put("response_type", "code");
-        params.put("redirect_uri", ConfigUtil.REDIRECT_URI);
+        params.put("redirect_uri", "http://wx.lezhai365.com/" + pmcSigninName + "/wechat/callback");
         params.put("scope", ConfigUtil.SCOPE); // snsapi_base（不弹出授权页面，只能拿到用户openid）snsapi_userinfo
         // （弹出授权页面，这个可以通过 openid 拿到昵称、性别、所在地）
         params.put("state", "365#wechat_redirect");
-        params.put("pmcSigninName",pmcSigninName);
+//        params.put("pmcSigninName",pmcSigninName);
         String para = SignatureUtil.createSign(params, false);
         return CODE_URI + "?" + para;
     }
 
+    public static String getCodeUrl(String refer,String pmcSigninName) throws Exception {
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("appid", ConfigUtil.APPID);
+        params.put("response_type", "code");
+        params.put("redirect_uri", "http://wx.lezhai365.com/" + pmcSigninName + "/wechat/callback");
+        params.put("scope", ConfigUtil.SCOPE); // snsapi_base（不弹出授权页面，只能拿到用户openid）snsapi_userinfo
+        // （弹出授权页面，这个可以通过 openid 拿到昵称、性别、所在地）
+        params.put("state", Encoder.symmetricEncrypto(refer)+"#wechat_redirect");
+//        params.put("pmcSigninName",pmcSigninName);
+        String para = SignatureUtil.createSign(params, false);
+        return CODE_URI + "?" + para;
+    }
     /**
      *
      * 通过code 换取 access_token
