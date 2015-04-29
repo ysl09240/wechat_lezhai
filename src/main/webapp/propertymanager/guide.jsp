@@ -27,7 +27,7 @@
                 <div class="wx-group">
                     <ul class="wx-functions">
                         <li class="wx-item">
-                            <div class="wx-header">小区通知</div>
+                            <div class="wx-header">服务指南</div>
                         </li>
                     </ul>
                 </div>
@@ -35,7 +35,7 @@
                     <div class="wx-space"></div>
                     <ul class="wx-functions">
                         <li class="wx-item">
-                            <a href="/manager/detail/guide?item=1">
+                            <a href="/${signinName}/manager/detail/guide?item=1&openid=${openid}">
                                    <span class="wx-icon">
                                     <img src="/assets/img/icon-service.png">
                                    </span>
@@ -44,7 +44,7 @@
                             </a>
                         </li>
                         <li class="wx-item">
-                            <a href="/manager/detail/guide?item=2">
+                            <a href="/${signinName}/manager/detail/guide?item=2&openid=${openid}">
                                  <span class="wx-icon">
                                     <img src="/assets/img/icon-service.png">
                                  </span>

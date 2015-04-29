@@ -24,12 +24,11 @@
             <div class="row">
                 <div class="col-lg-4 col-sm-6">
                     <div class="mobileframe bg">
-
                         <div class="wx-group">
                             <ul class="wx-functions">
                                 <li class="wx-item">
-                                    <a href="http://baidu.com" class="wx-icon back-arrow">
-                                        <img  src="assets/img/back-arrow.png">
+                                    <a href="/${signinName}/manager/guide?openid=${openid}" class="wx-icon back-arrow">
+                                        <img  src="/assets/img/back-arrow.png">
                                     </a>
                                     <div class="wx-header">服务指南详情</div>
                                 </li>

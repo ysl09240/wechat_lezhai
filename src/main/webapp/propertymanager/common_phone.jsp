@@ -25,6 +25,13 @@
                 <div class="col-lg-4 col-sm-6">
                     <div class="mobileframe bg">
                         <div class="wx-group">
+                            <ul class="wx-functions">
+                                <li class="wx-item">
+                                    <div class="wx-header">常用电话</div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="wx-group">
                             <div class="wx-space"></div>
                             <ul class="wx-functions">
                                 <li class="wx-item">

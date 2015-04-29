@@ -12,7 +12,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
-    <title>wx demo</title>
+    <title>小区通知</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/assets/css/wx.css">
@@ -35,13 +35,21 @@
                     <div class="wx-group">
                         <div class="wx-space"></div>
                         <ul class="wx-functions">
+                            <li class="wx-item thumbnail-wrap">
+                                <div class="wx-thumbnail">
+                                    <img src="/assets/img/notice-thumbnail-bg.png" />
+                                </div>
+                                <div class="thumbnail-comment">地下车位最后一次活动开始了</div>
+                            </li>
                             <c:forEach var="notice" items="${noticeList.content}">
                                 <li class="wx-item">
-                                    <span class="wx-icon wx-icon-sanmarino wx-yang">
-                                        <i class="fa fa-coffee"></i>
-                                    </span>
-                                    <div class="wx-name"><a href="/${signinName}/manager/detail/notice">${notice.title}</a></div>
-                                    <div class="text-right prm text-muted"><span>2015-06-12</span></div>
+                                    <a href="/${signinName}/manager/detail/notice?noticeId=${notice.id}&openid=${openid}">
+                                 <span class="wx-icon">
+                                    <img src="/assets/img/icon-notice.png">
+                                 </span>
+                                        <div class="wx-name">${notice.title}</div>
+                                        <div class="text-right prm text-muted"><span>2015-06-12</span></div>
+                                    </a>
                                 </li>
                             </c:forEach>
                         </ul>
