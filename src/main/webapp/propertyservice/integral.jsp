@@ -13,14 +13,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
-    <title>环保积分房间1-1101</title>
+    <title>环保积分房间${houseInfo.num}</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/assets/css/wx.css">
     <link rel="stylesheet" href="/assets/css/common-space.css">
-    <style>
-        body {padding-top: 40px; background: #666666; font-family: "Heiti SC", "DroidSansFallback",  "微软雅黑";}
-    </style>
 </head>
 <html>
     <body>
@@ -28,6 +25,13 @@
             <div class="row">
                 <div class="col-lg-4 col-sm-6">
                     <div class="mobileframe">
+                        <div class="wx-group">
+                            <ul class="wx-functions">
+                                <li class="wx-item">
+                                    <div class="wx-header">环保积分-房间${houseInfo.num}</div>
+                                </li>
+                            </ul>
+                        </div>
                         <div class="wx-group">
                             <div class="wx-space"></div>
                             <div class="env-box">
@@ -51,9 +55,9 @@
                                             <div class="pull-right text-muted">最后积分时间:${integralInfo.lastTimeStr}</div>
                                         </div>
                                         <ul class="c-tab clearfix">
-                                            <li class="c-tab-item <c:if test="${flag eq 'iHistory'}">select</c:if> "><a href="/${signinName}/service/integralslist?flag=iHistory">积分查询</a></li>
-                                            <li class="c-tab-item <c:if test="${flag eq 'iExchange'}">select</c:if> "><a href="/${signinName}/service/integralslist?flag=iExchange">积分兑换</a></li>
-                                            <li class="c-tab-item <c:if test="${flag eq 'iAdjust'}">select</c:if> "><a href="/${signinName}/service/integralslist?flag=iAdjust">积分调整</a></li>
+                                            <li class="c-tab-item <c:if test="${flag eq 'iHistory'}">select</c:if> "><a href="/${signinName}/service/integralslist?flag=iHistory&openid=${openid}">积分查询</a></li>
+                                            <li class="c-tab-item <c:if test="${flag eq 'iExchange'}">select</c:if> "><a href="/${signinName}/service/integralslist?flag=iExchange&openid=${openid}">积分兑换</a></li>
+                                            <li class="c-tab-item <c:if test="${flag eq 'iAdjust'}">select</c:if> "><a href="/${signinName}/service/integralslist?flag=iAdjust&openid=${openid}">积分调整</a></li>
                                         </ul>
                                     </div>
                                 </li>

@@ -17,9 +17,13 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/assets/css/wx.css">
     <link rel="stylesheet" href="/assets/css/common-space.css">
+    <link rel="stylesheet" type="text/css" href="/assets/libs/webupload/lib/webuploader.css"/>
+    <link rel="stylesheet" type="text/css" href="/assets/libs/webupload/style.css"/>
     <script src="/assets/libs/jquery/jquery-1.9.1.min.js"></script>
     <script src="/assets/libs/jquery/plugins/jquery.validate.min.js"></script>
     <script src="/assets/app/propertyservice/faultValidate.js"></script>
+    <script type="text/javascript" src="/assets/libs/webupload/lib/webuploader.js"></script>
+    <script type="text/javascript" src="/assets/libs/webupload/upload.js"></script>
 </head>
 <html>
     <body>
@@ -27,9 +31,24 @@
             <div class="row">
                 <div class="col-lg-4 col-sm-6">
                     <div class="mobileframe">
-                        <form id="addFaultForm" method="post" action="/service/do/addfault">
+
+                        <div class="wx-group">
+                            <ul class="wx-functions">
+                                <li class="wx-item">
+                                    <div class="wx-header">新增报修-房间${houseInfo.num}</div>
+                                </li>
+                            </ul>
+                        </div>
+                        <form id="addFaultForm" method="post" action="/${signinName}/service/do/addfault?openid=${openid}">
                             <div class="wx-group">
-                                <div class="upload-space"></div>
+                                <div class="upload-space fault-bg">
+                                    <div id="uploader">
+                                        <div id="queueList" class="queueList">
+                                            <a id="filePicker" class="webuploader-container">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
                                 <ul class="wx-functions">
                                     <li class="wx-item">
                                         <textarea name="description" class="textarea" placeholder="故障描述"></textarea>
@@ -109,7 +128,7 @@
                             <div class="wx-group fiexd-b">
                                 <ul class="wx-functions">
                                     <li class="wx-item">
-                                        <div class="wx-header "><button type="submit" class="text-c">提交报修</buttons></div>
+                                        <div class="wx-header "><button  type="submit" class="form-button">提交报修</button></div>
                                     </li>
                                 </ul>
                             </div>
@@ -118,5 +137,6 @@
                 </div>
             </div>
         </div>
+
     </body>
 </html>

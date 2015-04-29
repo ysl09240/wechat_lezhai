@@ -34,6 +34,12 @@
                 <div class="wx-group">
                     <div class="wx-space"></div>
                     <ul class="wx-functions">
+                        <li class="wx-item thumbnail-wrap">
+                                <div class="wx-thumbnail">
+                                    <img src="/assets/img/guide-thumbnail-bg.png" />
+                                </div>
+                                <div class="thumbnail-comment">地下车位最后一次活动开始了</div>
+                        </li>
                         <li class="wx-item">
                             <a href="/${signinName}/manager/detail/guide?item=1&openid=${openid}">
                                    <span class="wx-icon">

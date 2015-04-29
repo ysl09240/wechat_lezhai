@@ -102,7 +102,8 @@ public class OwnersInfomationController extends BaseController {
 
             List<Map<String, Object>> estateList = userWxAuthService.queryMyEstate(userWxEstateWhere);
             mv.addObject("estateList", estateList);
-            mv.addObject("signinName",signinName);
+            mv.addObject("signinName", signinName);
+            mv.addObject("openid", openid);
         }
 
         mv.setViewName("propertyinfomation/myestate");
@@ -123,17 +124,17 @@ public class OwnersInfomationController extends BaseController {
         Map<String,Object> userWxMap = getUserWx(signinName,openid);
 
         if(userWxMap != null){
-            Long userWxId = (Long) userWxMap.get("id");
-            UserAuthApplyLog where = new UserAuthApplyLog();
-            where.setUserWxId(userWxId);
-            if(houseEstateId != null){
-                where.setHousingEstateId(houseEstateId);
-            }
 
-            List<Map<String,Object>> myHouseList = userWxAuthService.queryMyHouse(where);
+            Long userWxId = (Long) userWxMap.get("id");
+            if(houseEstateId == null){
+                houseEstateId = (Long) userWxMap.get("defaultEstateId");
+            }
+            List<Map<String,Object>> myHouseList = userWxAuthService.queryMyHouse(userWxId,houseEstateId);
 
             mv.addObject("signinName",signinName);
             mv.addObject("myHouseList",myHouseList);
+            mv.addObject("openid", openid);
+            mv.addObject("houseEstateId", houseEstateId);
         }
         mv.setViewName("propertyinfomation/myhouse");
         return mv;
@@ -150,15 +151,17 @@ public class OwnersInfomationController extends BaseController {
             @RequestParam String openid,
             @RequestParam Long houseInfoId,
             @RequestParam Long houseEstateId,
-            @RequestParam String signinName){
+            @PathVariable String signinName){
         ModelAndView mv = new ModelAndView();
         UserAccounts userAccounts = userAccountService.queryUserInfoBySigninName(signinName);
         if(userAccounts != null){
             Long pmcUserId = userAccounts.getId();
             int flag = userWxService.doDefaultEstateAnHouse(houseEstateId, houseInfoId, pmcUserId, openid);
         }
-        mv.setViewName("redirect:/"+signinName+"/infomation/myhouse");
 
+        mv.addObject("openid", openid);
+        mv.addObject("signinName", signinName);
+        mv.setViewName("redirect:/"+signinName+"/infomation/myhouse");
         return mv;
 
     }
@@ -183,7 +186,8 @@ public class OwnersInfomationController extends BaseController {
 
             List<Map<String, Object>> estateList = userWxAuthService.queryMyEstate(userWxEstateWhere);
             mv.addObject("estateList", estateList);
-            mv.addObject("signinName",signinName);
+            mv.addObject("signinName", signinName);
+            mv.addObject("openid", openid);
         }
         mv.setViewName("propertyinfomation/applyauth");
 
@@ -212,6 +216,7 @@ public class OwnersInfomationController extends BaseController {
             int flag = userWxAuthService.addUserWxAuth(userAuthApplyLog);
         }
         mv.addObject("signinName",signinName);
+        mv.addObject("openid", openid);
         mv.setViewName("redirect:/"+signinName+"/infomation/myhouse");
 
         return mv;

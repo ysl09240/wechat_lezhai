@@ -19,44 +19,44 @@
     <link rel="stylesheet" href="/assets/css/common-space.css">
 </head>
 <html>
-    <body>
-    <div class="wx-page">
-        <div class="row">
+<body>
+<div class="wx-page">
+    <div class="row">
 
-            <div class="col-lg-4 col-sm-6">
-                <div class="mobileframe">
-                    <div class="wx-group">
-                        <ul class="wx-functions">
+        <div class="col-lg-4 col-sm-6">
+            <div class="mobileframe">
+                <div class="wx-group">
+                    <ul class="wx-functions">
+                        <li class="wx-item">
+                            <div class="wx-header">小区通知</div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="wx-group">
+                    <div class="wx-space"></div>
+                    <ul class="wx-functions">
+                        <li class="wx-item thumbnail-wrap">
+                            <div class="wx-thumbnail">
+                                <img src="/assets/img/notice-thumbnail-bg.png"/>
+                            </div>
+                            <div class="thumbnail-comment">地下车位最后一次活动开始了</div>
+                        </li>
+                        <c:forEach var="notice" items="${noticeList.content}">
                             <li class="wx-item">
-                                <div class="wx-header">小区通知</div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="wx-group">
-                        <div class="wx-space"></div>
-                        <ul class="wx-functions">
-                            <li class="wx-item thumbnail-wrap">
-                                <div class="wx-thumbnail">
-                                    <img src="/assets/img/notice-thumbnail-bg.png" />
-                                </div>
-                                <div class="thumbnail-comment">地下车位最后一次活动开始了</div>
-                            </li>
-                            <c:forEach var="notice" items="${noticeList.content}">
-                                <li class="wx-item">
-                                    <a href="/${signinName}/manager/detail/notice?noticeId=${notice.id}&openid=${openid}">
+                                <a href="/${signinName}/manager/detail/notice?noticeId=${notice.id}&openid=${openid}">
                                  <span class="wx-icon">
                                     <img src="/assets/img/icon-notice.png">
                                  </span>
-                                        <div class="wx-name">${notice.title}</div>
-                                        <div class="text-right prm text-muted"><span>2015-06-12</span></div>
-                                    </a>
-                                </li>
-                            </c:forEach>
-                        </ul>
-                    </div>
+                                    <div class="wx-name">${notice.title}</div>
+                                    <div class="text-right prm text-muted"><span>2015-06-12</span></div>
+                                </a>
+                            </li>
+                        </c:forEach>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
-    </body>
+</div>
+</body>
 </html>

@@ -11,7 +11,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>新增投诉-房间1-1101</title>
+    <title>新增投诉-房间${houseInfo.num}</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/assets/css/wx.css">
@@ -20,7 +20,9 @@
     <link rel="stylesheet" type="text/css" href="/assets/libs/webupload/style.css"/>
     <script src="/assets/libs/jquery/jquery-1.9.1.min.js"></script>
     <script src="/assets/libs/jquery/plugins/jquery.validate.min.js"></script>
-    <script src="/assets/app/propertyservice/complaintValidate.js"></script>
+    <script src="/assets/app/propertyservice/faultValidate.js"></script>
+    <script type="text/javascript" src="/assets/libs/webupload/lib/webuploader.js"></script>
+    <script type="text/javascript" src="/assets/libs/webupload/upload.js"></script>
 </head>
 <html>
     <body>
@@ -28,9 +30,22 @@
             <div class="row">
             <div class="col-lg-4 col-sm-6">
                 <div class="mobileframe">
-                    <form id="addComplaintForm" action="/${signinName}/service/do/addcomplaint">
+                    <div class="wx-group">
+                        <ul class="wx-functions">
+                            <li class="wx-item">
+                                <div class="wx-header">新增投诉-房间${houseInfo.num}</div>
+                            </li>
+                        </ul>
+                    </div>
+                    <form id="addComplaintForm" action="/${signinName}/service/do/addcomplaint?openid=${openid}" method="post">
                         <div class="wx-group">
-                            <div class="upload-space">
+                            <div class="upload-space complaint-bg">
+                                <div id="uploader">
+                                    <div id="queueList" class="queueList">
+                                        <a id="filePicker" class="webuploader-container">
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                             <ul class="wx-functions">
                                 <li class="wx-item">

@@ -27,6 +27,13 @@
                 <div class="col-lg-4 col-sm-6">
                     <div class="mobileframe bg">
                         <div class="wx-group">
+                            <ul class="wx-functions">
+                                <li class="wx-item">
+                                    <div class="wx-header">积分兑换规则</div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="wx-group">
                             <div class="wx-space"></div>
                             <ul class="wx-functions">
                                 <li class="wx-item">

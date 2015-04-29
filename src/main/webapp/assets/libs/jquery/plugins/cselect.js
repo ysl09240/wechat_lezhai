@@ -18,7 +18,7 @@
  */
 
 'use strict';
-$(function(){
+(function($){
     /**
      * 思路:
      * 1.每个下拉框可以单独异步加载， 
@@ -130,7 +130,7 @@ $(function(){
             var kv = options.kv;
             var plaecholder = $element.data('placeholder');
             if (plaecholder !== "undefined") {
-                $element.append($('<option value="">--' + plaecholder + '--</option>'));
+                $element.append($('<option value="">' + plaecholder + '</option>'));
             }
             for (var i = 0, len = data.length; i < len; i++) {
                 var _t = $(optionStr);
@@ -162,16 +162,19 @@ $(function(){
             arr.push($($element).data('_next'));
             $.each(arr, function (i, id) {
             var plaecholder = $('#' + id).data('placeholder');
-                $('#' + id).empty().append('<option value="">--' + plaecholder + '--</option>');
+                $('#' + id).empty().append('<option value="">' + plaecholder + '</option>');
             });
 //            }
 
         },
         //加载数据
         loadData: function (options, param) {
-
             if(options.async.defaultParam){
-                param = $.extend(param,options.async.defaultParam);
+                if (!$.isFunction(options.async.defaultParam)) {
+                    param = $.extend(param,options.async.defaultParam);
+                } else {
+                    param = $.extend(param,options.async.defaultParam());
+                }
             }
             return $.ajax({
                 url: options.async.uri,
@@ -199,11 +202,4 @@ $(function(){
         });
         return this;
     };
-
-    // return new object ;
-    return function (element, options) {
-        options = $.extend(options, {});
-        options.element = element;
-        $(element).cselect(options);
-    };
-});
+})(jQuery);

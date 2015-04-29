@@ -1,4 +1,4 @@
-(function( $ ){
+$(function(  ){
     // 优化retina, 在retina下这个值是2
       var ratio = window.devicePixelRatio || 1,
           fileCount = 0;
@@ -124,4 +124,4 @@
         }
     });
 
-})( jQuery );
+});
