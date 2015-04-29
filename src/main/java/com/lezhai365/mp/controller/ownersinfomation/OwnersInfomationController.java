@@ -135,6 +135,7 @@ public class OwnersInfomationController extends BaseController {
 
             mv.addObject("signinName",signinName);
             mv.addObject("myHouseList",myHouseList);
+            mv.addObject("openid", openid);
         }
         mv.setViewName("propertyinfomation/myhouse");
         return mv;
@@ -159,6 +160,7 @@ public class OwnersInfomationController extends BaseController {
             int flag = userWxService.doDefaultEstateAnHouse(houseEstateId, houseInfoId, pmcUserId, openid);
         }
         mv.setViewName("redirect:/"+signinName+"/infomation/myhouse");
+        mv.addObject("openid", openid);
 
         return mv;
 
@@ -214,6 +216,7 @@ public class OwnersInfomationController extends BaseController {
             int flag = userWxAuthService.addUserWxAuth(userAuthApplyLog);
         }
         mv.addObject("signinName",signinName);
+        mv.addObject("openid", openid);
         mv.setViewName("redirect:/"+signinName+"/infomation/myhouse");
 
         return mv;
