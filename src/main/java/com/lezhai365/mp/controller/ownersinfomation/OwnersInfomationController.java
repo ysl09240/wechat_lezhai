@@ -198,7 +198,7 @@ public class OwnersInfomationController extends BaseController {
      * @param signinName
      * @return
      */
-    @RequestMapping(value="/doauthhouse")
+    @RequestMapping(value="/doauthhouse",method = RequestMethod.POST)
     public ModelAndView doAuthHouse(
             @RequestParam String openid,
             @ModelAttribute UserAuthApplyLog userAuthApplyLog,

@@ -31,7 +31,7 @@
     <div class="row">
         <div class="col-lg-4 col-sm-6">
             <div class="mobileframe">
-                <form id="authhouseForm" action="/${signinName}/infomation/doauthhouse">
+                <form id="authhouseForm" method="post" action="/${signinName}/infomation/doauthhouse">
 
 
                     <div class="mtl visible-xs"></div>
