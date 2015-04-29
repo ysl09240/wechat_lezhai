@@ -22,7 +22,7 @@
     <script src="/assets/libs/jquery/jquery-1.9.1.min.js"></script>
     <script src="/assets/libs/jquery/plugins/jquery.validate.min.js"></script>
     <script src="/assets/libs/jquery/plugins/cselect.js"></script>
-    <script src="/assets/app/propertyservice/complaintValidate.js"></script>
+    <script src="/assets/app/propertyinfomation/authHouseValidate.js"></script>
 
 </head>
 <html>
@@ -31,7 +31,7 @@
     <div class="row">
         <div class="col-lg-4 col-sm-6">
             <div class="mobileframe">
-                <form action="/${signinName}/infomation/doauthhouse">
+                <form id="authhouseForm" action="/${signinName}/infomation/doauthhouse">
 
 
                     <div class="mtl visible-xs"></div>

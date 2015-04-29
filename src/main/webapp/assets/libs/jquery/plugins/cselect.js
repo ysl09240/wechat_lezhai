@@ -18,7 +18,7 @@
  */
 
 'use strict';
-define(['jquery'], function ($) {
+$(function(){
     /**
      * 思路:
      * 1.每个下拉框可以单独异步加载， 

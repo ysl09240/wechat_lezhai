@@ -30,8 +30,6 @@ import java.util.*;
 @Controller
 @RequestMapping(value = "/{signinName}/service")
 public class PropertyServiceController extends BaseController {
-    public static Long housingEstateId = 103558l;
-    public static Long houseInfoId = 3464l;
     @Autowired
     IPropertyServiceService propertyServiceService;
     @Autowired
@@ -43,15 +41,15 @@ public class PropertyServiceController extends BaseController {
     @RequestMapping(value = "/billslist")
     public ModelAndView getBillsList(
             HttpServletResponse response,
+            @RequestParam String openid,
             @PathVariable String signinName,
             @RequestParam(value = "pageSize", defaultValue = "10")Integer pageSize,
             @RequestParam(value = "pageIndex", defaultValue = "1")Integer pageIndex){
         ModelAndView mv = new ModelAndView();
 
-        CacheUser user = getCacheUser(response);
-        if(user != null ){
-            Long estateId = 103558l;
-            Long houseInfoId = 3464l;
+            Map<String,Object> userWxMap = getUserWx(signinName,openid);
+            Long estateId = (Long) userWxMap.get("defaultEstateId");
+            Long houseInfoId = (Long) userWxMap.get("defaultHouseId");
             Page<Map<String,Object>> billsPage = propertyServiceService.queryPayBillsListByHouseInfoId(houseInfoId, estateId, pageIndex, pageSize);
             List<Map<String,Object>> billsList = billsPage.getContent();
 
@@ -82,9 +80,6 @@ public class PropertyServiceController extends BaseController {
             mv.addObject("billsMap",billsMap);
             mv.setViewName("propertyservice/paybills");
             mv.addObject("signinName", signinName);
-        } else{
-            mv.setViewName("redirect:/account/signin?pmcSigninName=" + signinName);
-        }
         return mv;
     }
 
@@ -94,39 +89,39 @@ public class PropertyServiceController extends BaseController {
     @RequestMapping(value="/faultlist")
     public ModelAndView getFaultInfoList(
             HttpServletResponse response,
+            @RequestParam String openid,
             @PathVariable String signinName,
             @RequestParam(value = "pageSize", defaultValue = "10")Integer pageSize,
             @RequestParam(value = "pageIndex", defaultValue = "1")Integer pageIndex){
         ModelAndView mv = new ModelAndView();
-
-        CacheUser user = getCacheUser(response);
-        if(user != null ){
-            Long estateId = 103558l;
-            Long houseInfoId = 3464l;
+        Map<String,Object> userWxMap = getUserWx(signinName, openid);
+        Long estateId = (Long) userWxMap.get("defaultEstateId");
+        Long houseInfoId = (Long) userWxMap.get("defaultHouseId");
             Page<Map<String,Object>> faultInfoList = propertyServiceService.queryFaultsByHouseInfoId(houseInfoId,estateId,pageIndex,pageSize);
             mv.addObject("faultInfoList",faultInfoList);
             mv.setViewName("propertyservice/faults");
             mv.addObject("signinName", signinName);
-
-        } else{
             mv.setViewName("redirect:/account/signin?pmcSigninName=" + signinName);
-        }
         return mv;
     }
 
     @RequestMapping(value="/faultview")
     public ModelAndView faultView(
+            @RequestParam String openid,
             @PathVariable String signinName){
         ModelAndView mv = new ModelAndView();
         String repairFaultType="repair_fault_type";
         String repairEmergencyType="repair_emergency_type";
-        Long pmcId = 649l;
+        Map<String,Object> userWxMap = getUserWx(signinName, openid);
+        Long estateId = (Long) userWxMap.get("defaultEstateId");
+        Long houseInfoId = (Long) userWxMap.get("defaultHouseId");
+        Long pmcId = (Long) userWxMap.get("pmcId");
         //从session中获取物业公司的id
         Map<String,Object> repairFaultValue=null;
         Map<String,Object> repairEmergencyValue=null;
         //当前小区id
-        repairFaultValue=pmsParameterService.queryInitParamsValue(repairFaultType,pmcId,housingEstateId);
-        repairEmergencyValue=pmsParameterService.queryInitParamsValue(repairEmergencyType,pmcId,housingEstateId);
+        repairFaultValue=pmsParameterService.queryInitParamsValue(repairFaultType,pmcId,estateId);
+        repairEmergencyValue=pmsParameterService.queryInitParamsValue(repairEmergencyType,pmcId,estateId);
         mv.addObject("repairFaultValue",repairFaultValue);
         mv.addObject("repairEmergencyValue",repairEmergencyValue);
         mv.addObject("signinName",signinName);
@@ -137,10 +132,15 @@ public class PropertyServiceController extends BaseController {
     //新增报修
     @RequestMapping(value="/do/addfault",method = RequestMethod.POST)
     public ModelAndView addFaultInfo(
+            @RequestParam String openid,
             @PathVariable String signinName,
             @ModelAttribute FaultInfo faultInfo){
         ModelAndView mv = new ModelAndView();
-        faultInfo.setHousingEstateId(housingEstateId);
+        Map<String,Object> userWxMap = getUserWx(signinName, openid);
+        Long estateId = (Long) userWxMap.get("defaultEstateId");
+        Long houseInfoId = (Long) userWxMap.get("defaultHouseId");
+        Long pmcId = (Long) userWxMap.get("pmcId");
+        faultInfo.setHousingEstateId(estateId);
         faultInfo.setHouseInfoId(houseInfoId);
 
         int flag = propertyServiceService.addFaultInfo(faultInfo);
@@ -154,12 +154,15 @@ public class PropertyServiceController extends BaseController {
     //投诉查询
     @RequestMapping(value="/complaintlist")
     public ModelAndView getComplaintsList(
+            @RequestParam String openid,
             @PathVariable String signinName,
             @RequestParam(value = "pageSize", defaultValue = "10")Integer pageSize,
             @RequestParam(value = "pageIndex", defaultValue = "1")Integer pageIndex){
         ModelAndView mv = new ModelAndView();
-        Long estateId = 103558l;
-        Long houseInfoId = 3464l;
+
+        Map<String,Object> userWxMap = getUserWx(signinName, openid);
+        Long estateId = (Long) userWxMap.get("defaultEstateId");
+        Long houseInfoId = (Long) userWxMap.get("defaultHouseId");
         Page<Map<String,Object>> complaintList = propertyServiceService.queryComplaintByHouseInfoId(houseInfoId,estateId,pageIndex,pageSize);
         mv.addObject("complaintList",complaintList);
         mv.addObject("signinName",signinName);
@@ -183,10 +186,15 @@ public class PropertyServiceController extends BaseController {
     //新增投诉
     @RequestMapping(value="/do/addcomplaint")
     public ModelAndView addComplaintInfo(
+            @RequestParam String openid,
             @PathVariable String signinName,
             @ModelAttribute ComplaintInfo complaintInfo){
+
+        Map<String,Object> userWxMap = getUserWx(signinName, openid);
+        Long estateId = (Long) userWxMap.get("defaultEstateId");
+        Long houseInfoId = (Long) userWxMap.get("defaultHouseId");
         complaintInfo.setHouseInfoId(houseInfoId);
-        complaintInfo.setHousingEstateId(housingEstateId);
+        complaintInfo.setHousingEstateId(estateId);
         ModelAndView mv = new ModelAndView();
         int flag = propertyServiceService.addComplaintInfo(complaintInfo);
         if(flag>0){
@@ -199,13 +207,17 @@ public class PropertyServiceController extends BaseController {
     //环保积分
     @RequestMapping(value="/integralslist")
     public ModelAndView getWasteIntegral(
+            @RequestParam String openid,
             @PathVariable String signinName,
             @RequestParam String flag,
             @RequestParam(value = "pageSize", defaultValue = "10") int pageSize,
             @RequestParam(value = "pageIndex", defaultValue = "1") int pageIndex){
         ModelAndView mv = new ModelAndView();
+        Map<String,Object> userWxMap = getUserWx(signinName, openid);
+        Long estateId = (Long) userWxMap.get("defaultEstateId");
+        Long houseInfoId = (Long) userWxMap.get("defaultHouseId");
         //我的积分
-        Map<String, Object> integralInfo = wasteIntegralService.queryWasteIntegralByHouseInfoId(housingEstateId, houseInfoId);
+        Map<String, Object> integralInfo = wasteIntegralService.queryWasteIntegralByHouseInfoId(estateId, houseInfoId);
         if (integralInfo != null){
             mv.addObject("integralInfo",integralInfo);
         }else{
@@ -220,7 +232,7 @@ public class PropertyServiceController extends BaseController {
             mv.addObject("integralInfo",integralInfo);
         }
         Map<String,Object> paramMap = new HashMap();
-        paramMap.put("housingEstateId", housingEstateId);
+        paramMap.put("housingEstateId", estateId);
         paramMap.put("houseInfoId", houseInfoId);
         paramMap.put("pageIndex", pageIndex);
         paramMap.put("pageSize", pageSize);

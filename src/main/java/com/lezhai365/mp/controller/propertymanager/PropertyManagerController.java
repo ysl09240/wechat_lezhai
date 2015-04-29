@@ -32,8 +32,6 @@ public class PropertyManagerController extends BaseController {
     @Autowired
     INoticeService noticeService;
 
-    public static Long estateId = 103500l;
-    public static Long userId = 351l;
 
 
 
@@ -51,10 +49,14 @@ public class PropertyManagerController extends BaseController {
      */
     @RequestMapping(value="/notice")
     public ModelAndView getNoticeList(
+            @RequestParam String openid,
             @PathVariable String signinName,
             @RequestParam(value = "pageSize", defaultValue = "10")Integer pageSize,
             @RequestParam(value = "pageIndex", defaultValue = "1")Integer pageIndex){
         ModelAndView mv = new ModelAndView();
+        Map<String,Object> userWxMap = getUserWx(signinName,openid);
+        Long estateId = (Long) userWxMap.get("defaultEstateId");
+        Long houseInfoId = (Long) userWxMap.get("defaultHouseId");
 //        Long estateId = 110l;
         Page<Map<String,Object>> noticeList = propertyManagerService.queryNoticeListSNS(pageSize,pageIndex,estateId);
         mv.addObject("noticeList",noticeList);
@@ -72,13 +74,19 @@ public class PropertyManagerController extends BaseController {
      */
     @RequestMapping(value="/detail/notice")
     public ModelAndView getNoticeDetail(
+            @PathVariable String signinName,
+            @RequestParam String openid,
             @RequestParam Long noticeId){
         ModelAndView mv = new ModelAndView();
+        Map<String,Object> userWxMap = getUserWx(signinName,openid);
+        Long estateId = (Long) userWxMap.get("defaultEstateId");
+        Long houseInfoId = (Long) userWxMap.get("defaultHouseId");
         Notice notice = new Notice();
         notice.setHousingEstateId(estateId);
         notice.setId(noticeId);
         Map<String,Object> noticeMap = noticeService.queryOneNotice(notice);
         mv.addObject("noticeMap",noticeMap);
+        mv.addObject("signinName",signinName);
         mv.setViewName("propertymanager/notice_detail");
         return mv;
     }
@@ -88,7 +96,9 @@ public class PropertyManagerController extends BaseController {
      * 物业介绍
      * @return
      */
-    public ModelAndView getPropertyIntroduce(){
+    public ModelAndView getPropertyIntroduce(
+            @RequestParam String openid,
+            @PathVariable String signinName){
         ModelAndView mv = new ModelAndView();
         mv.setViewName("");
         return mv;
@@ -99,8 +109,11 @@ public class PropertyManagerController extends BaseController {
      * @return
      */
     @RequestMapping(value="/guide")
-    public ModelAndView getPropertyGuide(){
+    public ModelAndView getPropertyGuide(
+            @RequestParam String openid,
+            @PathVariable String signinName){
         ModelAndView mv = new ModelAndView();
+            mv.addObject("signinName",signinName);
             mv.setViewName("propertymanager/guide");
         //common method
         return mv;
@@ -111,9 +124,11 @@ public class PropertyManagerController extends BaseController {
      */
     @RequestMapping(value="/detail/guide")
     public ModelAndView getPropertyGuideDetail(
+            @RequestParam String openid,
+            @PathVariable String signinName,
             @RequestParam Integer item){
         ModelAndView mv = new ModelAndView();
-
+        mv.addObject("signinName",signinName);
         mv.setViewName("propertymanager/guide_detail_"+item);
         //common method
         return mv;
@@ -124,7 +139,9 @@ public class PropertyManagerController extends BaseController {
      * @return
      */
     @RequestMapping(value="/commonphone")
-    public ModelAndView getCommonPhone(){
+    public ModelAndView getCommonPhone(
+            @RequestParam String openid,
+            @PathVariable String signinName){
         ModelAndView mv = new ModelAndView();
         mv.setViewName("propertymanager/common_phone");
         return mv;

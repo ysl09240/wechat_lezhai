@@ -155,7 +155,7 @@ public class OwnersInfomationController extends BaseController {
         UserAccounts userAccounts = userAccountService.queryUserInfoBySigninName(signinName);
         if(userAccounts != null){
             Long pmcUserId = userAccounts.getId();
-            int flag = userWxService.doDefaultEstateAnHouse(houseEstateId,houseInfoId,pmcUserId,openid);
+            int flag = userWxService.doDefaultEstateAnHouse(houseEstateId, houseInfoId, pmcUserId, openid);
         }
         mv.setViewName("redirect:/"+signinName+"/infomation/myhouse");
 
@@ -205,9 +205,12 @@ public class OwnersInfomationController extends BaseController {
             @PathVariable String signinName){
         ModelAndView mv = new ModelAndView();
 
-
-        int flag = userWxAuthService.addUserWxAuth(userAuthApplyLog);
-
+        Map<String,Object> userWxMap = getUserWx(signinName,openid);
+        if(userWxMap != null){
+            Long userWxId = (Long) userWxMap.get("id");
+            userAuthApplyLog.setUserWxId(userWxId);
+            int flag = userWxAuthService.addUserWxAuth(userAuthApplyLog);
+        }
         mv.addObject("signinName",signinName);
         mv.setViewName("redirect:/"+signinName+"/infomation/myhouse");
 
