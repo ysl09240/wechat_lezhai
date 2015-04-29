@@ -1,13 +1,18 @@
 package com.lezhai365.wechat;
 
 import com.alibaba.fastjson.JSONObject;
+import com.lezhai365.pms.model.weixin.UserWx;
+import com.lezhai365.pms.spi.wechat.IUserWxService;
 import com.lezhai365.wechat.model.InMessage;
 import com.lezhai365.wechat.model.TextOutMessage;
 import com.lezhai365.wechat.utils.XStreamUtil;
 import com.thoughtworks.xstream.XStream;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
 import java.util.Date;
+import java.util.Map;
 
 /**
  *
@@ -22,9 +27,11 @@ import java.util.Date;
  * @copyright :  Copyright(c) 2013 西安乐宅网络科技有限公司
  * @description :
  */
+@Service
 public class WeChatService extends WeChatOpenApi {
 
-
+    @Autowired
+    IUserWxService userWxService;
     /**
      * 处理微信消息
      *
@@ -32,7 +39,7 @@ public class WeChatService extends WeChatOpenApi {
      * @return
      * @throws Exception
      */
-    public String processWxMsg(String pmcSignName,InputStream xmlInputStream) throws Exception {
+    public String processWxMsg(Long pmcUserId,String pmcSignName,InputStream xmlInputStream) throws Exception {
         String result = "";
         //转换微信post过来的xml内容
         XStream xs = XStreamUtil.init(false);
@@ -58,10 +65,23 @@ public class WeChatService extends WeChatOpenApi {
                     String access_token = getAccessToken("wxc25645bdef1d5f57","bd9108b26ac432faed9a1a24aae92510");
                     UserService us = new UserService();
                     JSONObject userInfo = us.getUserInfo(access_token, msg.getFromUserName());
-//                    System.out.println("用户信息如下：--------------------------------------------------------");
-//                    System.out.println(userInfo);
-                    oms.setContent("欢迎关注[万千家物业服务]<a href=\""+new OauthService().getCodeUrl(pmcSignName)+"\">点击绑定业主信息</a>");
-//                     oms.setContent("感谢您的关注!");
+
+                    String openId = userInfo.getString("openid");
+                    UserWx uw = new UserWx();
+                    uw.setWeixinOpenid(openId);
+                    uw.setPmcId(pmcUserId);
+
+                    Map queryResult = userWxService.queryUserWxByPmcIdAndOpenId(uw);
+                    if(null != queryResult){
+                        uw.setNickname(userInfo.getString("nickname"));
+                        uw.setHeadPic(userInfo.getString("headimgurl"));
+                        int _result = userWxService.addUserWx(uw);
+                        System.out.println("用户信息如下：--------------------------------------------------------");
+                        System.out.println(userInfo);
+                        //关注微信公众号时设置欢迎语
+                        oms.setContent("欢迎关注[万千家物业服务]微信公众号<a href='http://wx.lezhai365.com/"+pmcSignName+"/infomation/authhouse?openid="+openId+"'>点击绑定业主信息</a>");
+                    }
+
                     break;
                 case "unsubscribe"://取消关注
                     //标注用户已经取消关注
@@ -79,6 +99,8 @@ public class WeChatService extends WeChatOpenApi {
                     //提醒用户绑定房产
                     break;
                 case "VIEW"://跳转
+                    //点击菜单时检查当前微信用户是否已经关注过
+
                     System.out.println("跳转");
                     break;
                 case "card_pass_check"://卡券审核通过

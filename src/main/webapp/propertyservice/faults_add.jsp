@@ -59,8 +59,8 @@
                                 <div class="wx-space"></div>
                                 <ul class="wx-functions">
                                     <li class="wx-item">
-                                <span class="wx-icon wx-icon-sanmarino wx-yang">
-                                    <i class="fa fa-qrcode"></i>
+                                <span class="wx-icon">
+                                    <img src="/assets/img/icon-fault-type.png">
                                 </span>
                                         <div class="wx-name">故障类型</div>
                                         <select class="feild" name="typeId">
@@ -75,8 +75,8 @@
                                 <div class="wx-space"></div>
                                 <ul class="wx-functions">
                                     <li class="wx-item">
-                                <span class="wx-icon wx-icon-sanmarino wx-yang">
-                                    <i class="fa fa-qrcode"></i>
+                                <span class="wx-icon">
+                                    <img src="/assets/img/icon-level.png">
                                 </span>
                                         <div class="wx-name inline-block">紧急程度</div>
                                         <select class="feild" name="urgency">
@@ -91,8 +91,8 @@
                                 <div class="wx-space"></div>
                                 <ul class="wx-functions">
                                     <li class="wx-item">
-                                <span class="wx-icon wx-icon-sanmarino wx-yang">
-                                    <i class="fa fa-qrcode"></i>
+                                <span class="wx-icon">
+                                    <img src="/assets/img/icon-location.png">
                                 </span>
                                         <div class="wx-name">故障地点</div>
                                         <input class="feild" name="adress" />
@@ -104,8 +104,8 @@
                                 <div class="wx-space"></div>
                                 <ul class="wx-functions">
                                     <li class="wx-item">
-                                <span class="wx-icon wx-icon-sanmarino wx-yang">
-                                    <i class="fa fa-coffee"></i>
+                                <span class="wx-icon">
+                                    <img src="/assets/img/icon-people.png">
                                 </span>
                                         <div class="wx-name">保修人</div>
                                         <input class="feild" name="repairPeople"/>
@@ -116,8 +116,8 @@
                                 <div class="wx-space"></div>
                                 <ul class="wx-functions">
                                     <li class="wx-item">
-                                <span class="wx-icon wx-icon-sanmarino wx-yang">
-                                    <i class="fa fa-coffee"></i>
+                                <span class="wx-icon">
+                                    <img src="/assets/img/icon-phone.png">
                                 </span>
                                         <div class="wx-name">联系电话</div>
                                         <input class="feild" name="contactNumber"/>

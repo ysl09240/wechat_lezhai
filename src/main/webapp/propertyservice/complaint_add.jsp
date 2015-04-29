@@ -57,8 +57,8 @@
                             <div class="wx-space"></div>
                             <ul class="wx-functions">
                                 <li class="wx-item">
-                                <span class="wx-icon wx-icon-sanmarino wx-yang">
-                                    <i class="fa fa-coffee"></i>
+                                <span class="wx-icon">
+                                    <img src="/assets/img/icon-people.png">
                                 </span>
                                     <div class="wx-name">投诉人</div>
                                     <input class="feild" name="complainant" />
@@ -69,8 +69,8 @@
                             <div class="wx-space"></div>
                             <ul class="wx-functions">
                                 <li class="wx-item">
-                                <span class="wx-icon wx-icon-sanmarino wx-yang">
-                                    <i class="fa fa-coffee"></i>
+                                <span class="wx-icon">
+                                    <img src="/assets/img/icon-phone.png">
                                 </span>
                                     <div class="wx-name">联系电话</div>
                                     <input id="contactNumber" class="feild" name="contactNumber"/>
@@ -81,7 +81,7 @@
                         <div class="wx-group fiexd-b">
                             <ul class="wx-functions">
                                 <li class="wx-item">
-                                    <div class="wx-header "><button class="text-c">提交投诉</button></div>
+                                    <div class="wx-header "><button class="form-button">提交投诉</button></div>
                                 </li>
                             </ul>
                         </div>

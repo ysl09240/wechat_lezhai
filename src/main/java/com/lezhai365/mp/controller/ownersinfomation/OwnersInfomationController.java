@@ -68,7 +68,7 @@ public class OwnersInfomationController extends BaseController {
     public
     @ResponseBody
     ResultObject findTreeList(
-            @RequestParam(value = "estateId") Long housingEstateId,
+            @RequestParam Long housingEstateId,
             @RequestParam(value = "id", required = false) Long pid,
             @RequestParam(value = "pid", required = false) Long hipid,
             @RequestParam(value = "floor", required = false) Long floor,

@@ -9,6 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -58,11 +59,16 @@
                                 </li>
                                 <li class="wx-item">
                                     <div class="ln"> ${faultInfo.description}</div>
-                                    <div class="mtm">
-                                        <img src="http://s.cn.bing.net/az/hprichbg/rb/Husafell_ZH-CN9632204692_1920x1080.jpg" alt="..." class="img-thumbnail">
-                                        <img src="http://s.cn.bing.net/az/hprichbg/rb/Husafell_ZH-CN9632204692_1920x1080.jpg" alt="..." class="img-thumbnail">
-                                        <img src="http://s.cn.bing.net/az/hprichbg/rb/Husafell_ZH-CN9632204692_1920x1080.jpg" alt="..." class="img-thumbnail">
-                                    </div>
+                                    ${faultInfo.imgs}
+                                    <c:if test="${!empty faultInfo.imgs}">
+                                        <div class="mtm">
+
+                                            <c:set var="imgs" value="${fn:split(faultInfo.imgs, ',')}"/>
+                                            <c:forEach items="${imgs}" var="img">
+                                                <img src="http://img.lezhai365.com/${img}" alt="..." class="img-thumbnail">
+                                            </c:forEach>
+                                        </div>
+                                    </c:if>
                                 </li>
                             </ul>
                         </div>

@@ -8,6 +8,7 @@
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -48,11 +49,15 @@
                                         ${complaint.complaintContent}
                                         <span class="wx-content">${complaint.createdDateStr}</span>
                                     </div>
-                                    <div class="mtm">
-                                        <img src="http://s.cn.bing.net/az/hprichbg/rb/Husafell_ZH-CN9632204692_1920x1080.jpg" alt="..." class="img-thumbnail">
-                                        <img src="http://s.cn.bing.net/az/hprichbg/rb/Husafell_ZH-CN9632204692_1920x1080.jpg" alt="..." class="img-thumbnail">
-                                        <img src="http://s.cn.bing.net/az/hprichbg/rb/Husafell_ZH-CN9632204692_1920x1080.jpg" alt="..." class="img-thumbnail">
-                                    </div>
+                                    <c:if test="${!empty complaint.imgs}">
+                                        <div class="mtm">
+
+                                            <c:set var="imgs" value="${fn:split(complaint.imgs, ',')}"/>
+                                            <c:forEach items="${imgs}" var="img">
+                                                <img src="http://img.lezhai365.com/${img}" alt="..." class="img-thumbnail">
+                                            </c:forEach>
+                                        </div>
+                                    </c:if>
                                 </li>
                             </ul>
                         </div>

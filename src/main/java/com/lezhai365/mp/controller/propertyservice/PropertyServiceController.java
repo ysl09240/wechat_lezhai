@@ -1,5 +1,6 @@
 package com.lezhai365.mp.controller.propertyservice;
 
+import com.lezhai365.common.exception.TranscationalException;
 import com.lezhai365.common.model.CacheUser;
 import com.lezhai365.common.model.Page;
 import com.lezhai365.mp.controller.BaseController;
@@ -140,7 +141,8 @@ public class PropertyServiceController extends BaseController {
     public ModelAndView addFaultInfo(
             @RequestParam String openid,
             @PathVariable String signinName,
-            @ModelAttribute FaultInfo faultInfo) {
+            @RequestParam(value = "imgs[]", required = false) String[] imgs,
+            @ModelAttribute FaultInfo faultInfo) throws TranscationalException {
         ModelAndView mv = new ModelAndView();
         Map<String, Object> userWxMap = getUserWx(signinName, openid);
         Long estateId = (Long) userWxMap.get("defaultEstateId");
@@ -149,12 +151,11 @@ public class PropertyServiceController extends BaseController {
         faultInfo.setHousingEstateId(estateId);
         faultInfo.setHouseInfoId(houseInfoId);
 
-        int flag = propertyServiceService.addFaultInfo(faultInfo);
+        int flag = propertyServiceService.addFaultInfo(faultInfo,imgs);
         if (flag > 0) {
             mv.setViewName("redirect:/" + signinName + "/service/faultlist");
         }
-//        mv.addObject("signinName",signinName);
-//        mv.addObject("openid", openid);
+        mv.addObject("openid", openid);
         mv.addObject("houseInfo",houseService.queryHouseInfoById(houseInfoId));
         return mv;
     }
@@ -205,7 +206,8 @@ public class PropertyServiceController extends BaseController {
     public ModelAndView addComplaintInfo(
             @RequestParam String openid,
             @PathVariable String signinName,
-            @ModelAttribute ComplaintInfo complaintInfo) {
+            @RequestParam(value = "imgs[]", required = false) String[] imgs,
+            @ModelAttribute ComplaintInfo complaintInfo) throws TranscationalException {
 
         Map<String, Object> userWxMap = getUserWx(signinName, openid);
         Long estateId = (Long) userWxMap.get("defaultEstateId");
@@ -213,7 +215,7 @@ public class PropertyServiceController extends BaseController {
         complaintInfo.setHouseInfoId(houseInfoId);
         complaintInfo.setHousingEstateId(estateId);
         ModelAndView mv = new ModelAndView();
-        int flag = propertyServiceService.addComplaintInfo(complaintInfo);
+        int flag = propertyServiceService.addComplaintInfo(complaintInfo,imgs);
         if (flag > 0) {
             mv.setViewName("redirect:/" + signinName + "/service/complaintlist");
         }

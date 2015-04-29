@@ -23,7 +23,7 @@ $(function(  ){
         $filePicker = $("#filePicker");
 
     var uploader = WebUploader.create({
-        //auto: true,
+        auto: true,
         // 文件接收服务端。
         server: '/api/upload/file/img',
 
@@ -86,7 +86,7 @@ $(function(  ){
         //alert(text);
     });
     uploader.on('uploadSuccess', function (file, response) {
-
+        $("#input_" + file.id).val(response.data);
         console.log(response);
     });
 
@@ -106,7 +106,7 @@ $(function(  ){
                         return;
                     }
                     if( isSupportBase64 ) {
-                        img = $('<img id=' + file.id + ' class="queue-item" src="' + src + '">');
+                        img = $('<img id=' + file.id + ' class="queue-item" src="' + src + '"><input id="input_'+file.id+'" type="hidden" name="imgs[]"/>');
                         $queueList.prepend( img );
                     }
                 }, thumbnailWidth, thumbnailHeight);

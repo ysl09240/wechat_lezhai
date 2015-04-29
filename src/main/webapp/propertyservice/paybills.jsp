@@ -57,8 +57,8 @@
                                                 <c:if test="${bill.paymentStatus == 2}">己作废</c:if>
                                             </div>
                                         </div>
-                                        <span class="wx-icon wx-icon-sanmarino">
-                                          <i class="fa fa-envelope"></i>
+                                        <span class="wx-icon ">
+                                            <img src="/assets/img/icon-fee.png">
                                         </span>
                                         <div class="wx-name">${bill.itemName}</div>
                                         <div class="wx-content"><fmt:formatDate value="${bill.billingDate}" pattern="yyyy-MM-dd HH:ss"></fmt:formatDate> </div>

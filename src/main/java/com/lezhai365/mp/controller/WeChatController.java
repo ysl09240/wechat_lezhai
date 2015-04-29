@@ -1,6 +1,7 @@
 package com.lezhai365.mp.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.lezhai365.base.model.user.UserAccounts;
 import com.lezhai365.utils.Decoder;
 import com.lezhai365.wechat.OauthService;
 import com.lezhai365.wechat.UserService;
@@ -8,6 +9,7 @@ import com.lezhai365.wechat.WeChatService;
 import com.lezhai365.wechat.utils.SignatureUtil;
 import com.thoughtworks.xstream.XStream;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -32,10 +34,12 @@ import java.io.InputStream;
 
 @Controller
 @RequestMapping(value="/{pmcSiginName}/wechat")
-public class WeChatController {
+public class WeChatController extends  BaseController{
 
     OauthService oauthService = new OauthService();
-    WeChatService weChatService = new WeChatService();
+
+    @Autowired
+    WeChatService weChatService;
 
     /**
      * <pre>
@@ -79,7 +83,9 @@ public class WeChatController {
             System.out.println("---------------------message---------------");
             try {
                 InputStream inputStream = request.getInputStream();
-                result = weChatService.processWxMsg(pmcSiginName,inputStream);
+
+                UserAccounts userAccounts = userAccountService.queryUserInfoBySigninName(pmcSiginName);
+                result = weChatService.processWxMsg(userAccounts.getId(),pmcSiginName,inputStream);
             } catch (IOException e) {
                 System.out.println("error");
                 e.printStackTrace();
