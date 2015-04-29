@@ -31,27 +31,23 @@
     <div class="row">
         <div class="col-lg-4 col-sm-6">
             <div class="mobileframe">
-                <form id="authhouseForm" action="/${signinName}/infomation/doauthhouse">
-
-
-                    <div class="mtl visible-xs"></div>
-                    <div class="col-sm-3">
-                    </div>
-
-                    <div class="mtl visible-xs"></div>
-                    <div class="col-sm-3">
-                    </div>
-                    <div class="mtl visible-xs"></div>
-                    <div class="col-sm-3">
-                    </div>
-
-
+                <div class="wx-group">
+                    <ul class="wx-functions">
+                        <li class="wx-item">
+                            <a href="/${signinName}/infomation/myestate?openid=${openid}" class="wx-icon back-arrow">
+                                <img  src="/assets/img/back-arrow.png">
+                            </a>
+                            <div class="wx-header">申请认证</div>
+                        </li>
+                    </ul>
+                </div>
+                <form id="authhouseForm" action="/${signinName}/infomation/doauthhouse?openid=${openid}">
                     <div class="wx-group">
                         <div class="wx-space"></div>
                         <ul class="wx-functions">
                             <li class="wx-item">
-                                <span class="wx-icon wx-icon-sanmarino wx-yang">
-                                    <i class="fa fa-qrcode"></i>
+                                <span class="wx-icon">
+                                    <img src="/assets/img/icon-estate.png">
                                 </span>
 
                                 <div class="wx-name">小区</div>
@@ -65,8 +61,8 @@
                                 </select>
                             </li>
                             <li class="wx-item">
-                                <span class="wx-icon wx-icon-sanmarino wx-yang">
-                                    <i class="fa fa-qrcode"></i>
+                                <span class="wx-icon">
+                                    <img src="/assets/img/icon-building.png">
                                 </span>
 
                                 <div class="wx-name inline-block">楼宇</div>
@@ -77,8 +73,8 @@
                                 </select>
                             </li>
                             <li class="wx-item">
-                                <span class="wx-icon wx-icon-sanmarino wx-yang">
-                                    <i class="fa fa-qrcode"></i>
+                                <span class="wx-icon">
+                                    <img src="/assets/img/icon-unit.png">
                                 </span>
 
                                 <div class="wx-name">单元</div>
@@ -89,19 +85,8 @@
                                 </select>
                             </li>
                             <li class="wx-item">
-                                <span class="wx-icon wx-icon-sanmarino wx-yang">
-                                    <i class="fa fa-coffee"></i>
-                                </span>
-
-                                <div class="wx-name">房间</div>
-                                <select class="feild" id="floor-select" data-default="${detail.floor}" name="floorId"
-                                        data-_next="houseInfoId" data-placeholder="请选择楼层">
-                                    <option>请选择楼层</option>
-                                </select>
-                            </li>
-                            <li class="wx-item">
-                                <span class="wx-icon wx-icon-sanmarino wx-yang">
-                                    <i class="fa fa-coffee"></i>
+                                <span class="wx-icon">
+                                    <img src="/assets/img/icon-house.png">
                                 </span>
 
                                 <div class="wx-name">房间</div>
@@ -111,8 +96,8 @@
                                 </select>
                             </li>
                             <li class="wx-item">
-                                <span class="wx-icon wx-icon-sanmarino wx-yang">
-                                    <i class="fa fa-coffee"></i>
+                                <span class="wx-icon">
+                                    <img src="/assets/img/icon-people.png">
                                 </span>
 
                                 <div class="wx-name">业主姓名</div>
@@ -120,11 +105,19 @@
                             </li>
 
                             <li class="wx-item">
-                                <span class="wx-icon wx-icon-sanmarino wx-yang">
-                                    <i class="fa fa-coffee"></i>
+                                <span class="wx-icon">
+                                    <img src="/assets/img/icon-phone.png">
                                 </span>
 
                                 <div class="wx-name">业主电话</div>
+                                <input name="ownerPhone" class="feild">
+                            </li>
+                            <li class="wx-item">
+                                <span class="wx-icon">
+                                    <img src="/assets/img/icon-idcard.png">
+                                </span>
+
+                                <div class="wx-name">身份证号</div>
                                 <input name="ownerPhone" class="feild">
                             </li>
                         </ul>
@@ -132,7 +125,7 @@
                     <div class="wx-group fiexd-b">
                         <ul class="wx-functions">
                             <li class="wx-item">
-                                <div class="wx-header "><a class="text-c">提交认证</a></div>
+                                <div class="wx-header "><input class="form-button" type="submit" value="提交认证"/></div>
                             </li>
                         </ul>
                     </div>

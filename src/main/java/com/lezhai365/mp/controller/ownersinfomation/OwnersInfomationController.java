@@ -102,7 +102,8 @@ public class OwnersInfomationController extends BaseController {
 
             List<Map<String, Object>> estateList = userWxAuthService.queryMyEstate(userWxEstateWhere);
             mv.addObject("estateList", estateList);
-            mv.addObject("signinName",signinName);
+            mv.addObject("signinName", signinName);
+            mv.addObject("openid", openid);
         }
 
         mv.setViewName("propertyinfomation/myestate");
@@ -183,7 +184,8 @@ public class OwnersInfomationController extends BaseController {
 
             List<Map<String, Object>> estateList = userWxAuthService.queryMyEstate(userWxEstateWhere);
             mv.addObject("estateList", estateList);
-            mv.addObject("signinName",signinName);
+            mv.addObject("signinName", signinName);
+            mv.addObject("openid", openid);
         }
         mv.setViewName("propertyinfomation/applyauth");
 

@@ -27,6 +27,13 @@
                 <div class="col-lg-4 col-sm-6">
                     <div class="mobileframe bg">
                         <div class="wx-group">
+                            <ul class="wx-functions">
+                                <li class="wx-item">
+                                    <div class="wx-header">我的小区</div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="wx-group">
                             <div class="wx-space"></div>
                             <ul class="wx-functions">
                                 <c:forEach var="myestate" items="${estateList}">
@@ -37,14 +44,14 @@
                                         <div class="wx-name">
                                            ${myestate.housingEstateName}
                                             <div class="pull-right prm">
-                                                <a href="/${signinName}/infomation/myhouse?houseEstateId=${myestate.housingEstateId}" class="wx-btn">设为常住</a>
+                                                <a href="/${signinName}/infomation/myhouse?houseEstateId=${myestate.housingEstateId}&openid=${openid}" class="wx-btn">设为常住</a>
                                                <c:choose>
                                                    <c:when test="${myestate.ownerId == null}">
-                                                        <a href="/${signinName}/infomation/authhouse" class="wx-btn mlm">申请认证</a>
+                                                        <a href="/${signinName}/infomation/authhouse?houseEstateId=${myestate.housingEstateId}&openid=${openid}" class="wx-btn mlm">申请认证</a>
                                                    </c:when>
                                                    <c:otherwise>
                                                        <c:if test="${myestate.uaalId!=null}">
-                                                            <a href="/${signinName}/infomation/myhouse?houseEstateId=${myestate.housingEstateId}" class="wx-btn mlm">查看详情</a>
+                                                            <a href="/${signinName}/infomation/myhouse?houseEstateId=${myestate.housingEstateId}&openid=${openid}" class="wx-btn mlm">查看详情</a>
                                                        </c:if>
                                                    </c:otherwise>
                                                </c:choose>

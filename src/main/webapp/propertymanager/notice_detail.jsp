@@ -30,7 +30,7 @@
                                 <a href="/${signinName}/manager/notice?openid=${openid}" class="wx-icon back-arrow">
                                     <img  src="/assets/img/back-arrow.png">
                                 </a>
-                                <div class="wx-header">通知详情${signinName}</div>
+                                <div class="wx-header">通知详情</div>
                             </li>
                         </ul>
                     </div>
