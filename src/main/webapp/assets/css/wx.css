@@ -606,3 +606,11 @@ form .textarea{
   font-size: 14px;
 }
 
+.wx-functions > .wx-item .back-arrow{
+  display: inline-block;
+}
+.wx-functions > .wx-item .back-arrow>img{
+  width: 10px;
+  height: auto;
+  vertical-align: middle;
+}

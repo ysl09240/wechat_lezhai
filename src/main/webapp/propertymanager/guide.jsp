@@ -19,31 +19,43 @@
     <link rel="stylesheet" href="/assets/css/common-space.css">
 </head>
 <html>
-    <body>
-        <div class="wx-page">
-            <div class="row">
-                <div class="col-lg-4 col-sm-6">
-                    <div class="mobileframe">
-                        <div class="wx-group">
-                            <div class="wx-space"></div>
-                            <ul class="wx-functions">
-                                <li class="wx-item">
-                                <span class="wx-icon wx-icon-sanmarino wx-yang">
-                                    <i class="fa fa-qrcode"></i>
-                                </span>
-                                    <a href="/manager/detail/guide?item=1" class="wx-name">如何办理居民常住证？</a>
-                                </li>
-                                <li class="wx-item">
-                                <span class="wx-icon wx-icon-sanmarino wx-yang">
-                                    <i class="fa fa-coffee"></i>
-                                </span>
-                                    <a href="/manager/detail/guide?item=2" class="wx-name">小区业主如何报名小区幼儿园？</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+<body>
+<div class="wx-page">
+    <div class="row">
+        <div class="col-lg-4 col-sm-6">
+            <div class="mobileframe">
+                <div class="wx-group">
+                    <ul class="wx-functions">
+                        <li class="wx-item">
+                            <div class="wx-header">小区通知</div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="wx-group">
+                    <div class="wx-space"></div>
+                    <ul class="wx-functions">
+                        <li class="wx-item">
+                            <a href="/manager/detail/guide?item=1">
+                                   <span class="wx-icon">
+                                    <img src="/assets/img/icon-service.png">
+                                   </span>
+
+                                <div class="wx-name">如何办理居民常住证？</div>
+                            </a>
+                        </li>
+                        <li class="wx-item">
+                            <a href="/manager/detail/guide?item=2">
+                                 <span class="wx-icon">
+                                    <img src="/assets/img/icon-service.png">
+                                 </span>
+                                <div class="wx-name">小区业主如何报名小区幼儿园？</div>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
-    </body>
+    </div>
+</div>
+</body>
 </html>

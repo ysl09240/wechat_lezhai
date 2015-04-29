@@ -1,7 +1,7 @@
 (function( $ ){
     // 优化retina, 在retina下这个值是2
-    ratio = window.devicePixelRatio || 1,
-
+      var ratio = window.devicePixelRatio || 1,
+          fileCount = 0;
         // 缩略图大小
         thumbnailWidth = 110 * ratio,
         thumbnailHeight = 110 * ratio,
@@ -19,7 +19,8 @@
             return support;
         } )();
 
-    var $queueList = $("#queueList");
+    var $queueList = $("#queueList"),
+        $filePicker = $("#filePicker");
 
     var uploader = WebUploader.create({
         //auto: true,
@@ -75,7 +76,7 @@
         var text = "";
         switch (code){
             case 'Q_EXCEED_NUM_LIMIT':
-                $("#filePicker").hide();
+                text = "最多可以上传3张"
                 break;
             default :
                 text = "上传出错,请重试";
@@ -93,7 +94,10 @@
         console.log("upload event type:" + type);
         switch( type ) {
             case 'fileQueued':
-                console.log(file);
+                fileCount++;
+                if(fileCount === 3){
+                    $filePicker.hide();
+                }
                 uploader.makeThumb( file, function( error, src ) {
                     var img;
 
@@ -102,7 +106,7 @@
                         return;
                     }
                     if( isSupportBase64 ) {
-                        img = $('<img class="queue-item" src="'+src+'">');
+                        img = $('<img id=' + file.id + ' class="queue-item" src="' + src + '">');
                         $queueList.prepend( img );
                     }
                 }, thumbnailWidth, thumbnailHeight);
