@@ -28,40 +28,24 @@
                     <div class="mobileframe bg">
                         <div class="wx-group">
                             <div class="wx-space"></div>
-                            <ul class="wx-functions">
-                                <li class="wx-item">
-                                <span class="wx-icon wx-icon-sanmarino wx-yang">
-                                    <i class="fa fa-qrcode"></i>
-                                </span>
-                                    <div class="wx-name">
-                                        1号楼/1单元/1层/1-111
-                                        <div class="pull-right prm">
-                                            <a class="wx-btn">设为常住</a>
+                           <ul class="wx-functions">
+                               <c:if test="${myHouseList == null}">
+                                   亲，您还没有认证房产，赶快去<a href="/${signinName}/infomation/authhouse">申请认证</a>哦
+                               </c:if>
+                               <c:forEach var="myhouse" items="${myHouseList}">
+
+                                  <li class="wx-item">
+                                       <span class="wx-icon wx-icon-sanmarino wx-yang">
+                                        <i class="fa fa-qrcode"></i>
+                                        </span>
+                                        <div class="wx-name">
+                                           ${myhouse.houseInfoStr}
+                                            <div class="pull-right prm">
+                                                <a href="/${signinName}/infomation/dodefault?houseInfoId=${myhouse.houseInfoId}&houseEstateId=${myhouse.housingEstateId}" class="wx-btn">设为常住</a>
+                                            </div>
                                         </div>
-                                    </div>
-                                </li>
-                                <li class="wx-item">
-                                <span class="wx-icon wx-icon-sanmarino wx-yang">
-                                    <i class="fa fa-qrcode"></i>
-                                </span>
-                                    <div class="wx-name">
-                                        1号楼/1单元/1层/1-111
-                                        <div class="pull-right prm">
-                                            <a class="wx-btn">设为常住</a>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="wx-item">
-                                <span class="wx-icon wx-icon-sanmarino wx-yang">
-                                    <i class="fa fa-qrcode"></i>
-                                </span>
-                                    <div class="wx-name">
-                                        1号楼/1单元/1层/1-111
-                                        <div class="pull-right prm">
-                                            <a class="wx-btn inverse">设为常住</a>
-                                        </div>
-                                    </div>
-                                </li>
+                                    </li>
+                               </c:forEach>
                             </ul>
                         </div>
                     </div>

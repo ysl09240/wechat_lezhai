@@ -116,7 +116,7 @@ public class PropertyServiceController extends BaseController {
 
     @RequestMapping(value="/faultview")
     public ModelAndView faultView(
-            @PathVariable Long signinName){
+            @PathVariable String signinName){
         ModelAndView mv = new ModelAndView();
         String repairFaultType="repair_fault_type";
         String repairEmergencyType="repair_emergency_type";
@@ -137,7 +137,7 @@ public class PropertyServiceController extends BaseController {
     //新增报修
     @RequestMapping(value="/do/addfault",method = RequestMethod.POST)
     public ModelAndView addFaultInfo(
-            @PathVariable Long signinName,
+            @PathVariable String signinName,
             @ModelAttribute FaultInfo faultInfo){
         ModelAndView mv = new ModelAndView();
         faultInfo.setHousingEstateId(housingEstateId);
@@ -154,7 +154,7 @@ public class PropertyServiceController extends BaseController {
     //投诉查询
     @RequestMapping(value="/complaintlist")
     public ModelAndView getComplaintsList(
-            @PathVariable Long signinName,
+            @PathVariable String signinName,
             @RequestParam(value = "pageSize", defaultValue = "10")Integer pageSize,
             @RequestParam(value = "pageIndex", defaultValue = "1")Integer pageIndex){
         ModelAndView mv = new ModelAndView();
@@ -173,7 +173,7 @@ public class PropertyServiceController extends BaseController {
      */
     @RequestMapping(value="/complaintview")
     public ModelAndView complaintView(
-            @PathVariable Long signinName){
+            @PathVariable String signinName){
         ModelAndView mv = new ModelAndView();
         mv.addObject("signinName",signinName);
         mv.setViewName("propertyservice/complaint_add");
@@ -183,7 +183,7 @@ public class PropertyServiceController extends BaseController {
     //新增投诉
     @RequestMapping(value="/do/addcomplaint")
     public ModelAndView addComplaintInfo(
-            @PathVariable Long signinName,
+            @PathVariable String signinName,
             @ModelAttribute ComplaintInfo complaintInfo){
         complaintInfo.setHouseInfoId(houseInfoId);
         complaintInfo.setHousingEstateId(housingEstateId);
@@ -199,6 +199,7 @@ public class PropertyServiceController extends BaseController {
     //环保积分
     @RequestMapping(value="/integralslist")
     public ModelAndView getWasteIntegral(
+            @PathVariable String signinName,
             @RequestParam String flag,
             @RequestParam(value = "pageSize", defaultValue = "10") int pageSize,
             @RequestParam(value = "pageIndex", defaultValue = "1") int pageIndex){
@@ -242,6 +243,7 @@ public class PropertyServiceController extends BaseController {
                     break;
 
         }
+        mv.addObject("signinName",signinName);
         mv.setViewName("propertyservice/integral");
         mv.addObject("flag",flag);
         return mv;

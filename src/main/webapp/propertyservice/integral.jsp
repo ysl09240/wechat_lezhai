@@ -51,9 +51,9 @@
                                             <div class="pull-right text-muted">最后积分时间:${integralInfo.lastTimeStr}</div>
                                         </div>
                                         <ul class="c-tab clearfix">
-                                            <li class="c-tab-item <c:if test="${flag eq 'iHistory'}">select</c:if> "><a href="/service/integral/list?flag=iHistory">积分查询</a></li>
-                                            <li class="c-tab-item <c:if test="${flag eq 'iExchange'}">select</c:if> "><a href="/service/integral/list?flag=iExchange">积分兑换</a></li>
-                                            <li class="c-tab-item <c:if test="${flag eq 'iAdjust'}">select</c:if> "><a href="/service/integral/list?flag=iAdjust">积分调整</a></li>
+                                            <li class="c-tab-item <c:if test="${flag eq 'iHistory'}">select</c:if> "><a href="/${signinName}/service/integralslist?flag=iHistory">积分查询</a></li>
+                                            <li class="c-tab-item <c:if test="${flag eq 'iExchange'}">select</c:if> "><a href="/${signinName}/service/integralslist?flag=iExchange">积分兑换</a></li>
+                                            <li class="c-tab-item <c:if test="${flag eq 'iAdjust'}">select</c:if> "><a href="/${signinName}/service/integralslist?flag=iAdjust">积分调整</a></li>
                                         </ul>
                                     </div>
                                 </li>
