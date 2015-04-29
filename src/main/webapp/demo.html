@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="./assets/css/wx.css">
     <link rel="stylesheet" href="./assets/css/common-space.css">
+    <link rel="stylesheet" type="text/css" href="./assets/libs/webupload/lib/webuploader.css"/>
+    <link rel="stylesheet" type="text/css" href="./assets/libs/webupload/style.css"/>
     <style>
         body {padding-top: 40px; background: #666666; font-family: "Heiti SC", "DroidSansFallback",  "微软雅黑";}
     </style>
@@ -28,15 +30,15 @@
                     <div class="wx-group">
                         <div class="wx-space"></div>
                         <ul class="wx-functions">
-                            <li class="wx-item">
-                                <span class="wx-icon wx-icon-sanmarino wx-yang">
-                                    <i class="fa fa-users"></i>
-                                </span>
-                                <div class="wx-name">附近的人</div>
+                            <li class="wx-item thumbnail-wrap">
+                                <div class="wx-thumbnail">
+                                    <img src="assets/img/notice-thumbnail-bg.png" />
+                                </div>
+                                <div class="thumbnail-comment">地下车位最后一次活动开始了</div>
                             </li>
                             <li class="wx-item">
                                 <span class="wx-icon wx-icon-sanmarino wx-yang">
-                                    <i class="fa fa-qrcode"></i>
+                                    <img src="assets/img/icon-notice.png">
                                 </span>
                                 <div class="wx-name">小区小学要招生了</div>
                                 <div class="text-right prm text-muted"><span>2015-06-12</span></div>
@@ -94,6 +96,14 @@
                     <div class="wx-group">
                         <div class="wx-space"></div>
                         <ul class="wx-functions">
+                            <li class="wx-item thumbnail-wrap">
+                                <a href="http://www.baidu.com">
+                                    <div class="wx-thumbnail">
+                                        <img src="assets/img/guide-thumbnail-bg.png" />
+                                    </div>
+                                    <div class="thumbnail-comment">地下车位最后一次活动开始了</div>
+                                </a>
+                            </li>
                             <li class="wx-item">
                                 <span class="wx-icon wx-icon-sanmarino wx-yang">
                                     <i class="fa fa-qrcode"></i>
@@ -210,7 +220,7 @@
                                     <div class="status text-c">未付款</div>
                                 </div>
                                 <span class="wx-icon wx-icon-sanmarino">
-                                    <i class="fa fa-envelope"></i>
+                                    <img src="assets/img/wuye-fee.png">
                                 </span>
                                 <div class="wx-name">物业费</div>
                                 <div class="wx-content">2015.12.12 16:20</div>
@@ -221,7 +231,7 @@
                                     <div class="status text-muted">已付款</div>
                                 </div>
                                 <span class="wx-icon wx-icon-sanmarino">
-                                    <i class="fa fa-envelope"></i>
+                                    <img src="assets/img/shui-fee.png">
                                 </span>
                                 <div class="wx-name">水费</div>
                                 <div class="wx-content">2015.12.12 16:20</div>
@@ -268,7 +278,13 @@
                     </div>
                     <form>
                         <div class="wx-group">
-                            <div class="upload-space"></div>
+                            <div class="upload-space fault-bg">
+                                <div id="uploader">
+                                    <div id="queueList" class="queueList">
+                                        <a id="filePicker"></a>
+                                    </div>
+                                </div>
+                            </div>
                             <ul class="wx-functions">
                                 <li class="wx-item">
                                     <textarea class="textarea" placeholder="故障描述"></textarea>
@@ -431,10 +447,19 @@
                     </div>
                     <form>
                         <div class="wx-group">
-                            <div class="upload-space"></div>
+                            <div class="upload-space complaint-bg">
+                                <div id="uploader">
+                                    <div id="queueList" class="queueList">
+                                        <img class="queue-item"/>
+                                        <img class="queue-item"/>
+                                        <img class="queue-item"/>
+                                        <a id="filePicker"></a>
+                                    </div>
+                                </div>
+                            </div>
                             <ul class="wx-functions">
                                 <li class="wx-item">
-                                    <textarea class="textarea" placeholder="故障描述"></textarea>
+                                    <textarea class="textarea" placeholder="投诉详情"></textarea>
                                 </li>
                             </ul>
                         </div>
@@ -1044,6 +1069,8 @@
 
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./assets/libs/webupload/lib/webuploader.js"></script>
+    <script type="text/javascript" src="./assets/libs/webupload/upload.js"></script>
 </body>
 </html>
 
