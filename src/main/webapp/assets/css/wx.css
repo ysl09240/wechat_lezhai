@@ -75,7 +75,7 @@ body {
 .mobileframe {
   background: #EEE;
   overflow: hidden;
-  max-height: 640px;
+  height: 640px;
   margin-bottom: 40px;
   position: relative;
 }
@@ -88,135 +88,6 @@ body {
 /* line 103, ../sass/_variables.scss */
 .wx-icon {
   text-align: center;
-  display: block;
-}
-
-/* line 108, ../sass/_variables.scss */
-.wx-icon-apple {
-  background: #4fab3d;
-  color: #ffffff;
-}
-/* line 94, ../sass/_variables.scss */
-.wx-icon-apple.wx-yang {
-  color: #4fab3d;
-}
-
-/* line 111, ../sass/_variables.scss */
-.wx-icon-bostonblue {
-  background: #3b91b4;
-  color: #ffffff;
-}
-/* line 94, ../sass/_variables.scss */
-.wx-icon-bostonblue.wx-yang {
-  color: #3b91b4;
-}
-
-/* line 114, ../sass/_variables.scss */
-.wx-icon-sanmarino {
-  background: #456cac;
-  color: #ffffff;
-}
-/* line 94, ../sass/_variables.scss */
-.wx-icon-sanmarino.wx-yang {
-  color: #456cac;
-}
-
-/* line 117, ../sass/_variables.scss */
-.wx-icon-blueviolet {
-  background: #6456b7;
-  color: #ffffff;
-}
-/* line 94, ../sass/_variables.scss */
-.wx-icon-blueviolet.wx-yang {
-  color: #6456b7;
-}
-
-/* line 120, ../sass/_variables.scss */
-.wx-icon-deeplilac {
-  background: #9955bb;
-  color: #ffffff;
-}
-/* line 94, ../sass/_variables.scss */
-.wx-icon-deeplilac.wx-yang {
-  color: #9955bb;
-}
-
-/* line 123, ../sass/_variables.scss */
-.wx-icon-mulberry {
-  background: #c54b8c;
-  color: #ffffff;
-}
-/* line 94, ../sass/_variables.scss */
-.wx-icon-mulberry.wx-yang {
-  color: #c54b8c;
-}
-
-/* line 126, ../sass/_variables.scss */
-.wx-icon-darkcoral {
-  background: #cd5b45;
-  color: #ffffff;
-}
-/* line 94, ../sass/_variables.scss */
-.wx-icon-darkcoral.wx-yang {
-  color: #cd5b45;
-}
-
-/* line 129, ../sass/_variables.scss */
-.wx-icon-rawsienna {
-  background: #d27d46;
-  color: #ffffff;
-}
-/* line 94, ../sass/_variables.scss */
-.wx-icon-rawsienna.wx-yang {
-  color: #d27d46;
-}
-
-/* line 132, ../sass/_variables.scss */
-.wx-icon-tussock {
-  background: #c5884b;
-  color: #ffffff;
-}
-/* line 94, ../sass/_variables.scss */
-.wx-icon-tussock.wx-yang {
-  color: #c5884b;
-}
-
-/* line 135, ../sass/_variables.scss */
-.wx-icon-turmeric {
-  background: #cabb48;
-  color: #ffffff;
-}
-/* line 94, ../sass/_variables.scss */
-.wx-icon-turmeric.wx-yang {
-  color: #cabb48;
-}
-
-/* line 138, ../sass/_variables.scss */
-.wx-icon-wattle {
-  background: #dcd747;
-  color: #ffffff;
-}
-/* line 94, ../sass/_variables.scss */
-.wx-icon-wattle.wx-yang {
-  color: #dcd747;
-}
-
-/* line 141, ../sass/_variables.scss */
-.wx-icon-androidgreen {
-  background: #a4c639;
-  color: #ffffff;
-}
-/* line 94, ../sass/_variables.scss */
-.wx-icon-androidgreen.wx-yang {
-  color: #a4c639;
-}
-
-/* line 144, ../sass/_variables.scss */
-.wx-yang {
-  background: transparent;
-}
-/* line 146, ../sass/_variables.scss */
-.wx-yang * {
   display: block;
 }
 
@@ -248,6 +119,12 @@ body {
   margin-right: 10px;
   float: left;
 }
+
+.wx-messages > .wx-item .wx-icon>img{
+  width: 42px;
+  height: 42px;
+}
+
 /* line 86, ../sass/_variables.scss */
 .wx-messages > .wx-item .wx-icon.wx-yang {
   font-size: 48px;
@@ -348,6 +225,10 @@ body {
   font-size: 16px;
   margin: 0 14px;
   float: left;
+}
+.wx-functions > .wx-item .wx-icon>img{
+  width: 26px;
+  height: 26px;
 }
 /* line 86, ../sass/_variables.scss */
 .wx-functions > .wx-item .wx-icon.wx-yang {
@@ -511,11 +392,12 @@ form .textarea{
 }
 
 .upload-space{
-  height: 120px;
+  height: 147px;
   line-height: 120px;
   font-size: 12px;
   color: #888888;
   overflow: hidden;
+  margin-top: 2px;
 }
 
 /*环保积分*/
@@ -672,3 +554,55 @@ form .textarea{
   padding: 0px;
   overflow-x: hidden;
 }
+
+
+/*文件上传*/
+.complaint-bg{
+  background: url(../img/complaint-bg.png) no-repeat;
+  background-size: contain;
+}
+
+
+.fault-bg{
+  background: url(../img/fault-bg.png) no-repeat;
+  background-size: contain;
+}
+
+.photo-container{
+  padding-top:30px;
+  text-align: center;
+}
+.photo-container .img-thumbnail{
+  width: 60px;
+  height: 60px;
+}
+
+.wx-functions > .wx-item.thumbnail-wrap{
+  padding: 0;
+  position: relative;
+}
+
+.wx-thumbnail{
+  height: 150px;
+  line-height: 150px;
+  color: #888888;
+  overflow: hidden;
+}
+.wx-thumbnail>img{
+  width: 100%;
+  height: 100%;
+}
+
+.thumbnail-comment{
+  position: absolute;
+  bottom: 0px;
+  z-index: 79;
+  padding:4px 4px 4px 17px;
+  background: #000;
+  opacity: 0.5;
+  width: 100%;
+  height: 23px;
+  color: #FFF;
+  font-size: 14px;
+}
+
