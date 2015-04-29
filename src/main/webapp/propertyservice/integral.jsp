@@ -47,7 +47,7 @@
                                 <li class="wx-item">
                                     <div class="">
                                         <div class="clearfix small ptm">
-                                            <div class="pull-left"><a class="text-c">积分规格说明</a></div>
+                                            <div class="pull-left"><a href="/${signinName}/service/integralintro" class="text-c">积分规格说明</a></div>
                                             <div class="pull-right text-muted">最后积分时间:${integralInfo.lastTimeStr}</div>
                                         </div>
                                         <ul class="c-tab clearfix">

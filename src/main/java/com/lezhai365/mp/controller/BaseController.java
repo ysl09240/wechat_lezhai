@@ -1,13 +1,17 @@
 package com.lezhai365.mp.controller;
 
+import com.lezhai365.base.model.user.UserAccounts;
 import com.lezhai365.base.spi.user.IUserAccountService;
 import com.lezhai365.common.config.WebAppConfig;
 import com.lezhai365.common.model.CacheUser;
 import com.lezhai365.common.web.CommonController;
+import com.lezhai365.pms.model.weixin.UserWx;
+import com.lezhai365.pms.spi.wechat.IUserWxService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
 
 /**
  * @author :  Minty.Tong [tonglei@lezhai365.com]
@@ -29,6 +33,9 @@ public class BaseController extends CommonController{
 
     @Autowired
     public IUserAccountService userAccountService;
+
+    @Autowired
+    public  IUserWxService userWxService;
 
      /**
      * <p>
@@ -66,4 +73,17 @@ public class BaseController extends CommonController{
         }
         return cacheUser;
     }
+
+    public Map<String,Object> getUserWx(String pmcSignName,String openId){
+
+        UserAccounts userAccounts = userAccountService.queryUserInfoBySigninName(pmcSignName);
+        Long pmcUserId = userAccounts.getId();
+
+        UserWx where = new UserWx();
+        where.setWeixinOpenid(openId);
+        where.setPmcId(pmcUserId);
+        Map<String,Object> userWxMap = userWxService.queryUserWxByPmcIdAndOpenId(where);
+        return null;
+    }
+
 }
