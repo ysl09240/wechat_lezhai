@@ -4,9 +4,11 @@ import com.lezhai365.base.model.user.UserAccounts;
 import com.lezhai365.base.spi.estate.IHousingEstateService;
 import com.lezhai365.base.spi.user.IPersonalUserService;
 import com.lezhai365.base.spi.user.IUserAccountService;
+import com.lezhai365.common.model.ResultObject;
 import com.lezhai365.pms.model.weixin.UserAuthApplyLog;
 import com.lezhai365.pms.model.weixin.UserWx;
 import com.lezhai365.pms.model.weixin.UserWxEstate;
+import com.lezhai365.pms.spi.material.IHouseService;
 import com.lezhai365.pms.spi.sns.ISNSUserHouseService;
 import com.lezhai365.pms.spi.sns.ISNSUserService;
 import com.lezhai365.mp.controller.BaseController;
@@ -15,10 +17,7 @@ import com.lezhai365.pms.spi.wechat.IUserWxService;
 import org.apache.cxf.management.annotation.ManagedAttribute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -45,31 +44,57 @@ public class OwnersInfomationController extends BaseController {
     IHousingEstateService housingEstateService;
     @Autowired
     IPersonalUserService personalUserService;
-    @Autowired
-    IUserAccountService userAccountService;
+//    @Autowired
+//    IUserAccountService userAccountService;
 
-    @Autowired
-    IUserWxService userWxService;
     @Autowired
     IUserWxAuthService userWxAuthService;
 
+    @Autowired
+    IHouseService houseService;
+
+
+    /**
+     * 房产资料树
+     *
+     * @param housingEstateId 小区id
+     * @param hipid
+     * @param floor
+     * @param childType
+     * @param pid
+     * @return
+     */
+    @RequestMapping(value = {"/house/tree"})
+    public
+    @ResponseBody
+    ResultObject findTreeList(
+            @RequestParam(value = "estateId") Long housingEstateId,
+            @RequestParam(value = "id", required = false) Long pid,
+            @RequestParam(value = "pid", required = false) Long hipid,
+            @RequestParam(value = "floor", required = false) Long floor,
+            @RequestParam(value = "childtype", required = false, defaultValue = "B") String childType) {
+
+        ResultObject result = new ResultObject();
+        //设置默认小区
+        if (childType.equals("HI")) {
+            pid = hipid;
+        }
+        List nodeList = null;
+        nodeList = houseService.queryTreeChildNodes(housingEstateId, pid, floor, childType);
+        result.setData(nodeList);
+        return result;
+    }
     /**
      * 我的房产
      * 我的小区
      */
     @RequestMapping(value="/myestate")
     public ModelAndView profileView(
+            @RequestParam String openid,
             @PathVariable String signinName){
         ModelAndView mv = new ModelAndView();
-        Long userId = 351l;
-        String openId = "";
-        UserAccounts userAccounts = userAccountService.queryUserInfoBySigninName(signinName);
-        userId = userAccounts.getId();
 
-        UserWx where = new UserWx();
-        where.setWeixinOpenid(openId);
-        where.setPmcId(userId);
-        Map<String,Object> userWxMap = userWxService.queryUserWxByPmcIdAndOpenId(where);
+        Map<String,Object> userWxMap = getUserWx(signinName,openid);
         Long userWxId = (Long) userWxMap.get("id");
 
         UserWxEstate userWxEstateWhere = new UserWxEstate();
@@ -117,31 +142,12 @@ public class OwnersInfomationController extends BaseController {
     @RequestMapping(value="/dodefault")
     public ModelAndView defaultEstateAndHouse(
             @RequestParam Long houseInfoId,
-            @RequestParam Long houseEstateId){
+            @RequestParam Long houseEstateId,
+            @RequestParam String signinName){
         ModelAndView mv = new ModelAndView();
         String openId = "";
         Long pmcUserId = 0l;
         int flag = userWxService.doDefaultEstateAnHouse(houseEstateId,houseInfoId,pmcUserId,openId);
-
-        mv.setViewName("propertyinfomation/myhouse");
-
-        return mv;
-
-    }
-
-    /**
-     * 认证房产
-     * @param userAuthApplyLog
-     * @param signinName
-     * @return
-     */
-    @RequestMapping(value="/authhouse")
-    public ModelAndView authHouse(
-            @ModelAttribute UserAuthApplyLog userAuthApplyLog,
-            @PathVariable String signinName){
-        ModelAndView mv = new ModelAndView();
-
-        int flag = userWxAuthService.addUserWxAuth(userAuthApplyLog);
 
         mv.setViewName("redirect:/"+signinName+"/infomation/myhouse");
 
@@ -149,65 +155,54 @@ public class OwnersInfomationController extends BaseController {
 
     }
 
+    /**
+     * 认证房产视图
+     * @param signinName
+     * @return
+     */
+    @RequestMapping(value="/authhouse")
+    public ModelAndView authHouseView(
+            @RequestParam String openid,
+            @PathVariable String signinName){
+        ModelAndView mv = new ModelAndView();
+
+        Map<String,Object> userWxMap = getUserWx(signinName,openid);
+        Long userWxId = (Long) userWxMap.get("id");
+
+        UserWxEstate userWxEstateWhere = new UserWxEstate();
+        userWxEstateWhere.setUserWxId(userWxId);
+
+        List<Map<String, Object>> estateList = userWxAuthService.queryMyEstate(userWxEstateWhere);
+        mv.addObject("estateList", estateList);
+        mv.addObject("signinName",signinName);
+        mv.setViewName("propertyinfomation/applyauth");
+
+        return mv;
+
+    }
+
+    /**
+     * 认证
+     * @param openid
+     * @param userAuthApplyLog
+     * @param signinName
+     * @return
+     */
+    @RequestMapping(value="/doAuthhouse")
+    public ModelAndView doAuthHouse(
+            @RequestParam String openid,
+            @ModelAttribute UserAuthApplyLog userAuthApplyLog,
+            @PathVariable String signinName){
+        ModelAndView mv = new ModelAndView();
 
 
+        int flag = userWxAuthService.addUserWxAuth(userAuthApplyLog);
 
+        mv.addObject("signinName",signinName);
+        mv.setViewName("redirect:/"+signinName+"/infomation/myhouse");
 
+        return mv;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    }
 
 }
