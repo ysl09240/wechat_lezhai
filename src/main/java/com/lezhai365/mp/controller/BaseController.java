@@ -77,13 +77,17 @@ public class BaseController extends CommonController{
     public Map<String,Object> getUserWx(String pmcSignName,String openId){
 
         UserAccounts userAccounts = userAccountService.queryUserInfoBySigninName(pmcSignName);
-        Long pmcUserId = userAccounts.getId();
+        Long pmcUserId =null;
+        Map<String,Object> userWxMap = null;
+        if(userAccounts!=null){
+            pmcUserId = userAccounts.getId();
+            UserWx where = new UserWx();
+            where.setWeixinOpenid(openId);
+            where.setPmcId(pmcUserId);
+            userWxMap = userWxService.queryUserWxByPmcIdAndOpenId(where);
+        }
 
-        UserWx where = new UserWx();
-        where.setWeixinOpenid(openId);
-        where.setPmcId(pmcUserId);
-        Map<String,Object> userWxMap = userWxService.queryUserWxByPmcIdAndOpenId(where);
-        return null;
+        return userWxMap;
     }
 
 }

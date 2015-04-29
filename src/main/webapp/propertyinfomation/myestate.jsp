@@ -29,42 +29,29 @@
                         <div class="wx-group">
                             <div class="wx-space"></div>
                             <ul class="wx-functions">
-                                <li class="wx-item">
-                                <span class="wx-icon wx-icon-sanmarino wx-yang">
-                                    <i class="fa fa-qrcode"></i>
-                                </span>
-                                    <div class="wx-name">
-                                        A小区
-                                        <div class="pull-right prm">
-                                            <a class="wx-btn">设为常住</a>
-                                            <a class="wx-btn mlm">查看详情</a>
+                                <c:forEach var="myestate" items="${estateList}">
+                                    <li class="wx-item">
+                                    <span class="wx-icon wx-icon-sanmarino wx-yang">
+                                        <i class="fa fa-qrcode"></i>
+                                    </span>
+                                        <div class="wx-name">
+                                           ${myestate.housingEstateName}
+                                            <div class="pull-right prm">
+                                                <a href="/${signinName}/infomation/myhouse?houseEstateId=${myestate.housingEstateId}" class="wx-btn">设为常住</a>
+                                               <c:choose>
+                                                   <c:when test="${myestate.ownerId == null}">
+                                                        <a href="/${signinName}/infomation/authhouse" class="wx-btn mlm">申请认证</a>
+                                                   </c:when>
+                                                   <c:otherwise>
+                                                       <c:if test="${myestate.uaalId!=null}">
+                                                            <a href="/${signinName}/infomation/myhouse?houseEstateId=${myestate.housingEstateId}" class="wx-btn mlm">查看详情</a>
+                                                       </c:if>
+                                                   </c:otherwise>
+                                               </c:choose>
+                                            </div>
                                         </div>
-                                    </div>
-                                </li>
-                                <li class="wx-item">
-                                <span class="wx-icon wx-icon-sanmarino wx-yang">
-                                    <i class="fa fa-qrcode"></i>
-                                </span>
-                                    <div class="wx-name">
-                                        A小区
-                                        <div class="pull-right prm">
-                                            <a class="wx-btn">设为常住</a>
-                                            <a class="wx-btn mlm">申请认证</a>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="wx-item">
-                                <span class="wx-icon wx-icon-sanmarino wx-yang">
-                                    <i class="fa fa-qrcode"></i>
-                                </span>
-                                    <div class="wx-name">
-                                        B小区
-                                        <div class="pull-right prm">
-                                            <a class="wx-btn inverse">设为常住</a>
-                                            <a class="wx-btn mlm">查看详情</a>
-                                        </div>
-                                    </div>
-                                </li>
+                                    </li>
+                                </c:forEach>
                             </ul>
                         </div>
                     </div>
