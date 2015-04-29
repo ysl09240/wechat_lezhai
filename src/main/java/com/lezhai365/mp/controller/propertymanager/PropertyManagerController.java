@@ -25,14 +25,12 @@ import java.util.Map;
  * @description :
  */
 @Controller
-@RequestMapping(value="/{signinName}/manager")
+@RequestMapping(value = "/{signinName}/manager")
 public class PropertyManagerController extends BaseController {
     @Autowired
     IPropertyManagerService propertyManagerService;
     @Autowired
     INoticeService noticeService;
-
-
 
 
 /**
@@ -43,24 +41,26 @@ public class PropertyManagerController extends BaseController {
  */
     /**
      * 小区通知列表
+     *
      * @param pageSize
      * @param pageIndex
      * @return
      */
-    @RequestMapping(value="/notice")
+    @RequestMapping(value = "/notice")
     public ModelAndView getNoticeList(
             @RequestParam String openid,
             @PathVariable String signinName,
-            @RequestParam(value = "pageSize", defaultValue = "10")Integer pageSize,
-            @RequestParam(value = "pageIndex", defaultValue = "1")Integer pageIndex){
+            @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+            @RequestParam(value = "pageIndex", defaultValue = "1") Integer pageIndex) {
         ModelAndView mv = new ModelAndView();
-        Map<String,Object> userWxMap = getUserWx(signinName,openid);
+        Map<String, Object> userWxMap = getUserWx(signinName, openid);
         Long estateId = (Long) userWxMap.get("defaultEstateId");
         Long houseInfoId = (Long) userWxMap.get("defaultHouseId");
 //        Long estateId = 110l;
-        Page<Map<String,Object>> noticeList = propertyManagerService.queryNoticeListSNS(pageSize,pageIndex,estateId);
-        mv.addObject("noticeList",noticeList);
-        mv.addObject("signinName",signinName);
+        Page<Map<String, Object>> noticeList = propertyManagerService.queryNoticeListSNS(pageSize, pageIndex, estateId);
+        mv.addObject("noticeList", noticeList);
+        mv.addObject("signinName", signinName);
+        mv.addObject("openid", openid);
         mv.setViewName("propertymanager/notice");
         return mv;
 
@@ -69,24 +69,30 @@ public class PropertyManagerController extends BaseController {
 
     /**
      * 通知详情
+     *
      * @param noticeId
      * @return
      */
-    @RequestMapping(value="/detail/notice")
+    @RequestMapping(value = "/detail/notice")
     public ModelAndView getNoticeDetail(
             @PathVariable String signinName,
             @RequestParam String openid,
-            @RequestParam Long noticeId){
+            @RequestParam Long noticeId) {
         ModelAndView mv = new ModelAndView();
-        Map<String,Object> userWxMap = getUserWx(signinName,openid);
+        Map<String, Object> userWxMap = getUserWx(signinName, openid);
+
         Long estateId = (Long) userWxMap.get("defaultEstateId");
-        Long houseInfoId = (Long) userWxMap.get("defaultHouseId");
+
         Notice notice = new Notice();
+
         notice.setHousingEstateId(estateId);
+
         notice.setId(noticeId);
-        Map<String,Object> noticeMap = noticeService.queryOneNotice(notice);
-        mv.addObject("noticeMap",noticeMap);
-        mv.addObject("signinName",signinName);
+        Map<String, Object> noticeMap = noticeService.queryOneNotice(notice);
+
+        mv.addObject("noticeMap", noticeMap);
+        mv.addObject("signinName", signinName);
+        mv.addObject("openid", openid);
         mv.setViewName("propertymanager/notice_detail");
         return mv;
     }
@@ -94,11 +100,12 @@ public class PropertyManagerController extends BaseController {
 
     /**
      * 物业介绍
+     *
      * @return
      */
     public ModelAndView getPropertyIntroduce(
             @RequestParam String openid,
-            @PathVariable String signinName){
+            @PathVariable String signinName) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("");
         return mv;
@@ -106,55 +113,52 @@ public class PropertyManagerController extends BaseController {
 
     /**
      * 服务指南
+     *
      * @return
      */
-    @RequestMapping(value="/guide")
+    @RequestMapping(value = "/guide")
     public ModelAndView getPropertyGuide(
             @RequestParam String openid,
-            @PathVariable String signinName){
+            @PathVariable String signinName) {
         ModelAndView mv = new ModelAndView();
-            mv.addObject("signinName",signinName);
-            mv.setViewName("propertymanager/guide");
+        mv.addObject("signinName", signinName);
+        mv.addObject("openid", openid);
+        mv.setViewName("propertymanager/guide");
         //common method
         return mv;
     }
+
     /**
      * 服务指南详情
+     *
      * @return
      */
-    @RequestMapping(value="/detail/guide")
+    @RequestMapping(value = "/detail/guide")
     public ModelAndView getPropertyGuideDetail(
             @RequestParam String openid,
             @PathVariable String signinName,
-            @RequestParam Integer item){
+            @RequestParam Integer item) {
         ModelAndView mv = new ModelAndView();
-        mv.addObject("signinName",signinName);
-        mv.setViewName("propertymanager/guide_detail_"+item);
+        mv.addObject("signinName", signinName);
+        mv.addObject("openid", openid);
+        mv.setViewName("propertymanager/guide_detail_" + item);
         //common method
         return mv;
     }
 
     /**
      * 常用电话
+     *
      * @return
      */
-    @RequestMapping(value="/commonphone")
+    @RequestMapping(value = "/commonphone")
     public ModelAndView getCommonPhone(
             @RequestParam String openid,
-            @PathVariable String signinName){
+            @PathVariable String signinName) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("propertymanager/common_phone");
         return mv;
     }
-
-
-
-
-
-
-
-
-
 
 
 }
