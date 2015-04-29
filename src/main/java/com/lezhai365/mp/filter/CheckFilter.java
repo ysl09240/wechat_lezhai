@@ -42,6 +42,11 @@ public class CheckFilter implements Filter {
         String uri = request.getRequestURI();
         //取物业公司的signinName,如果没有，就跳转到错误页面
         String[] tempArr = uri.split("\\/");
+
+        if (tempArr.length < 1) {
+            response.encodeRedirectURL("/error.jsp");
+        }
+
         String pmcSignName = tempArr[1];
         String openid = request.getParameter("openid");
 
