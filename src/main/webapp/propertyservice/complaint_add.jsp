@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/assets/css/wx.css">
     <link rel="stylesheet" href="/assets/css/common-space.css">
+    <link rel="stylesheet" type="text/css" href="/assets/libs/webupload/lib/webuploader.css"/>
+    <link rel="stylesheet" type="text/css" href="/assets/libs/webupload/style.css"/>
     <script src="/assets/libs/jquery/jquery-1.9.1.min.js"></script>
     <script src="/assets/libs/jquery/plugins/jquery.validate.min.js"></script>
     <script src="/assets/app/propertyservice/complaintValidate.js"></script>
@@ -28,7 +30,8 @@
                 <div class="mobileframe">
                     <form id="addComplaintForm" action="/${signinName}/service/do/addcomplaint">
                         <div class="wx-group">
-                            <div class="upload-space"></div>
+                            <div class="upload-space">
+                            </div>
                             <ul class="wx-functions">
                                 <li class="wx-item">
                                     <textarea name="complaintContent" class="textarea" placeholder="投诉内容"></textarea>

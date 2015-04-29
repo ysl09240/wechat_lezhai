@@ -1,3 +1,56 @@
+/* ----------------Reset Css--------------------- */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video, input  {
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+html, body, form, fieldset, p, div, h1, h2, h3, h4, h5, h6 {
+    -webkit-text-size-adjust: none;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+body {
+    font-family: arial, sans-serif;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+blockquote, q {
+    quotes: none;
+}
+
+blockquote:before, blockquote:after, q:before, q:after {
+    content: '';
+    content: none;
+}
+
+ins {
+    text-decoration: none;
+}
+
+del {
+    text-decoration: line-through;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
 
 /* ------------ */
 #wrapper {
@@ -15,8 +68,11 @@
     margin-top: 10px;
     background-color: #FFF;
 }
+
 #uploader .queueList {
-    margin: 0px 20px 20px 0px;
+    /*margin: 20px;*/
+    text-align: center;
+    padding-top: 50px;
 }
 
 .element-invisible {
@@ -26,32 +82,32 @@
 }
 
 #uploader .placeholder {
-    border: 3px dashed #e6e6e6;
-    min-height: 200px;
-    padding-top: 65px;
+    min-height: 147px;
     text-align: center;
-    background: url(./image.png) center 6px no-repeat;
-    color: #cccccc;
-    font-size: 18px;
-    position: relative;
+    /*background: url(./image.png) 51% 50px no-repeat;*/
+    /*color: #cccccc;*/
+    /*font-size: 18px;*/
+    /*position: relative;*/
 }
-
-#uploader .placeholder .webuploader-pick {
-    font-size: 18px;
-    background: #3da7a7;
+.queue-item{
+    height: 80px;
+    width: 80px;
+    background: #FFF;
+    border: 1px solid #DDD;
+    margin-left: 2px;
+}
+.webuploader-pick {
+    height: 80px;
+    width: 80px;
+    background: url(./add-photo.png) no-repeat;
+    background-size: contain;
     border-radius: 3px;
-    line-height: 44px;
-    padding: 0 30px;
     color: #fff;
     display: inline-block;
-    margin: 20px auto;
     cursor: pointer;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 }
 
-#uploader .placeholder .webuploader-pick-hover {
-    background: #369494;
-}
 
 #uploader .placeholder .flashTip {
     color: #666666;
@@ -315,14 +371,10 @@
 }
 
 #uploader .statusBar .btns {
+    position: absolute;
+    top: 10px;
+    right: 20px;
     line-height: 40px;
-}
-
-@media (max-width: 768px){
-
-    #uploader .statusBar .btns {
-        float: none!important;
-    }
 }
 
 #filePicker2 {
@@ -353,12 +405,12 @@
 }
 
 #uploader .statusBar .btns .uploadBtn {
-    background: #3da7a7;
+    background: #00b7ee;
     color: #fff;
     border-color: transparent;
 }
 #uploader .statusBar .btns .uploadBtn:hover {
-    background: #369494;
+    background: #00a2d4;
 }
 
 #uploader .statusBar .btns .uploadBtn.disabled {

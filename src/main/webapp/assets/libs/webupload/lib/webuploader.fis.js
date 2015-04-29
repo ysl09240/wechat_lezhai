@@ -1,4 +1,4 @@
-/*! WebUploader 0.1.6 */
+/*! WebUploader 0.1.5 */
 
 
 var jQuery = require('example:widget/ui/jquery/jquery.js')
@@ -211,7 +211,7 @@ return (function( root, factory ) {
             /**
              * @property {String} version 当前版本号。
              */
-            version: '0.1.6',
+            version: '0.1.5',
     
             /**
              * @property {jQuery|Zepto} $ 引用依赖的jQuery或者Zepto对象。
@@ -1894,9 +1894,6 @@ return (function( root, factory ) {
                     picker.once( 'ready', deferred.resolve );
                     picker.on( 'select', function( files ) {
                         me.owner.request( 'add-file', [ files ]);
-                    });
-                    picker.on('dialogopen', function() {
-                        me.owner.trigger('dialogOpen', picker.button);
                     });
                     picker.init();
     
@@ -4669,9 +4666,6 @@ return (function( root, factory ) {
                 } catch( err ) {
                 }
     
-                me.dndOver = false;
-                me.elem.removeClass( prefix + 'over' );
-    
                 if ( data ) {
                     return;
                 }
@@ -4682,6 +4676,8 @@ return (function( root, factory ) {
                     }) );
                 });
     
+                me.dndOver = false;
+                me.elem.removeClass( prefix + 'over' );
                 return false;
             },
     
@@ -4757,7 +4753,7 @@ return (function( root, factory ) {
                 if (!elem) {
                     return;
                 }
-    
+                
                 elem.off( 'dragenter', this.dragEnterHandler );
                 elem.off( 'dragover', this.dragOverHandler );
                 elem.off( 'dragleave', this.dragLeaveHandler );
@@ -4864,7 +4860,6 @@ return (function( root, factory ) {
     
                 label.on( 'click', function() {
                     input.trigger('click');
-                    owner.trigger('dialogopen');
                 });
     
                 label.css({
@@ -6308,8 +6303,6 @@ return (function( root, factory ) {
                         height: this.height
                     };
     
-                    //debugger;
-    
                     // 读取meta信息。
                     if ( !me._metas && 'image/jpeg' === me.type ) {
                         Util.parseMeta( me._blob, function( error, ret ) {
@@ -6455,12 +6448,12 @@ return (function( root, factory ) {
     
                 // setter
                 if ( val ) {
-                    this._metas = val;
+                    this._meta = val;
                     return this;
                 }
     
                 // getter
-                return this._metas;
+                return this._meta;
             },
     
             destroy: function() {
@@ -6715,7 +6708,6 @@ return (function( root, factory ) {
             })()
         });
     });
-    
     /**
      * @fileOverview Transport
      * @todo 支持chunked传输，优势：
@@ -7879,23 +7871,19 @@ return (function( root, factory ) {
                         // try {
                         //     me._responseJson = xhr.exec('getResponseAsJson');
                         // } catch ( error ) {
-    
-                        p = function( s ) {
+                            
+                        p = window.JSON && window.JSON.parse || function( s ) {
                             try {
-                                if (window.JSON && window.JSON.parse) {
-                                    return JSON.parse(s);
-                                }
-    
                                 return new Function('return ' + s).call();
                             } catch ( err ) {
                                 return {};
                             }
                         };
                         me._responseJson  = me._response ? p(me._response) : {};
-    
+                            
                         // }
                     }
-    
+                    
                     xhr.destroy();
                     xhr = null;
     
@@ -7919,7 +7907,6 @@ return (function( root, factory ) {
             }
         });
     });
-    
     /**
      * @fileOverview Blob Html实现
      */

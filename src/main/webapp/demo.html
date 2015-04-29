@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="./assets/css/wx.css">
     <link rel="stylesheet" href="./assets/css/common-space.css">
+    <link rel="stylesheet" type="text/css" href="./assets/libs/webupload/lib/webuploader.css"/>
+    <link rel="stylesheet" type="text/css" href="./assets/libs/webupload/style.css"/>
     <style>
         body {padding-top: 40px; background: #666666; font-family: "Heiti SC", "DroidSansFallback",  "微软雅黑";}
     </style>
@@ -276,7 +278,13 @@
                     </div>
                     <form>
                         <div class="wx-group">
-                            <div class="upload-space fault-bg"></div>
+                            <div class="upload-space fault-bg">
+                                <div id="uploader">
+                                    <div id="queueList" class="queueList">
+                                        <a id="filePicker"></a>
+                                    </div>
+                                </div>
+                            </div>
                             <ul class="wx-functions">
                                 <li class="wx-item">
                                     <textarea class="textarea" placeholder="故障描述"></textarea>
@@ -440,15 +448,18 @@
                     <form>
                         <div class="wx-group">
                             <div class="upload-space complaint-bg">
-                                <div class="photo-container">
-                                    <img src="http://s.cn.bing.net/az/hprichbg/rb/Husafell_ZH-CN9632204692_1920x1080.jpg" alt="..." class="img-thumbnail">
-                                    <img src="http://s.cn.bing.net/az/hprichbg/rb/Husafell_ZH-CN9632204692_1920x1080.jpg" alt="..." class="img-thumbnail">
-                                    <img src="http://s.cn.bing.net/az/hprichbg/rb/Husafell_ZH-CN9632204692_1920x1080.jpg" alt="..." class="img-thumbnail">
+                                <div id="uploader">
+                                    <div id="queueList" class="queueList">
+                                        <img class="queue-item"/>
+                                        <img class="queue-item"/>
+                                        <img class="queue-item"/>
+                                        <a id="filePicker"></a>
+                                    </div>
                                 </div>
                             </div>
                             <ul class="wx-functions">
                                 <li class="wx-item">
-                                    <textarea class="textarea" placeholder="故障描述"></textarea>
+                                    <textarea class="textarea" placeholder="投诉详情"></textarea>
                                 </li>
                             </ul>
                         </div>
@@ -1058,6 +1069,8 @@
 
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./assets/libs/webupload/lib/webuploader.js"></script>
+    <script type="text/javascript" src="./assets/libs/webupload/upload.js"></script>
 </body>
 </html>
 

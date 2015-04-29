@@ -1,4 +1,4 @@
-/*! WebUploader 0.1.6 */
+/*! WebUploader 0.1.5 */
 
 
 /**
@@ -236,7 +236,7 @@
             /**
              * @property {String} version 当前版本号。
              */
-            version: '0.1.6',
+            version: '0.1.5',
     
             /**
              * @property {jQuery|Zepto} $ 引用依赖的jQuery或者Zepto对象。
@@ -1919,9 +1919,6 @@
                     picker.once( 'ready', deferred.resolve );
                     picker.on( 'select', function( files ) {
                         me.owner.request( 'add-file', [ files ]);
-                    });
-                    picker.on('dialogopen', function() {
-                        me.owner.trigger('dialogOpen', picker.button);
                     });
                     picker.init();
     
@@ -4177,9 +4174,6 @@
                 } catch( err ) {
                 }
     
-                me.dndOver = false;
-                me.elem.removeClass( prefix + 'over' );
-    
                 if ( data ) {
                     return;
                 }
@@ -4190,6 +4184,8 @@
                     }) );
                 });
     
+                me.dndOver = false;
+                me.elem.removeClass( prefix + 'over' );
                 return false;
             },
     
@@ -4265,7 +4261,7 @@
                 if (!elem) {
                     return;
                 }
-    
+                
                 elem.off( 'dragenter', this.dragEnterHandler );
                 elem.off( 'dragover', this.dragOverHandler );
                 elem.off( 'dragleave', this.dragLeaveHandler );
@@ -4372,7 +4368,6 @@
     
                 label.on( 'click', function() {
                     input.trigger('click');
-                    owner.trigger('dialogopen');
                 });
     
                 label.css({
@@ -4940,23 +4935,19 @@
                         // try {
                         //     me._responseJson = xhr.exec('getResponseAsJson');
                         // } catch ( error ) {
-    
-                        p = function( s ) {
+                            
+                        p = window.JSON && window.JSON.parse || function( s ) {
                             try {
-                                if (window.JSON && window.JSON.parse) {
-                                    return JSON.parse(s);
-                                }
-    
                                 return new Function('return ' + s).call();
                             } catch ( err ) {
                                 return {};
                             }
                         };
                         me._responseJson  = me._response ? p(me._response) : {};
-    
+                            
                         // }
                     }
-    
+                    
                     xhr.destroy();
                     xhr = null;
     
@@ -4980,7 +4971,6 @@
             }
         });
     });
-    
     /**
      * @fileOverview Blob Html实现
      */

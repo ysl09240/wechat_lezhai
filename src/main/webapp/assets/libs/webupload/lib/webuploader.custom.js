@@ -1,4 +1,4 @@
-/*! WebUploader 0.1.6 */
+/*! WebUploader 0.1.5 */
 
 
 /**
@@ -539,7 +539,7 @@
             /**
              * @property {String} version 当前版本号。
              */
-            version: '0.1.6',
+            version: '0.1.5',
     
             /**
              * @property {jQuery|Zepto} $ 引用依赖的jQuery或者Zepto对象。
@@ -2020,9 +2020,6 @@
                     picker.once( 'ready', deferred.resolve );
                     picker.on( 'select', function( files ) {
                         me.owner.request( 'add-file', [ files ]);
-                    });
-                    picker.on('dialogopen', function() {
-                        me.owner.trigger('dialogOpen', picker.button);
                     });
                     picker.init();
     
@@ -4464,7 +4461,6 @@
     
                 label.on( 'click', function() {
                     input.trigger('click');
-                    owner.trigger('dialogopen');
                 });
     
                 label.css({
@@ -5106,8 +5102,6 @@
                         height: this.height
                     };
     
-                    //debugger;
-    
                     // 读取meta信息。
                     if ( !me._metas && 'image/jpeg' === me.type ) {
                         Util.parseMeta( me._blob, function( error, ret ) {
@@ -5253,12 +5247,12 @@
     
                 // setter
                 if ( val ) {
-                    this._metas = val;
+                    this._meta = val;
                     return this;
                 }
     
                 // getter
-                return this._metas;
+                return this._meta;
             },
     
             destroy: function() {
@@ -5513,7 +5507,6 @@
             })()
         });
     });
-    
     /**
      * 这个方式性能不行，但是可以解决android里面的toDataUrl的bug
      * android里面toDataUrl('image/jpege')得到的结果却是png.
