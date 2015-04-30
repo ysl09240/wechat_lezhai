@@ -75,8 +75,8 @@ body {
 .mobileframe {
   background: #EEE;
   overflow: hidden;
-  height: 640px;
-  margin-bottom: 40px;
+  height: 100%;
+  margin-bottom: 60px;
   position: relative;
 }
 /* mobile fram with bg*/
@@ -366,7 +366,7 @@ body {
 }
 
 .fiexd-b{
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 100%;
 }
@@ -384,6 +384,10 @@ form .textarea{
   margin-left: 5%;
   resize: inherit;
 }
+form .error{
+  border: 1px solid red;
+}
+
 .form-button{
   background: transparent;
   border: transparent;
@@ -622,6 +626,7 @@ form .textarea{
 }
 
 .wx-functions > .wx-item .back-arrow{
+  margin-right: -29px;
   display: inline-block;
 }
 .wx-functions > .wx-item .back-arrow>img{

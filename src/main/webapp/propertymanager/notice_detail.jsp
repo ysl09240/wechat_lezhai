@@ -37,12 +37,12 @@
                         <div class="wx-space"></div>
                         <ul class="wx-functions">
                             <li class="wx-item">
-                                <h4 class="text-center"> <span class="label label-info c-label"></span>${noticeMap.title} </h4>
+                                <h4 class="text-center"> <span class="label label-info c-label"> </span>  ${noticeMap.title} </h4>
                                 <div class="wx-detail mtm">
                                     ${noticeMap.content}
                                 </div>
                                 <div class="text-right prml">
-                                    <h4>${noticeMap.pmcName}</h4>
+                                    <h4>${pmcInfo.companyName}</h4>
                                     <span>${noticeMap.createdDateStr2}</span>
                                 </div>
                             </li>

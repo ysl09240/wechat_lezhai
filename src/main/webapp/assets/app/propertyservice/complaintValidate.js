@@ -37,7 +37,7 @@ $(function(){
             }
         },
         errorPlacement: function(error, element) {
-            error.appendTo($(".wx-group"));
+            element.addClass("error");
         },
         submitHandler:function(form){
             form.submit();

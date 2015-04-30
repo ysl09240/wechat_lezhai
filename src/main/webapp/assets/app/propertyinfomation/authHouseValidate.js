@@ -54,7 +54,7 @@ $(function () {
             }
         },
         errorPlacement: function (error, element) {
-            error.appendTo($(".wx-item"));
+            element.addClass("error");
         },
         submitHandler: function (form) {
             form.submit();

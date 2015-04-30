@@ -30,7 +30,7 @@ $(function() {
                 description:{
                     required:"请输入报修描述"
                 },
-                contactNumber:{
+                repairPeople:{
                     required:"请输报修人"
                 },
                 contactNumber:{
@@ -39,7 +39,8 @@ $(function() {
                 }
             },
             errorPlacement: function(error, element) {
-                error.appendTo($(".wx-group"));
+                element.addClass("error");
+                //error.appendTo(element.parent());
             },
             submitHandler:function(form){
                 form.submit();

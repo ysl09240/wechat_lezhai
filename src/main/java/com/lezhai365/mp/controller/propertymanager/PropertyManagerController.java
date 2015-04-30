@@ -1,5 +1,6 @@
 package com.lezhai365.mp.controller.propertymanager;
 
+import com.lezhai365.base.spi.user.IPmcUserService;
 import com.lezhai365.common.model.Page;
 import com.lezhai365.mp.controller.BaseController;
 import com.lezhai365.pms.model.Notice;
@@ -31,6 +32,9 @@ public class PropertyManagerController extends BaseController {
     IPropertyManagerService propertyManagerService;
     @Autowired
     INoticeService noticeService;
+
+    @Autowired
+    IPmcUserService pmcUserService;
 
 
 /**
@@ -79,20 +83,23 @@ public class PropertyManagerController extends BaseController {
             @RequestParam String openid,
             @RequestParam Long noticeId) {
         ModelAndView mv = new ModelAndView();
+
         Map<String, Object> userWxMap = getUserWx(signinName, openid);
 
         Long estateId = (Long) userWxMap.get("defaultEstateId");
-
+        Long pmcUserId = (Long) userWxMap.get("pmcId");
         Notice notice = new Notice();
 
         notice.setHousingEstateId(estateId);
 
         notice.setId(noticeId);
-        Map<String, Object> noticeMap = noticeService.queryOneNotice(notice);
 
+        Map<String, Object> noticeMap = noticeService.queryOneNotice(notice);
+        Map<String,Object> pmcInfo = pmcUserService.queryPmcInfoByUserId(pmcUserId);
         mv.addObject("noticeMap", noticeMap);
         mv.addObject("signinName", signinName);
         mv.addObject("openid", openid);
+        mv.addObject("pmcInfo",pmcInfo);
         mv.setViewName("propertymanager/notice_detail");
         return mv;
     }

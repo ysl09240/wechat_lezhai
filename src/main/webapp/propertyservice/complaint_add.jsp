@@ -33,6 +33,9 @@
                     <div class="wx-group">
                         <ul class="wx-functions">
                             <li class="wx-item">
+                                <a href="/${signinName}/service/complaintlist?openid=${openid}" class="wx-icon back-arrow">
+                                    <img  src="/assets/img/back-arrow.png">
+                                </a>
                                 <div class="wx-header">新增投诉-房间${houseInfo.num}</div>
                             </li>
                         </ul>
