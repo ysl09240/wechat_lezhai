@@ -44,7 +44,7 @@
                                        <div class="wx-tip-message">
                                            <div class="tip-bg"></div>
                                            <div class="tip-message">
-                                               尊敬的业主你好，你还未申请认证房产，请<a href="/${signinName}/infomation/myhouse?openid=${openid}&housingEstateId=${housingEstateId}" class="text-c">申请认证</a>
+                                               尊敬的业主你好，你还未申请认证房产，请<a href="/${signinName}/infomation/authhouse?openid=${openid}&housingEstateId=${housingEstateId}" class="text-c">申请认证</a>
                                            </div>
                                        </div>
                                    </c:when>
