@@ -8,6 +8,8 @@
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <html>
 <head>
     <meta charset="utf-8">
@@ -47,7 +49,7 @@
                                     <img src="/assets/img/icon-notice.png">
                                  </span>
                                     <div class="wx-name">${notice.title}</div>
-                                    <div class="text-right prm text-muted"><span>2015-06-12</span></div>
+                                    <div class="text-right prm text-muted"><span><fmt:formatDate pattern="yyyy-MM-dd" value="${notice.createdTime}" /></span></div>
                                 </a>
                             </li>
                         </c:forEach>

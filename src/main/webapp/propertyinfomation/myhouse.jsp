@@ -21,68 +21,71 @@
     <script src="/assets/app/propertyservice/complaintValidate.js"></script>
 </head>
 <html>
-    <body>
-        <div class="wx-page">
-            <div class="row">
-                <div class="col-lg-4 col-sm-6">
-                    <div class="mobileframe bg">
-                        <div class="wx-group">
-                            <ul class="wx-functions">
-                                <li class="wx-item">
-                                    <a href="/${signinName}/infomation/myestate?openid=${openid}" class="wx-icon back-arrow">
-                                        <img  src="/assets/img/back-arrow.png">
-                                    </a>
-                                    <div class="wx-header">我的房产</div>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="wx-group">
-                            <div class="wx-space"></div>
-                           <ul class="wx-functions">
-                               <c:choose>
-                                   <c:when test="${empty myHouseList}">
-                                       <div class="wx-tip-message">
-                                           <div class="tip-bg"></div>
-                                           <div class="tip-message">
-                                               尊敬的业主你好，你还未申请认证房产，请<a href="/${signinName}/infomation/authhouse?openid=${openid}&housingEstateId=${housingEstateId}" class="text-c">申请认证</a>
-                                           </div>
-                                       </div>
-                                   </c:when>
-                                   <c:otherwise>
-                                       <c:forEach var="myhouse" items="${myHouseList}">
-                                           <li class="wx-item">
-                                       <span class="wx-icon">
-                                        <img  src="/assets/img/icon-house.png">
+<body>
+<div class="wx-page">
+    <div class="row">
+        <div class="col-lg-4 col-sm-6">
+            <div class="mobileframe bg">
+                <div class="wx-group">
+                    <ul class="wx-functions">
+                        <li class="wx-item">
+                            <a href="/${signinName}/infomation/myestate?openid=${openid}" class="wx-icon back-arrow">
+                                <img src="/assets/img/back-arrow.png">
+                            </a>
+
+                            <div class="wx-header">我的房产</div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="wx-group">
+                    <div class="wx-space"></div>
+                    <ul class="wx-messages">
+                        <c:choose>
+                            <c:when test="${empty myHouseList}">
+                                <div class="wx-tip-message">
+                                    <div class="tip-bg"></div>
+                                    <div class="tip-message">
+                                        尊敬的业主你好，你还未申请认证房产，请<a
+                                            href="/${signinName}/infomation/myhouse?openid=${openid}&housingEstateId=${housingEstateId}"
+                                            class="text-c">申请认证</a>
+                                    </div>
+                                </div>
+                            </c:when>
+                            <c:otherwise>
+                                <c:forEach var="myhouse" items="${myHouseList}">
+
+                                    <li class="wx-item">
+                                        <div class="pull-right prm pts">
+                                            <c:choose>
+                                                <c:when test="${myhouse.authStatus eq 0}">
+                                                    <span class="wx-btn inverse">待认证</span>
+                                                </c:when>
+                                                <c:when test="${myhouse.authStatus eq 1}">
+                                                    <c:if test="${myhouse.defaultHouseId eq myhouse.houseInfoId}">
+                                                        <span>常住</span>
+                                                    </c:if>
+                                                    <c:if test="${myhouse.defaultHouseId ne myhouse.houseInfoId}">
+                                                        <a href="/${signinName}/infomation/dodefault?houseInfoId=${myhouse.houseInfoId}&houseEstateId=${myhouse.housingEstateId}&openid=${openid}"
+                                                           class="wx-btn">设为常住</a>
+                                                    </c:if>
+                                                </c:when>
+                                            </c:choose>
+                                        </div>
+                                        <span class="wx-icon wx-icon-sanmarino">
+                                                <img src="/assets/img/icon-house.png">
                                         </span>
-                                               <div class="wx-name">
-                                                       ${myhouse.houseInfoStr}
-                                                   <c:choose>
-                                                       <c:when test="${myhouse.authStatus eq 0}">
-                                                           <div class="pull-right prm">
-                                                               <span class="wx-btn inverse">待认证</span>
-                                                           </div>
-                                                       </c:when>
-                                                       <c:when test="${myhouse.authStatus eq 1}">
-                                                           <div class="pull-right prm">
-                                                               <c:if test="${myhouse.defaultHouseId eq myhouse.houseInfoId}">
-                                                                   <span>常住</span>
-                                                               </c:if>
-                                                               <c:if test="${myhouse.defaultHouseId ne myhouse.houseInfoId}">
-                                                                   <a href="/${signinName}/infomation/dodefault?houseInfoId=${myhouse.houseInfoId}&houseEstateId=${myhouse.housingEstateId}&openid=${openid}" class="wx-btn">设为常住</a>
-                                                               </c:if>
-                                                           </div>
-                                                       </c:when>
-                                                   </c:choose>
-                                               </div>
-                                           </li>
-                                       </c:forEach>
-                                   </c:otherwise>
-                               </c:choose>
-                            </ul>
-                        </div>
-                    </div>
+
+                                        <div class="wx-name">${myhouse.buildingName}/${myhouse.unitInfoName}/${myhouse.unm}/{myhouse.num}</div>
+                                        <div class="wx-content">${myhouse.housingEstateName}</div>
+                                    </li>
+                                </c:forEach>
+                            </c:otherwise>
+                        </c:choose>
+                    </ul>
                 </div>
             </div>
         </div>
-    </body>
+    </div>
+</div>
+</body>
 </html>

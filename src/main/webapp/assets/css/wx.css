@@ -488,7 +488,7 @@ form .textarea{
   text-decoration: none;
 
 }
-.wx-btn:hover{
+.wx-btn:hover,.wx-btn:visited{
   text-decoration: none;
   color: #FFF;
 }

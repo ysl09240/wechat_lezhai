@@ -106,7 +106,7 @@
                                 <span class="wx-icon">
                                     <img src="/assets/img/icon-people.png">
                                 </span>
-                                        <div class="wx-name">保修人</div>
+                                        <div class="wx-name">报修人</div>
                                         <input class="feild" name="repairPeople"/>
                                     </li>
                                 </ul>

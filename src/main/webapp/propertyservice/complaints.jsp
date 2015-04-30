@@ -42,7 +42,7 @@
                                                 未处理
                                             </c:if>
                                             <c:if test="${complaint.dealStatus==1}">
-                                                己处理
+                                                已处理
                                             </c:if>
                                         </span>
                                         ${complaint.complaintContent}

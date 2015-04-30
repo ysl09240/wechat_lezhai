@@ -60,7 +60,7 @@
                                             <img src="/assets/img/icon-fee.png">
                                         </span>
                                         <div class="wx-name">${bill.itemName}</div>
-                                        <div class="wx-content"><fmt:formatDate value="${bill.billingDate}" pattern="yyyy-MM-dd HH:ss"></fmt:formatDate> </div>
+                                        <div class="wx-content"><fmt:formatDate value="${bill.billingDate}" pattern="yyyy-MM-dd HH:mm"></fmt:formatDate> </div>
                                     </li>
                                 </c:forEach>
                             </ul>
