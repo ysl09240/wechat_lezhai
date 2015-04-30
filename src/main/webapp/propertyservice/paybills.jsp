@@ -27,7 +27,7 @@
                         <div class="wx-group">
                             <ul class="wx-functions">
                                 <li class="wx-item">
-                                    <div class="wx-header">环保积分-房间${houseInfo.num}</div>
+                                    <div class="wx-header">账单查询-房间${houseInfo.num}</div>
                                 </li>
                             </ul>
                         </div>
