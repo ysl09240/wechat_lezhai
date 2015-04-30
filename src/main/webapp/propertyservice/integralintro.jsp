@@ -8,6 +8,7 @@
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -54,21 +55,24 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
-                                                <th scope="row">金属</th>
-                                                <td>22</td>
-                                                <td>+3</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">纸张</th>
-                                                <td>22</td>
-                                                <td>+3</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">瓶子</th>
-                                                <td>22</td>
-                                                <td>+3</td>
-                                            </tr>
+                                            <c:choose>
+                                                <c:when test="${empty wasteInfoList}">
+                                                   <tr>
+                                                       <td colspan="3">暂无</td>
+                                                   </tr>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <c:forEach var="waste" items="${wasteInfoList}">
+
+                                                <tr>
+                                                    <th scope="row">${waste.wasteName}</th>
+                                                    <td><fmt:formatNumber value="${waste.weight}" pattern="##.00" /></td>
+                                                    <td><fmt:formatNumber value="${waste.wasteUnitPrice}" pattern="##.00" /></td>
+                                                </tr>
+                                            </c:forEach>
+                                                </c:otherwise>
+                                            </c:choose>
+
                                             </tbody>
                                         </table>
                                     </div>

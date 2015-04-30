@@ -305,7 +305,7 @@ public class PropertyServiceController extends BaseController {
             mv.addObject("flag", flag);
             mv.addObject("houseInfo",houseService.queryHouseInfoById(houseInfoId));
             mv.addObject("openid",openid);
-            mv.addObject("signinName",signinName);
+            mv.addObject("signinName", signinName);
             mv.setViewName("propertyservice/integral");
         } else {
             mv.setViewName("no-default-house");
@@ -319,8 +319,17 @@ public class PropertyServiceController extends BaseController {
      * @return
      */
     @RequestMapping(value = "/integralintro")
-    public ModelAndView integralIntroView() {
+    public ModelAndView integralIntroView(
+            @RequestParam String openid,
+            @PathVariable String signinName) {
         ModelAndView mv = new ModelAndView();
+        Map<String, Object> userWxMap = getUserWx(signinName, openid);
+        Long estateId = (Long) userWxMap.get("defaultEstateId");
+        Object houseIdObj = userWxMap.get("defaultHouseId");
+        List<Map<String, Object>> wasteInfoList = wasteIntegralService.queryWasteInfo(estateId);
+        mv.addObject("wasteInfoList",wasteInfoList);
+        mv.addObject("signinName",signinName);
+        mv.addObject("openid",openid);
         mv.setViewName("propertyservice/integralintro");
         return mv;
     }

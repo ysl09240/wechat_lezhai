@@ -49,7 +49,7 @@
                                 <c:forEach var="bill" items="${item.value}">
                                     <li class="wx-item">
                                         <div class="pull-right prm pts">
-                                            <div class="fee">￥${bill.amountMoney}</div>
+                                            <div class="fee">￥<fmt:formatNumber value="${bill.amountMoney}" pattern="#.00"></fmt:formatNumber> </div>
                                             <div class="status text-muted">
                                                 <c:if test="${bill.paymentStatus == 0}">未缴费</c:if>
                                                 <c:if test="${bill.paymentStatus == 1}">己缴费</c:if>
