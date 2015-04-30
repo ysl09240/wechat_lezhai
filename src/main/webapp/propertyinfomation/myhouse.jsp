@@ -50,7 +50,6 @@
                                    </c:when>
                                    <c:otherwise>
                                        <c:forEach var="myhouse" items="${myHouseList}">
-
                                            <li class="wx-item">
                                        <span class="wx-icon">
                                         <img  src="/assets/img/icon-house.png">
