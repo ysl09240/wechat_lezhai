@@ -10,10 +10,13 @@ $(function () {
             element: $('#estate-select'),
             async: {
                 enable: true,
-                uri: '/' + window.pmcSignName + '/infomation/house/tree',
+                uri: '/' + window.wx.pmcSignName + '/infomation/house/tree',
                 autoParam: ['id', 'childtype', 'floor', 'pid'],
                 defaultParam:function(){
-                    return {housingEstateId:$('#estate-select>option:selected').val()};
+                    return {
+                        openid:window.wx.openid,
+                        housingEstateId:$('#estate-select>option:selected').val()
+                    };
                 }
             }
         });

@@ -35,7 +35,7 @@
               <div class="wx-tip-message">
                 <div class="tip-bg"></div>
                 <div class="tip-message">
-                  您还未<a href="/${signinName}/infomation/authhouse?openid=${openid}" class="text-c">申请认证</a>或者未<a  href="/${signinName}/infomation/authhouse?openid=${openid}" class="text-c">设置常住房产</a>
+                  您还未<a href="http://wx.lezhai365.com/${signinName}/infomation/authhouse?openid=${openid}" class="text-c">申请认证</a>或者未<a  href="/${signinName}/infomation/authhouse?openid=${openid}" class="text-c">设置常住房产</a>
                 </div>
               </div>
             </li>

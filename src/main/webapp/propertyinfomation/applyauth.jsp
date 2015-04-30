@@ -17,7 +17,10 @@
     <link rel="stylesheet" href="/assets/css/wx.css">
     <link rel="stylesheet" href="/assets/css/common-space.css">
     <script type="text/javascript">
-        window.pmcSignName = '${signinName}';
+        window.wx = {
+            pmcSignName:'${signinName}',
+            openid:'${openid}'
+        };
     </script>
     <script src="/assets/libs/jquery/jquery-1.9.1.min.js"></script>
     <script src="/assets/libs/jquery/plugins/jquery.validate.min.js"></script>
