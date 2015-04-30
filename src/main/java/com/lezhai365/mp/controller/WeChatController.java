@@ -118,6 +118,7 @@ public class WeChatController extends  BaseController{
             tokenInfo = oauthService.getTokenInfo(code);
             //TODO 根据access_token 和openid获取
             String openId = tokenInfo.getString("openid");
+            System.out.println("refer:" + refer);
             mv.setViewName("redirect:" + refer + "?openid=" + openId);
         } catch (Exception e) {
             e.printStackTrace();
