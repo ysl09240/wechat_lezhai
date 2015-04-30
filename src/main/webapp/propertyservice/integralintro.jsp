@@ -12,8 +12,7 @@
 <head>
     <meta charset="utf-8">
     <title>积分兑换规则</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/wx.css">
     <link rel="stylesheet" href="/assets/css/common-space.css">
     <script src="/assets/libs/jquery/jquery-1.9.1.min.js"></script>

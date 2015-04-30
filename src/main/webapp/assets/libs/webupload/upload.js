@@ -1,23 +1,23 @@
-$(function(  ){
+$(function() {
     // 优化retina, 在retina下这个值是2
-      var ratio = window.devicePixelRatio || 1,
-          fileCount = 0;
+    var ratio = window.devicePixelRatio || 1,
+        fileCount = 0,
         // 缩略图大小
         thumbnailWidth = 110 * ratio,
         thumbnailHeight = 110 * ratio,
 
         // 判断浏览器是否支持图片的base64
-        isSupportBase64 = ( function() {
+        isSupportBase64 = (function() {
             var data = new Image();
             var support = true;
             data.onload = data.onerror = function() {
-                if( this.width != 1 || this.height != 1 ) {
+                if (this.width != 1 || this.height != 1) {
                     support = false;
                 }
             }
             data.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
             return support;
-        } )();
+        })();
 
     var $queueList = $("#queueList"),
         $filePicker = $("#filePicker");
@@ -40,8 +40,8 @@ $(function(  ){
         resize: false,
         disableGlobalDnd: true,
         fileNumLimit: 3,
-        fileSizeLimit: 5 * 1024 * 1024,    // 5 M
-        fileSingleSizeLimit: 5 * 1024 * 1024,    // 5 M
+        fileSizeLimit: 5 * 1024 * 1024, // 5 M
+        fileSingleSizeLimit: 5 * 1024 * 1024, // 5 M
         compress: {
             width: 260,
             height: 180,
@@ -66,48 +66,48 @@ $(function(  ){
             compressSize: 0
         }
     });
-    uploader.on('startUpload', function () {
+    uploader.on('startUpload', function() {
         //$('#upload-avatar').fadeOut(function () {
         //$('#upload-avatar').append('<img id="upload-loading" src="/assets/img/loading6.gif">');
         //});
     });
 
-    uploader.on('error', function (code) {
+    uploader.on('error', function(code) {
         var text = "";
-        switch (code){
+        switch (code) {
             case 'Q_EXCEED_NUM_LIMIT':
                 text = "最多可以上传3张"
                 break;
-            default :
+            default:
                 text = "上传出错,请重试";
                 break;
 
         }
         //alert(text);
     });
-    uploader.on('uploadSuccess', function (file, response) {
+    uploader.on('uploadSuccess', function(file, response) {
         $("#input_" + file.id).val(response.data);
         console.log(response);
     });
 
-    uploader.on( 'all', function( type, file ) {
+    uploader.on('all', function(type, file) {
         console.log("upload event type:" + type);
-        switch( type ) {
+        switch (type) {
             case 'fileQueued':
                 fileCount++;
-                if(fileCount === 3){
+                if (fileCount === 3) {
                     $filePicker.hide();
                 }
-                uploader.makeThumb( file, function( error, src ) {
+                uploader.makeThumb(file, function(error, src) {
                     var img;
 
-                    if ( error ) {
-                        alert( '不能预览' );
+                    if (error) {
+                        alert('不能预览');
                         return;
                     }
-                    if( isSupportBase64 ) {
-                        img = $('<img id=' + file.id + ' class="queue-item" src="' + src + '"><input id="input_'+file.id+'" type="hidden" name="imgs[]"/>');
-                        $queueList.prepend( img );
+                    if (isSupportBase64) {
+                        img = $('<img id=' + file.id + ' class="queue-item" src="' + src + '"><input id="input_' + file.id + '" type="hidden" name="imgs[]"/>');
+                        $queueList.prepend(img);
                     }
                 }, thumbnailWidth, thumbnailHeight);
                 break;

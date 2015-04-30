@@ -15,7 +15,6 @@ import java.util.Date;
 import java.util.Map;
 
 /**
- *
  * 微信业务处理
  *
  * @author :  Huzi.Wang [huzi.wh@gmail.com]
@@ -32,6 +31,7 @@ public class WeChatService extends WeChatOpenApi {
 
     @Autowired
     IUserWxService userWxService;
+
     /**
      * 处理微信消息
      *
@@ -39,14 +39,14 @@ public class WeChatService extends WeChatOpenApi {
      * @return
      * @throws Exception
      */
-    public String processWxMsg(Long pmcUserId,String pmcSignName,InputStream xmlInputStream) throws Exception {
+    public String processWxMsg(Long pmcUserId, String pmcSignName, InputStream xmlInputStream) throws Exception {
         String result = "";
         //转换微信post过来的xml内容
         XStream xs = XStreamUtil.init(false);
         xs.ignoreUnknownElements();
         xs.alias("xml", InMessage.class);
 
-        TextOutMessage oms  = new TextOutMessage();
+        TextOutMessage oms = new TextOutMessage();
         InMessage msg = (InMessage) xs.fromXML(xmlInputStream);
         String event = msg.getEvent();
         String MsgType = msg.getMsgType();
@@ -55,14 +55,12 @@ public class WeChatService extends WeChatOpenApi {
         System.out.println("=============================================");
 
 
-
-
-        if(msg.getMsgType().equals("event")){
+        if (msg.getMsgType().equals("event")) {
             System.out.println("事件是:" + event);
             switch (event) {
                 case "subscribe"://关注
                     // 微信用户信息公众账号的时候绑定账号信息，
-                    String access_token = getAccessToken("wxc25645bdef1d5f57","bd9108b26ac432faed9a1a24aae92510");
+                    String access_token = getAccessToken("wxc25645bdef1d5f57", "bd9108b26ac432faed9a1a24aae92510");
                     UserService us = new UserService();
                     JSONObject userInfo = us.getUserInfo(access_token, msg.getFromUserName());
 
@@ -72,14 +70,14 @@ public class WeChatService extends WeChatOpenApi {
                     uw.setPmcId(pmcUserId);
 
                     Map queryResult = userWxService.queryUserWxByPmcIdAndOpenId(uw);
-                    if(null != queryResult){
+                    if (null == queryResult) {
                         uw.setNickname(userInfo.getString("nickname"));
                         uw.setHeadPic(userInfo.getString("headimgurl"));
                         int _result = userWxService.addUserWx(uw);
-                        System.out.println("用户信息如下：--------------------------------------------------------");
-                        System.out.println(userInfo);
                         //关注微信公众号时设置欢迎语
-                        oms.setContent("欢迎关注[万千家物业服务]微信公众号<a href='http://wx.lezhai365.com/"+pmcSignName+"/infomation/authhouse?openid="+openId+"'>点击绑定业主信息</a>");
+                        oms.setContent("欢迎关注[万千家物业服务]微信公众号<a href='http://wx.lezhai365.com/" + pmcSignName + "/infomation/authhouse?openid=" + openId + "'>点击绑定业主信息</a>");
+                    } else {
+                        oms.setContent("欢迎您再次关注[万千家物业服务]微信公众号,我们将竭诚为您服务");
                     }
 
                     break;
@@ -95,6 +93,9 @@ public class WeChatService extends WeChatOpenApi {
                     System.out.println("地址");
                     break;
                 case "CLICK"://点击事件
+                    if (msg.getEventKey().equals("pmc_intro")) {
+                        oms.setContent("物业公司介绍:物业服务");
+                    }
                     System.out.println("点击事件");
                     //提醒用户绑定房产
                     break;

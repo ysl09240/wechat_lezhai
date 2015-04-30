@@ -45,24 +45,25 @@ public class CheckFilter implements Filter {
 
         if (tempArr.length < 1) {
             response.encodeRedirectURL("/error.jsp");
-        }
-
-        String pmcSignName = tempArr[1];
-        String openid = request.getParameter("openid");
-
-        // 如果uri不包含wechat，并且没有openid时进行授权
-        if (!url.contains("wechat") && (null == openid || "".equals(openid))) {
-            //进行授权
-            System.out.println("------------授权跳转");
-            try {
-                System.out.println("oauth url:" + OauthService.getCodeUrl(uri, pmcSignName));
-                response.sendRedirect(OauthService.getCodeUrl(uri, pmcSignName));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         } else {
-            filterChain.doFilter(servletRequest, servletResponse);
+            String pmcSignName = tempArr[1];
+            String openid = request.getParameter("openid");
+
+            // 如果uri不包含wechat，并且没有openid时进行授权
+            if (!url.contains("wechat") && !url.contains("assets")&& (null == openid || "".equals(openid))) {
+                //进行授权
+                System.out.println("------------授权跳转");
+                try {
+                    System.out.println("oauth url:" + OauthService.getCodeUrl(uri, pmcSignName));
+                    response.sendRedirect(OauthService.getCodeUrl(uri, pmcSignName));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else {
+                filterChain.doFilter(servletRequest, servletResponse);
+            }
         }
+
 
     }
 

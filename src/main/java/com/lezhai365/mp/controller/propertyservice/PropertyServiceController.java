@@ -50,41 +50,47 @@ public class PropertyServiceController extends BaseController {
             @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
             @RequestParam(value = "pageIndex", defaultValue = "1") Integer pageIndex) {
         ModelAndView mv = new ModelAndView();
+        mv.addObject("signinName", signinName);
+        mv.addObject("openid", openid);
 
         Map<String, Object> userWxMap = getUserWx(signinName, openid);
         Long estateId = (Long) userWxMap.get("defaultEstateId");
-        Long houseInfoId = (Long) userWxMap.get("defaultHouseId");
-        Page<Map<String, Object>> billsPage = propertyServiceService.queryPayBillsListByHouseInfoId(houseInfoId, estateId, pageIndex, pageSize);
-        List<Map<String, Object>> billsList = billsPage.getContent();
+        Object houseIdObj = userWxMap.get("defaultHouseId");
+        if(null != houseIdObj){
+            Long houseInfoId = (Long) userWxMap.get("defaultHouseId");
+            Page<Map<String, Object>> billsPage = propertyServiceService.queryPayBillsListByHouseInfoId(houseInfoId, estateId, pageIndex, pageSize);
+            List<Map<String, Object>> billsList = billsPage.getContent();
 
-        /**
-         * {
-         *   "2015-02":[{},{}]
-         *   "2015-03":[{},{}]
-         *   "2015-04":[{},{}]
-         *   "2015-05":[{},{}]
-         * }
-         */
-        Map<String, List<Object>> billsMap = new HashMap<>();
-        for (Map<String, Object> map : billsList) {
-            String key = (String) map.get("month");
-            if (billsMap.containsKey(key)) {
-                List value = billsMap.get(key);
-                value.add(map);
-            } else {
-                List value = new ArrayList<Object>();
-                value.add(map);
-                billsMap.put(key, value);
+            /**
+             * {
+             *   "2015-02":[{},{}]
+             *   "2015-03":[{},{}]
+             *   "2015-04":[{},{}]
+             *   "2015-05":[{},{}]
+             * }
+             */
+            Map<String, List<Object>> billsMap = new HashMap<>();
+            for (Map<String, Object> map : billsList) {
+                String key = (String) map.get("month");
+                if (billsMap.containsKey(key)) {
+                    List value = billsMap.get(key);
+                    value.add(map);
+                } else {
+                    List value = new ArrayList<Object>();
+                    value.add(map);
+                    billsMap.put(key, value);
+                }
             }
+
+            Map<String, Object> sumNotPayMap = propertyServiceService.querySumNotPayBills(houseInfoId, estateId);
+
+            mv.addObject("sumNotPayMap", sumNotPayMap);
+            mv.addObject("billsMap", billsMap);
+            mv.addObject("houseInfo",houseService.queryHouseInfoById(houseInfoId));
+            mv.setViewName("propertyservice/paybills");
+        } else {
+            mv.setViewName("no-default-house");
         }
-
-        Map<String, Object> sumNotPayMap = propertyServiceService.querySumNotPayBills(houseInfoId, estateId);
-
-        mv.addObject("sumNotPayMap", sumNotPayMap);
-        mv.addObject("billsMap", billsMap);
-        mv.addObject("houseInfo",houseService.queryHouseInfoById(houseInfoId));
-        mv.addObject("signinName", signinName);
-        mv.setViewName("propertyservice/paybills");
         return mv;
     }
 
@@ -98,15 +104,24 @@ public class PropertyServiceController extends BaseController {
             @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
             @RequestParam(value = "pageIndex", defaultValue = "1") Integer pageIndex) {
         ModelAndView mv = new ModelAndView();
-        Map<String, Object> userWxMap = getUserWx(signinName, openid);
-        Long estateId = (Long) userWxMap.get("defaultEstateId");
-        Long houseInfoId = (Long) userWxMap.get("defaultHouseId");
-        Page<Map<String, Object>> faultInfoList = propertyServiceService.queryFaultsByHouseInfoId(houseInfoId, estateId, pageIndex, pageSize);
-        mv.addObject("faultInfoList", faultInfoList);
-        mv.addObject("houseInfo",houseService.queryHouseInfoById(houseInfoId));
-        mv.setViewName("propertyservice/faults");
         mv.addObject("signinName", signinName);
         mv.addObject("openid", openid);
+
+        Map<String, Object> userWxMap = getUserWx(signinName, openid);
+        Long estateId = (Long) userWxMap.get("defaultEstateId");
+
+        Object houseIdObj = userWxMap.get("defaultHouseId");
+        if(null != houseIdObj){
+
+            Long houseInfoId = (Long) userWxMap.get("defaultHouseId");
+
+            Page<Map<String, Object>> faultInfoList = propertyServiceService.queryFaultsByHouseInfoId(houseInfoId, estateId, pageIndex, pageSize);
+            mv.addObject("faultInfoList", faultInfoList);
+            mv.addObject("houseInfo",houseService.queryHouseInfoById(houseInfoId));
+            mv.setViewName("propertyservice/faults");
+        } else {
+            mv.setViewName("no-default-house");
+        }
         return mv;
     }
 
@@ -168,16 +183,23 @@ public class PropertyServiceController extends BaseController {
             @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
             @RequestParam(value = "pageIndex", defaultValue = "1") Integer pageIndex) {
         ModelAndView mv = new ModelAndView();
+        mv.addObject("signinName", signinName);
+        mv.addObject("openid", openid);
 
         Map<String, Object> userWxMap = getUserWx(signinName, openid);
         Long estateId = (Long) userWxMap.get("defaultEstateId");
-        Long houseInfoId = (Long) userWxMap.get("defaultHouseId");
-        Page<Map<String, Object>> complaintList = propertyServiceService.queryComplaintByHouseInfoId(houseInfoId, estateId, pageIndex, pageSize);
-        mv.addObject("complaintList", complaintList);
-        mv.addObject("signinName", signinName);
-        mv.addObject("openid", openid);
-        mv.addObject("houseInfo",houseService.queryHouseInfoById(houseInfoId));
-        mv.setViewName("propertyservice/complaints");
+
+        Object houseIdObj = userWxMap.get("defaultHouseId");
+        if(null != houseIdObj){
+            Long houseInfoId = (Long) userWxMap.get("defaultHouseId");
+            Page<Map<String, Object>> complaintList = propertyServiceService.queryComplaintByHouseInfoId(houseInfoId, estateId, pageIndex, pageSize);
+            mv.addObject("complaintList", complaintList);
+            mv.addObject("houseInfo",houseService.queryHouseInfoById(houseInfoId));
+            mv.setViewName("propertyservice/complaints");
+        } else {
+
+            mv.setViewName("no-default-house");
+        }
         return mv;
     }
 
@@ -236,51 +258,56 @@ public class PropertyServiceController extends BaseController {
         ModelAndView mv = new ModelAndView();
         Map<String, Object> userWxMap = getUserWx(signinName, openid);
         Long estateId = (Long) userWxMap.get("defaultEstateId");
-        Long houseInfoId = (Long) userWxMap.get("defaultHouseId");
-        //我的积分
-        Map<String, Object> integralInfo = wasteIntegralService.queryWasteIntegralByHouseInfoId(estateId, houseInfoId);
-        if (integralInfo != null) {
-            mv.addObject("integralInfo", integralInfo);
-        } else {
-            integralInfo = new HashMap<>();
-            integralInfo.put("housingEstateId", "0");
-            integralInfo.put("houseOwnerId", "0");
-            integralInfo.put("validIntegral", "0");
-            integralInfo.put("usedIntegral", "0");
-            integralInfo.put("totalIntegral", "0");
-            integralInfo.put("lastTimeStr", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
-            integralInfo.put("houseInfoId", "0");
-            mv.addObject("integralInfo", integralInfo);
-        }
-        Map<String, Object> paramMap = new HashMap();
-        paramMap.put("housingEstateId", estateId);
-        paramMap.put("houseInfoId", houseInfoId);
-        paramMap.put("pageIndex", pageIndex);
-        paramMap.put("pageSize", pageSize);
-        switch (flag) {
-            case "iHistory"://积分查询
-                Page<Map<String, Object>> integralHistoryPage = wasteIntegralService.queryWasteIntegralLogList(paramMap);
-                mv.addObject("integralHistoryPage", integralHistoryPage);
-                break;
-            case "iExchange"://积分兑换
-                Page<Map<String, Object>> integralExchangePage = wasteIntegralService.queryExchangeLogList(paramMap);
-                mv.addObject("integralExchangePage", integralExchangePage);
-                break;
-            case "iAdjust"://积分调整
-                Page<Map<String, Object>> integralAdjustPage = wasteIntegralService.queryWasteIntegralChangeList(paramMap);
-                mv.addObject("integralAdjustPage", integralAdjustPage);
-                break;
-            default:
-                integralHistoryPage = wasteIntegralService.queryWasteIntegralLogList(paramMap);
-                mv.addObject("integralHistoryPage", integralHistoryPage);
-                break;
+        Object houseIdObj = userWxMap.get("defaultHouseId");
+        if(null != houseIdObj) {
+            Long houseInfoId = (Long) userWxMap.get("defaultHouseId");
 
+            //我的积分
+            Map<String, Object> integralInfo = wasteIntegralService.queryWasteIntegralByHouseInfoId(estateId, houseInfoId);
+            if (integralInfo != null) {
+                mv.addObject("integralInfo", integralInfo);
+            } else {
+                integralInfo = new HashMap<>();
+                integralInfo.put("housingEstateId", "0");
+                integralInfo.put("houseOwnerId", "0");
+                integralInfo.put("validIntegral", "0");
+                integralInfo.put("usedIntegral", "0");
+                integralInfo.put("totalIntegral", "0");
+                integralInfo.put("lastTimeStr", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+                integralInfo.put("houseInfoId", "0");
+                mv.addObject("integralInfo", integralInfo);
+            }
+            Map<String, Object> paramMap = new HashMap();
+            paramMap.put("housingEstateId", estateId);
+            paramMap.put("houseInfoId", houseInfoId);
+            paramMap.put("pageIndex", pageIndex);
+            paramMap.put("pageSize", pageSize);
+            switch (flag) {
+                case "iHistory"://积分查询
+                    Page<Map<String, Object>> integralHistoryPage = wasteIntegralService.queryWasteIntegralLogList(paramMap);
+                    mv.addObject("integralHistoryPage", integralHistoryPage);
+                    break;
+                case "iExchange"://积分兑换
+                    Page<Map<String, Object>> integralExchangePage = wasteIntegralService.queryExchangeLogList(paramMap);
+                    mv.addObject("integralExchangePage", integralExchangePage);
+                    break;
+                case "iAdjust"://积分调整
+                    Page<Map<String, Object>> integralAdjustPage = wasteIntegralService.queryWasteIntegralChangeList(paramMap);
+                    mv.addObject("integralAdjustPage", integralAdjustPage);
+                    break;
+                default:
+                    integralHistoryPage = wasteIntegralService.queryWasteIntegralLogList(paramMap);
+                    mv.addObject("integralHistoryPage", integralHistoryPage);
+                    break;
+
+            }
+
+            mv.addObject("houseInfo",houseService.queryHouseInfoById(houseInfoId));
+            mv.setViewName("propertyservice/integral");
+            mv.addObject("flag", flag);
+        } else {
+            mv.setViewName("no-default-house");
         }
-        mv.addObject("signinName", signinName);
-        mv.addObject("openid", openid);
-        mv.addObject("houseInfo",houseService.queryHouseInfoById(houseInfoId));
-        mv.setViewName("propertyservice/integral");
-        mv.addObject("flag", flag);
         return mv;
     }
 

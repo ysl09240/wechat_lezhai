@@ -12,8 +12,7 @@
 <head>
     <meta charset="utf-8">
     <title>新增投诉-房间${houseInfo.num}</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/wx.css">
     <link rel="stylesheet" href="/assets/css/common-space.css">
     <link rel="stylesheet" type="text/css" href="/assets/libs/webupload/lib/webuploader.css"/>

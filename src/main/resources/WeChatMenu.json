@@ -54,12 +54,12 @@
         {
           "type":"view",
           "name":"我的房产",
-          "url":"http://wx.lezhai365.com/lezhaishiyong/infomation/house"
+          "url":"http://wx.lezhai365.com/lezhaishiyong/infomation/myhouse"
         },
         {
           "type":"view",
           "name":"我的小区",
-          "url":"http://wx.lezhai365.com/lezhaishiyong/infomation/estate"
+          "url":"http://wx.lezhai365.com/lezhaishiyong/infomation/myestate"
         }]
     }
   ]
