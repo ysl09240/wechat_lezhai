@@ -39,7 +39,7 @@
                 </div>
                 <div class="wx-group">
                     <div class="wx-space"></div>
-                    <ul class="wx-functions">
+                    <ul class="wx-messages">
                         <c:choose>
                             <c:when test="${empty myHouseList}">
                                 <div class="wx-tip-message">
