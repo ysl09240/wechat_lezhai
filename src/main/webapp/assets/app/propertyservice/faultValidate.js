@@ -3,7 +3,7 @@
  */
 
 
-$().ready(function() {
+$(function() {
 
 
     jQuery.validator.addMethod("isPhone", function(value, element) {
@@ -14,6 +14,12 @@ $().ready(function() {
 
     $("#addFaultForm").validate({
             rules: {
+                description:{
+                    required:true
+                },
+                repairPeople:{
+                    required:true
+                },
                 contactNumber:{
                     required: true,
                     maxlength:11,
@@ -21,13 +27,19 @@ $().ready(function() {
                 }
             },
             messages: {
+                description:{
+                    required:"请输入报修描述"
+                },
+                contactNumber:{
+                    required:"请输报修人"
+                },
                 contactNumber:{
                     required: "请输入联系电话",
                     maxlength:"确认电话不能大于11个字符"
                 }
             },
             errorPlacement: function(error, element) {
-                error.appendTo($(".errorMessage"));
+                error.appendTo($(".wx-group"));
             },
             submitHandler:function(form){
                 form.submit();

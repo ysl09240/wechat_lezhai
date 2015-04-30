@@ -29,6 +29,12 @@ $(function () {
 
     $("#authhouseForm").validate({
         rules: {
+            houseInfoId:{
+                required:true
+            },
+            ownerName:{
+                required:true
+            },
             ownerPhone: {
                 required: true,
                 maxlength: 11,
@@ -36,13 +42,19 @@ $(function () {
             }
         },
         messages: {
+            houseInfoId:{
+              required:"请选择房间"
+            },
+            ownerName:{
+                required:"请输入业主姓名"
+            },
             ownerPhone: {
                 required: "请输入联系电话",
                 maxlength: "确认电话不能大于11个字符"
             }
         },
         errorPlacement: function (error, element) {
-            error.appendTo($(".errorMessage"));
+            error.appendTo($(".wx-item"));
         },
         submitHandler: function (form) {
             form.submit();

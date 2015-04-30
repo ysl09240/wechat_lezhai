@@ -12,6 +12,12 @@ $(function(){
 
     $("#addComplaintForm").validate({
         rules: {
+            complaintContent:{
+                required:true
+            },
+            complainant:{
+                required:true
+            },
             contactNumber:{
                 required: true,
                 maxlength:11,
@@ -19,13 +25,19 @@ $(function(){
             }
         },
         messages: {
+            complaintContent:{
+                required:"请输入投诉内容"
+            },
+            complainant:{
+                required:"请输入投诉人"
+            },
             contactNumber:{
                 required: "请输入联系电话",
                 maxlength:"确认电话不能大于11个字符"
             }
         },
         errorPlacement: function(error, element) {
-            error.appendTo($(".errorMessage"));
+            error.appendTo($(".wx-group"));
         },
         submitHandler:function(form){
             form.submit();

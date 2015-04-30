@@ -304,6 +304,8 @@ public class PropertyServiceController extends BaseController {
 
             mv.addObject("flag", flag);
             mv.addObject("houseInfo",houseService.queryHouseInfoById(houseInfoId));
+            mv.addObject("openid",openid);
+            mv.addObject("signinName",signinName);
             mv.setViewName("propertyservice/integral");
         } else {
             mv.setViewName("no-default-house");
