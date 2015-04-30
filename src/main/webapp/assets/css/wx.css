@@ -433,14 +433,16 @@ form .textarea{
   color:rgb(243,93,48);
 }
 
-.env-statis li{
-  float: left;
-}
-
 .env-statis li
 {
+  float: left;
   margin-left: 18px;
 }
+
+.env-statis li:first-child{
+  margin-left: 5px;
+}
+
 .env-statis .line {
   height: 35px;
   width: 2px;
@@ -488,9 +490,15 @@ form .textarea{
   text-decoration: none;
 
 }
-.wx-btn:hover,.wx-btn:visited{
+.wx-btn:link,
+.wx-btn:hover,
+.wx-btn:visited
+.wx-btn:active {
   text-decoration: none;
   color: #FFF;
+}
+.wx-messages .wx-btn{
+  padding: 6px 8px;
 }
 
 .wx-btn.inverse{

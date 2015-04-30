@@ -167,9 +167,9 @@ public class PropertyServiceController extends BaseController {
         faultInfo.setHouseInfoId(houseInfoId);
 
         int flag = propertyServiceService.addFaultInfo(faultInfo,imgs);
-        if (flag > 0) {
+//        if (flag > 0) {
             mv.setViewName("redirect:/" + signinName + "/service/faultlist");
-        }
+//        }
         mv.addObject("openid", openid);
         mv.addObject("houseInfo",houseService.queryHouseInfoById(houseInfoId));
         return mv;
@@ -238,9 +238,9 @@ public class PropertyServiceController extends BaseController {
         complaintInfo.setHousingEstateId(estateId);
         ModelAndView mv = new ModelAndView();
         int flag = propertyServiceService.addComplaintInfo(complaintInfo,imgs);
-        if (flag > 0) {
+//        if (flag > 0) {
             mv.setViewName("redirect:/" + signinName + "/service/complaintlist");
-        }
+//        }
         mv.addObject("signinName", signinName);
         mv.addObject("openid", openid);
         mv.addObject("houseInfo",houseService.queryHouseInfoById(houseInfoId));
@@ -302,9 +302,9 @@ public class PropertyServiceController extends BaseController {
 
             }
 
+            mv.addObject("flag", flag);
             mv.addObject("houseInfo",houseService.queryHouseInfoById(houseInfoId));
             mv.setViewName("propertyservice/integral");
-            mv.addObject("flag", flag);
         } else {
             mv.setViewName("no-default-house");
         }

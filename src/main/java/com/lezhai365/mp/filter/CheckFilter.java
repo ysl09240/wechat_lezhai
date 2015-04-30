@@ -50,7 +50,7 @@ public class CheckFilter implements Filter {
             String openid = request.getParameter("openid");
 
             // 如果uri不包含wechat，并且没有openid时进行授权
-            if (!url.contains("wechat") && !url.contains("assets")&& (null == openid || "".equals(openid))) {
+            if (!url.contains("wechat") && !url.contains("assets") && !url.contains("api/upload")&& (null == openid || "".equals(openid))) {
                 //进行授权
                 System.out.println("------------授权跳转");
                 try {

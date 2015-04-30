@@ -58,7 +58,6 @@
                                 </li>
                                 <li class="wx-item">
                                     <div class="ln"> ${faultInfo.description}</div>
-                                    ${faultInfo.imgs}
                                     <c:if test="${!empty faultInfo.imgs}">
                                         <div class="mtm">
 
