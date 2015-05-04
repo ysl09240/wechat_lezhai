@@ -4,3 +4,4 @@ nbactions.xml
 ChangeLog
 *.iml
 .idea
+web.xml
