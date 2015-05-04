@@ -20,7 +20,7 @@
     <link rel="stylesheet" type="text/css" href="/assets/libs/webupload/style.css"/>
     <script src="/assets/libs/jquery/jquery-1.9.1.min.js"></script>
     <script src="/assets/libs/jquery/plugins/jquery.validate.min.js"></script>
-    <script src="/assets/app/propertyservice/faultValidate.js"></script>
+    <script src="/assets/app/propertyservice/complaintValidate.js"></script>
     <script type="text/javascript" src="/assets/libs/webupload/lib/webuploader.js"></script>
     <script type="text/javascript" src="/assets/libs/webupload/upload.js"></script>
 </head>
@@ -78,13 +78,12 @@
                                     <div class="wx-name">联系电话</div>
                                     <input id="contactNumber" class="feild" name="contactNumber"/>
                                 </li>
-                                    <span class="errorMessage" style="color:red"></span>
                             </ul>
                         </div>
                         <div class="wx-group fiexd-b">
                             <ul class="wx-functions">
                                 <li class="wx-item">
-                                    <div class="wx-header "><button class="form-button">提交投诉</button></div>
+                                    <div class="wx-header "><button  type="submit" class="form-button">提交投诉</button></div>
                                 </li>
                             </ul>
                         </div>

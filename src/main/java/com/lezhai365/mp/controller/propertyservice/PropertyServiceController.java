@@ -1,5 +1,6 @@
 package com.lezhai365.mp.controller.propertyservice;
 
+import com.lezhai365.base.spi.user.IPmcUserService;
 import com.lezhai365.common.exception.TranscationalException;
 import com.lezhai365.common.model.CacheUser;
 import com.lezhai365.common.model.Page;
@@ -41,6 +42,9 @@ public class PropertyServiceController extends BaseController {
     @Autowired
     IHouseService houseService;
 
+    @Autowired
+    IPmcUserService pmcUserService;
+
     //账单查询
     @RequestMapping(value = "/billslist")
     public ModelAndView getBillsList(
@@ -55,6 +59,7 @@ public class PropertyServiceController extends BaseController {
 
         Map<String, Object> userWxMap = getUserWx(signinName, openid);
         Long estateId = (Long) userWxMap.get("defaultEstateId");
+        Long pmcUserId = (Long) userWxMap.get("pmcId");
         Object houseIdObj = userWxMap.get("defaultHouseId");
         if(null != houseIdObj){
             Long houseInfoId = (Long) userWxMap.get("defaultHouseId");
@@ -87,6 +92,7 @@ public class PropertyServiceController extends BaseController {
             mv.addObject("sumNotPayMap", sumNotPayMap);
             mv.addObject("billsMap", billsMap);
             mv.addObject("houseInfo",houseService.queryHouseInfoById(houseInfoId));
+            mv.addObject("pmcInfo",pmcUserService.queryPmcInfoByUserId(pmcUserId));
             mv.setViewName("propertyservice/paybills");
         } else {
             mv.setViewName("no-default-house");

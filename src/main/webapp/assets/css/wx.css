@@ -634,3 +634,18 @@ form .error{
   height: auto;
   vertical-align: middle;
 }
+
+.pmc-account-info {
+  margin: 0 auto -6px;
+  padding: 14px 10px;
+  width: 280px;
+  top: -180px;
+  background: #000;
+  opacity: 0.5;
+  color: #FFF;
+  border-radius: 5px;
+}
+
+.pmc-account-info .small{
+  line-height: 20px;
+}

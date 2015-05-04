@@ -74,9 +74,18 @@
                         </div>
                         </c:forEach>
                         <div class="wx-group fiexd-b">
+                            <div id="account-info" class="hidden pmc-account-info">
+                                <div class="pbm">公司名称:${pmcInfo.companyName}</div>
+                                <div class="ptm pbm">开户行名称:${pmcInfo.bank}</div>
+                                <div class="ptm pbm">开户行账号:${pmcInfo.bankAccount}</div>
+                                <div class="ptm pbm">开户用户名:${pmcInfo.bankAccountUser}</div>
+                                <div class="text-c small">友情提示:转账汇款24小时内到账，届时物业会发布账单</div>
+                            </div>
                             <ul class="wx-functions">
                                 <li class="wx-item">
-                                    <div class="wx-header"><a class="text-c">物业账号</a></div>
+                                    <div class="wx-header">
+                                        <a id="show-account-info" class="text-c">物业账号</a>
+                                    </div>
                                 </li>
                             </ul>
                         </div>
@@ -85,5 +94,17 @@
 
             </div>
         </div>
+        <script src="/assets/libs/jquery/jquery-1.9.1.min.js"></script>
+        <script type="text/javascript">
+            $(function(){
+                $("#show-account-info").click(function(){
+                    if($("#account-info").hasClass("hidden")){
+                        $("#account-info").removeClass("hidden");
+                    } else {
+                        $("#account-info").addClass("hidden");
+                    }
+                });
+            });
+        </script>
     </body>
 </html>
