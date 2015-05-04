@@ -65,10 +65,10 @@
                                         <c:forEach var="exchange" items="${integralExchangePage.content}">
                                             <li class="wx-item bt-none">
                                                 <div class="pull-right prm">
-                                                    <div class="fee text-c small">-${exchange.usedIntegral}</div>
+                                                    <div class="fee text-c small"> -${exchange.usedIntegral} </div>
                                                     <div class="status text-muted small">${exchange.createdTimeStr} </div>
                                                 </div>
-                                                <div class="wx-name>${exchange.goodsName}*${exchange.goodsNumber}</div>
+                                                <div class="wx-name">${exchange.goodsName}*${exchange.goodsNumber}</div>
                                             </li>
                                         </c:forEach>
                                     </c:when>
@@ -76,7 +76,7 @@
                                         <c:forEach var="adjust" items="${integralAdjustPage.content}">
                                             <li class="wx-item bt-none ">
                                                 <div class="pull-right prm">
-                                                    <div class="fee text-c small">${adjust.newIntegral}-${adjust.oldIntegral}</div>
+                                                    <div class="fee text-c small">${adjust.newIntegral-adjust.oldIntegral}</div>
                                                     <div class="status text-muted small">${adjust.updateTimeStr} </div>
                                                 </div>
                                                 <div class="wx-name">${adjust.remarks}</div>
