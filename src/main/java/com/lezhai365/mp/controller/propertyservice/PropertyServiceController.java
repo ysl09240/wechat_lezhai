@@ -51,7 +51,7 @@ public class PropertyServiceController extends BaseController {
             HttpServletResponse response,
             @RequestParam String openid,
             @PathVariable String signinName,
-            @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+            @RequestParam(value = "pageSize", defaultValue = "100") Integer pageSize,
             @RequestParam(value = "pageIndex", defaultValue = "1") Integer pageIndex) {
         ModelAndView mv = new ModelAndView();
         mv.addObject("signinName", signinName);
@@ -107,7 +107,7 @@ public class PropertyServiceController extends BaseController {
             HttpServletResponse response,
             @RequestParam String openid,
             @PathVariable String signinName,
-            @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+            @RequestParam(value = "pageSize", defaultValue = "100") Integer pageSize,
             @RequestParam(value = "pageIndex", defaultValue = "1") Integer pageIndex) {
         ModelAndView mv = new ModelAndView();
         mv.addObject("signinName", signinName);
@@ -186,7 +186,7 @@ public class PropertyServiceController extends BaseController {
     public ModelAndView getComplaintsList(
             @RequestParam String openid,
             @PathVariable String signinName,
-            @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
+            @RequestParam(value = "pageSize", defaultValue = "100") Integer pageSize,
             @RequestParam(value = "pageIndex", defaultValue = "1") Integer pageIndex) {
         ModelAndView mv = new ModelAndView();
         mv.addObject("signinName", signinName);
@@ -259,7 +259,7 @@ public class PropertyServiceController extends BaseController {
             @RequestParam String openid,
             @PathVariable String signinName,
             @RequestParam(value = "flag", defaultValue = "iHistory") String flag,
-            @RequestParam(value = "pageSize", defaultValue = "10") int pageSize,
+            @RequestParam(value = "pageSize", defaultValue = "100") int pageSize,
             @RequestParam(value = "pageIndex", defaultValue = "1") int pageIndex) {
         ModelAndView mv = new ModelAndView();
         Map<String, Object> userWxMap = getUserWx(signinName, openid);

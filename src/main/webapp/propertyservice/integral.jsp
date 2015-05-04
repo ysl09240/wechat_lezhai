@@ -62,21 +62,21 @@
                                 </li>
                                 <c:choose>
                                     <c:when test="${flag eq 'iExchange'}">
-                                        <c:forEach var="exchange" varStatus="vs" items="${integralExchangePage.content}">
-                                            <li class="wx-item <c:if test="${vs.index eq 0}">bt-none</c:if>">
+                                        <c:forEach var="exchange" items="${integralExchangePage.content}">
+                                            <li class="wx-item bt-none">
                                                 <div class="pull-right prm">
-                                                    <div class="fee text-c small">-${exchange.usedIntegral}</div>
+                                                    <div class="fee text-c small"> -${exchange.usedIntegral} </div>
                                                     <div class="status text-muted small">${exchange.createdTimeStr} </div>
                                                 </div>
-                                                <div class="wx-name>${exchange.goodsName}*${exchange.goodsNumber}</div>
+                                                <div class="wx-name">${exchange.goodsName}*${exchange.goodsNumber}</div>
                                             </li>
                                         </c:forEach>
                                     </c:when>
                                     <c:when test="${flag eq 'iAdjust'}">
-                                        <c:forEach var="adjust" varStatus="vs" items="${integralAdjustPage.content}">
-                                            <li class="wx-item <c:if test="${vs.index eq 0}">bt-none</c:if>">
+                                        <c:forEach var="adjust" items="${integralAdjustPage.content}">
+                                            <li class="wx-item bt-none ">
                                                 <div class="pull-right prm">
-                                                    <div class="fee text-c small">${adjust.newIntegral - adjust.oldIntegral}</div>
+                                                    <div class="fee text-c small">${adjust.newIntegral-adjust.oldIntegral}</div>
                                                     <div class="status text-muted small">${adjust.updateTimeStr} </div>
                                                 </div>
                                                 <div class="wx-name">${adjust.remarks}</div>
@@ -84,8 +84,8 @@
                                         </c:forEach>
                                     </c:when>
                                     <c:otherwise>
-                                        <c:forEach var="history" varStatus="vs" items="${integralHistoryPage.content}">
-                                            <li class="wx-item <c:if test="${vs.index eq 0}">bt-none</c:if>">
+                                        <c:forEach var="history" items="${integralHistoryPage.content}">
+                                            <li class="wx-item bt-none">
                                                 <div class="pull-right prm">
                                                     <div class="fee text-c small">${history.integralGrade}</div>
                                                     <div class="status text-muted small">${history.createdTimeStr} </div>

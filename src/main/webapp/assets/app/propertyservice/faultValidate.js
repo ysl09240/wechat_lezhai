@@ -24,7 +24,11 @@ $(function() {
                     required: true,
                     maxlength:11,
                     isPhone:true
+                },
+                adress:{
+                    required:true
                 }
+
             },
             messages: {
                 description:{
@@ -36,6 +40,9 @@ $(function() {
                 contactNumber:{
                     required: "请输入联系电话",
                     maxlength:"确认电话不能大于11个字符"
+                },
+                address:{
+                    required:"请输入报修地点"
                 }
             },
             errorPlacement: function(error, element) {

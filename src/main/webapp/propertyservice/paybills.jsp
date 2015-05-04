@@ -35,7 +35,14 @@
                             <div class="wx-space"></div>
                             <ul class="wx-messages">
                                 <li class="wx-item">
-                                    <div class="pull-right prm pts text-c">￥<fmt:formatNumber pattern="0.00">${sumNotPayMap.sumMoney}</fmt:formatNumber> </div>
+                                    <c:choose>
+                                        <c:when test="${sumNotPayMap.sumMoney eq null}">
+                                            <div class="pull-right prm pts text-c">￥<fmt:formatNumber pattern="0.00" value="${0}"></fmt:formatNumber> </div>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <div class="pull-right prm pts text-c">￥<fmt:formatNumber pattern="0.00" value="${sumNotPayMap.sumMoney}"></fmt:formatNumber> </div>
+                                        </c:otherwise>
+                                    </c:choose>
                                     <div class="wx-name">未缴金额合计:</div>
                                 </li>
                             </ul>
