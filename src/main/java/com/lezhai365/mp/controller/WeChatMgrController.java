@@ -1,5 +1,9 @@
 package com.lezhai365.mp.controller;
 
+import com.lezhai365.nosql.mongo.Mongodb;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBCollection;
+import com.mongodb.DBObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,6 +43,10 @@ public class WeChatMgrController {
     @RequestMapping(value = {"do/edit"})
     public ModelAndView doEditView() {
 
+        DBCollection collection = Mongodb.getCollection("wechat","mp_info");
+        DBObject dbo = new BasicDBObject();
+//        dbo.put("pmcSignName",);
+        collection.save(dbo);
         return null;
     }
 
