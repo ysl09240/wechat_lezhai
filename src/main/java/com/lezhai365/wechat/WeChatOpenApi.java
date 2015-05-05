@@ -30,12 +30,25 @@ public class WeChatOpenApi {
      * @return
      * @throws Exception
      */
-    public static String getAccessToken(String appid, String secret) throws Exception {
+    public  String getAccessToken(String appid, String secret) throws Exception {
         String jsonStr = HttpUtil.get(ACCESSTOKEN_URL.concat("&appid=") + appid + "&secret=" + secret);
         Map<String, Object> map = JSONObject.parseObject(jsonStr);
         System.out.println("------------token");
         System.out.println(map);
         return map.get("access_token").toString();
+    }
+
+    /**
+     * 获取accessToken info
+     * @param appid
+     * @param secret
+     * @return
+     * @throws Exception
+     */
+    public  Map getAccessTokenInfo(String appid, String secret) throws Exception {
+        String jsonStr = HttpUtil.get(ACCESSTOKEN_URL.concat("&appid=") + appid + "&secret=" + secret);
+        Map<String, Object> map = JSONObject.parseObject(jsonStr);
+        return map;
     }
 
     /**
