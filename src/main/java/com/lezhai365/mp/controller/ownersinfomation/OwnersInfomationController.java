@@ -174,6 +174,7 @@ public class OwnersInfomationController extends BaseController {
     @RequestMapping(value="/authhouse")
     public ModelAndView authHouseView(
             @RequestParam String openid,
+            @RequestParam Long houseEstateId,
             @PathVariable String signinName){
         ModelAndView mv = new ModelAndView();
 
@@ -187,6 +188,7 @@ public class OwnersInfomationController extends BaseController {
             List<Map<String, Object>> estateList = userWxAuthService.queryMyEstate(userWxEstateWhere);
             mv.addObject("estateList", estateList);
             mv.addObject("signinName", signinName);
+            mv.addObject("houseEstateId",houseEstateId);
             mv.addObject("openid", openid);
         }
         mv.setViewName("propertyinfomation/applyauth");

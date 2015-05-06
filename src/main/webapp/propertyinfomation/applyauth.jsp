@@ -59,7 +59,7 @@
                                         data-sync="false">
                                         <option>请选择小区</option>
                                     <c:forEach items="${estateList}" var="estate">
-                                        <option value="${estate.housingEstateId}">${estate.housingEstateName}</option>
+                                        <option value="${estate.housingEstateId}" <c:if test="${houseEstateId eq estate.housingEstateId}">select</c:if> >${estate.housingEstateName}</option>
                                     </c:forEach>
                                 </select>
                             </li>

@@ -45,7 +45,7 @@ public class MpInfoService {
     public int addMpInfo(MpInfo mpInfo) throws Exception {
         DBObject obj = new BasicDBObject();
 
-        obj.put("pmcSigninName",mpInfo);    // 物业公司ID
+        obj.put("pmcSigninName",mpInfo.getPmcSigninName());    // 物业公司ID
         obj.put("wechatName",mpInfo.getWechatName()); // 微信名称
         obj.put("wechatOriginId",mpInfo.getWechatOriginId()); // 微信原始ID
         obj.put("wechatAppId",mpInfo.getWechatAppId()); // 微信公众号AppId
@@ -87,7 +87,7 @@ public class MpInfoService {
 
         if (null != dbo) {
             accessToken = dbo.get("accessToken").toString();
-            Long accessTokenUpdateTime = (Long)dbo.get("accessToken");
+            Long accessTokenUpdateTime = (Long)dbo.get("accessTokenUpdateTime");
             Long currentTime = new Date().getTime();
 
             //如果超过两个小时从新获取access token
