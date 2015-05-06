@@ -33,20 +33,35 @@ public class WeChatMgrController {
         return null;
     }
 
-    @RequestMapping(value = {"edit"})
+    /**
+     * 编辑添加公众号信息视图
+     * @return
+     */
+    @RequestMapping(value = {"mpInfo/edit"})
     public ModelAndView editView() {
-
-        return null;
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("mgr/mpInfoEdit");
+        return mv;
     }
 
+    /**
+     * 公众号列表
+     * @return
+     */
+    @RequestMapping(value = {"mpInfo/list"})
+    public ModelAndView mpInfoListView() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("mgr/mpInfoList");
+        return mv;
+    }
 
-    @RequestMapping(value = {"do/edit"})
-    public ModelAndView doEditView() {
+    /**
+     * 编辑公众号
+     * @return
+     */
+    @RequestMapping(value = {"mpInfo/do/edit"})
+    public ModelAndView doEdit() {
 
-        DBCollection collection = Mongodb.getCollection("wechat","mp_info");
-        DBObject dbo = new BasicDBObject();
-//        dbo.put("pmcSignName",);
-        collection.save(dbo);
         return null;
     }
 
