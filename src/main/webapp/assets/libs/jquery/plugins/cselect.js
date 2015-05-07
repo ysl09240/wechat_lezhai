@@ -59,9 +59,6 @@
             var _options = _self.options;
 
             _self.init();
-            console.log(_options);
-
-            console.log("-----------------");
             //bind on change event
             var groupElementIdArr = _options.group;
             var idArrLen = groupElementIdArr.length;
@@ -69,6 +66,7 @@
                 // last item not bind on change event
                 (idArrLen - 1 !== index) && $("#" + id).on('change', _options, function (event) {
                     console.log(_options);
+                    console.log("----------------------");
                     _self.onChange(event, _options);
                 });
             });

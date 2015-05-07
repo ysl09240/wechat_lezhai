@@ -54,14 +54,38 @@
                                 </span>
 
                                 <div class="wx-name">小区</div>
-                                <select class="feild" id="estate-select" data-default="${detail.buildingId}"
-                                        name="housingEstateId" data-placeholder="请选择小区" data-_next="building-select"
-                                        data-sync="false">
-                                        <option>请选择小区</option>
-                                    <c:forEach items="${estateList}" var="estate">
-                                        <option value="${estate.housingEstateId}" <c:if test="${houseEstateId eq estate.housingEstateId}">select</c:if> >${estate.housingEstateName}</option>
-                                    </c:forEach>
-                                </select>
+                                <c:choose>
+                                    <c:when test="${empty houseEstateId}" >
+                                        <select class="feild" id="estate-select" data-default="${detail.buildingId}"
+                                                name="housingEstateId" data-placeholder="请选择小区" data-_next="building-select"
+                                                data-sync="false">
+                                            <option>请选择小区</option>
+                                            <c:forEach items="${estateList}" var="estate">
+                                                <option value="${estate.housingEstateId}" <c:if test="${houseEstateId eq estate.housingEstateId}">select</c:if> >${estate.housingEstateName}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <c:forEach items="${estateList}" var="estate">
+                                            <c:if test="${houseEstateId eq estate.housingEstateId}">
+                                                <select class="feild hidden" id="estate-select" data-default="${detail.buildingId}"
+                                                        name="housingEstateId" data-placeholder="请选择小区" data-_next="building-select"
+                                                        data-sync="false">
+                                                        <option>请选择楼宇</option>
+                                                        <option value="${estate.housingEstateId}" selected>${estate.housingEstateName}</option>
+                                                </select>
+                                                <div class="feild pts">${estate.housingEstateName}</div>
+                                                <script type="text/javascript">
+                                                    $(function(){
+                                                        setTimeout(function(){
+                                                            $("#estate-select>option:selected").trigger("change");
+                                                        },1000)
+                                                    });
+                                                </script>
+                                            </c:if>
+                                        </c:forEach>
+                                    </c:otherwise>
+                                </c:choose>
                             </li>
                             <li class="wx-item">
                                 <span class="wx-icon">

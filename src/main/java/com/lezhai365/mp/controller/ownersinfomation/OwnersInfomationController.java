@@ -174,7 +174,7 @@ public class OwnersInfomationController extends BaseController {
     @RequestMapping(value="/authhouse")
     public ModelAndView authHouseView(
             @RequestParam String openid,
-            @RequestParam Long houseEstateId,
+            @RequestParam(required = false) Long houseEstateId,
             @PathVariable String signinName){
         ModelAndView mv = new ModelAndView();
 
