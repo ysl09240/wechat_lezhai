@@ -1,65 +1,45 @@
 {
   "button":[
     {
-      "name":"物业服务",
+      "name":"开心一笑",
       "sub_button":[
         {
           "type":"view",
-          "name":"账单缴费",
-          "url":"http://wx.lezhai365.com/lezhaishiyong/service/billslist"
+          "name":"每日一语",
+          "url":"http://2a086dd6.ngrok.io/lezhaishiyong/service/billslist"
         },
         {
           "type":"view",
-          "name":"报修",
-          "url":"http://wx.lezhai365.com/lezhaishiyong/service/faultlist"
-        },
-        {
-          "type":"view",
-          "name":"投诉",
-          "url":"http://wx.lezhai365.com/lezhaishiyong/service/complaintlist"
-        },
-        {
-          "type":"view",
-          "name":"环保积分",
-          "url":"http://wx.lezhai365.com/lezhaishiyong/service/integralslist"
+          "name":"每日一笑",
+          "url":"http://2a086dd6.ngrok.io/lezhaishiyong/service/faultlist"
         }]
     },
     {
-      "name":"物业管家",
+      "name":"lol日记",
       "sub_button":[
         {
           "type":"view",
-          "name":"小区通知",
-          "url":"http://wx.lezhai365.com/lezhaishiyong/manager/notice"
+          "name":"最新战报",
+          "url":"http://2a086dd6.ngrok.io/lezhaishiyong/manager/notice"
         },
         {
           "type":"click",
-          "name":"物业介绍",
+          "name":"团队战报",
           "key":"pmc_intro"
-        },
-        {
-          "type":"view",
-          "name":"服务指南",
-          "url":"http://wx.lezhai365.com/lezhaishiyong/manager/guide"
-        },
-        {
-          "type":"view",
-          "name":"常用电话",
-          "url":"http://wx.lezhai365.com/lezhaishiyong/manager/commonphone"
         }]
     },
     {
-      "name":"业主信息",
+      "name":"森林主角",
       "sub_button":[
         {
           "type":"view",
-          "name":"我的房产",
-          "url":"http://wx.lezhai365.com/lezhaishiyong/infomation/myhouse"
+          "name":"天涯海角",
+          "url":"http://2a086dd6.ngrok.io/lezhaishiyong/infomation/myhouse"
         },
         {
           "type":"view",
-          "name":"我的小区",
-          "url":"http://wx.lezhai365.com/lezhaishiyong/infomation/myestate"
+          "name":"美丽江山",
+          "url":"http://2a086dd6.ngrok.io/lezhaishiyong/infomation/myestate"
         }]
     }
   ]

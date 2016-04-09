@@ -30,7 +30,7 @@ import java.io.InputStream;
  */
 
 @Controller
-@RequestMapping(value="/{pmcSiginName}/wechat")
+@RequestMapping(value="/{pmcSiginName}")
 public class WeChatController extends  BaseController{
 
     OauthService oauthService = new OauthService();
@@ -53,9 +53,7 @@ public class WeChatController extends  BaseController{
      * @param pmcSiginName
      * @return
      */
-    @RequestMapping(value = {"","/","/index"},
-            //同时接收get和post
-            method = {RequestMethod.GET,RequestMethod.POST}, produces = "text/html;charset=UTF-8")
+    @RequestMapping(value = {"","/","/index"}, method = { RequestMethod.GET, RequestMethod.POST })
     @ResponseBody
     public String index(
             HttpServletRequest request,
@@ -68,9 +66,8 @@ public class WeChatController extends  BaseController{
         System.out.println("物业:" +pmcSiginName);
         //如果带有echostr
         if(echostr !=null && StringUtils.isNotBlank(echostr)){
-            System.out.println("-------------check token--------------");
             // 1.获取对应物业公司公众账号的token
-            String token = "3lezhai65";
+            String token = "dasenglin";
             if(SignatureUtil.checkSignature(token,signature,timestamp,nonce)){
                 //第一次认证的时候创建菜单
                 weChatService.menuCreate(pmcSiginName);
@@ -80,7 +77,6 @@ public class WeChatController extends  BaseController{
             System.out.println("---------------------message---------------");
             try {
                 InputStream inputStream = request.getInputStream();
-
                 UserAccounts userAccounts = new UserAccounts();
                 result = weChatService.processWxMsg(userAccounts.getId(),pmcSiginName,inputStream);
             } catch (IOException e) {
