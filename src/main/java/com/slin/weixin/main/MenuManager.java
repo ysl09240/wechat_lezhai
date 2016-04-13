@@ -26,9 +26,6 @@ public class MenuManager {
         // 第三方用户唯一凭证密钥
         String appSecret = ConfigUtil.APPSECRET;
 
-
-
-
         // 调用接口获取access_token
         AccessToken at = CommonUtil.getToken(appId,appSecret);
 

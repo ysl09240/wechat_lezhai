@@ -3,7 +3,7 @@ package com.slin.weixin.util;
 
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
-import com.slin.weixin.pojo.Token;
+import com.slin.weixin.pojo.AccessToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -98,15 +98,15 @@ public class CommonUtil {
      * @param appsecret 密钥
      * @return
      */
-    public static Token getToken(String appid, String appsecret) {
-        Token token = null;
+    public static AccessToken getToken(String appid, String appsecret) {
+        AccessToken token = null;
         String requestUrl = token_url.replace("APPID", appid).replace("APPSECRET", appsecret);
         // 发起GET请求获取凭证
         JSONObject jsonObject = httpsRequest(requestUrl, "GET", null);
 
         if (null != jsonObject) {
             try {
-                token = new Token();
+                token = new AccessToken();
                 token.setAccessToken(jsonObject.getString("access_token"));
                 token.setExpiresIn(jsonObject.getIntValue("expires_in"));
             } catch (JSONException e) {

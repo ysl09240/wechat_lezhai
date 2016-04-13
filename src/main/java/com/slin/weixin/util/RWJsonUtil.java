@@ -11,8 +11,10 @@ public class RWJsonUtil {
 
     public static void main(String[] args) {
         String path = String.valueOf(Thread.currentThread().getContextClassLoader().getResource("WechatMenu.json"));
-        String tempPath = path.substring(path.indexOf("/"));
-        System.out.println(ReadFile(tempPath).replaceAll("\\s*",""));
+        String temp = String.valueOf(RWJsonUtil.class.getResource("/").getPath()+"WechatMenu.json");
+//        String tempPath = path.substring(path.indexOf("/"));
+//        System.out.println(ReadFile(tempPath).replaceAll("\\s*",""));
+        System.out.println(ReadFile(temp).replaceAll("\\s*",""));
     }
 
     public static void writeFile(String filePath, String sets)
