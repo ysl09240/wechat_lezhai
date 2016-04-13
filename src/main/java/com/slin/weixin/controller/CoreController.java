@@ -1,14 +1,12 @@
 package com.slin.weixin.controller;
 
-import com.slin.wechat.utils.SignatureUtil;
+import com.slin.weixin.Util.SignUtil;
 import com.slin.weixin.service.CoreService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
-import java.io.InputStream;
+
 
 /**
  * 类名: CoreController </br>
@@ -40,16 +38,12 @@ public class CoreController extends BaseController {
             @RequestParam(required = false) String nonce,
             @RequestParam(required = false) String echostr,
             @PathVariable String wechatName) throws Exception {
-
-
         String result = "error";
         //如果带有echostr
         if(echostr !=null && StringUtils.isNotBlank(echostr)){
-            // 1.获取对应物业公司公众账号的token
-            String token = "dasenglin";
-            if(SignatureUtil.checkSignature(token,signature,timestamp,nonce)){
+            if(SignUtil.checkSignature(signature,timestamp,nonce)){
                 //第一次认证的时候创建菜单
-//                weChatService.menuCreate(pmcSiginName);
+//                weChatService.menuCreate(wechatName);
                 result = echostr;
             }
         } else {
