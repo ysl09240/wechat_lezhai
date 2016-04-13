@@ -1,6 +1,6 @@
 package com.slin.weixin.util;
 
-import com.slin.weixin.pojo.Token;
+import com.slin.weixin.pojo.AccessToken;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -64,7 +64,7 @@ public class TokenUtil {
      * @return
      * @throws
      */
-    public static void saveToken(Token token){
+    public static void saveToken(AccessToken token){
         //存入数据库中
         Connection conn = null;
         PreparedStatement pst = null;

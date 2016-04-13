@@ -1,6 +1,6 @@
 package com.slin.weixin.thread;
 
-import com.slin.weixin.pojo.Token;
+import com.slin.weixin.pojo.AccessToken;
 import com.slin.weixin.util.CommonUtil;
 import com.slin.weixin.util.TokenUtil;
 import org.slf4j.Logger;
@@ -16,7 +16,7 @@ public class TokenThread implements Runnable {
     public static String appid = "";
     // 第三方用户唯一凭证密钥
     public static String appsecret = "";
-    public static Token accessToken = null;
+    public static AccessToken accessToken = null;
 
     public void run() {
         while (true) {

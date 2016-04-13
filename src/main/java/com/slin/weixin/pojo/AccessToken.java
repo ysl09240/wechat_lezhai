@@ -6,7 +6,7 @@ package com.slin.weixin.pojo;
  * @author SongLin.Yang
  * @data 2016-04-13 11:49
  */
-public class Token {
+public class AccessToken {
     // 接口访问凭证
     private String accessToken;
     // 凭证有效期，单位：秒
