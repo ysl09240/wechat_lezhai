@@ -1,6 +1,6 @@
 package com.slin.weixin.controller;
 
-import com.slin.weixin.Util.SignUtil;
+import com.slin.weixin.util.SignUtil;
 import com.slin.weixin.service.CoreService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;

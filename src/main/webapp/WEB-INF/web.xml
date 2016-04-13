@@ -24,6 +24,7 @@
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
+
     <servlet-mapping>
         <servlet-name>spring</servlet-name>
         <url-pattern>/</url-pattern>
@@ -32,7 +33,6 @@
     <listener>
         <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
     </listener>
-
     <listener>
         <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
     </listener>
@@ -54,4 +54,21 @@
     <welcome-file-list>
         <welcome-file>/index.jsp</welcome-file>
     </welcome-file-list>
+
+    <servlet>
+        <servlet-name>initServlet</servlet-name>
+        <servlet-class>
+            com.slin.weixin.servlet.InitServlet
+        </servlet-class>
+        <!-- 配置获取access_token所需参数appid和appsecret -->
+        <!--<init-param>-->
+        <!--<param-name>appid</param-name>-->
+        <!--<param-value>appid</param-value>-->
+        <!--</init-param>-->
+        <!--<init-param>-->
+        <!--<param-name>appsecret</param-name>-->
+        <!--<param-value>appsecret</param-value>-->
+        <!--</init-param>-->
+        <load-on-startup>0</load-on-startup>
+    </servlet>
 </web-app>
