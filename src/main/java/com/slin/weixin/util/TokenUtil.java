@@ -1,4 +1,4 @@
-package com.slin.weixin.Util;
+package com.slin.weixin.util;
 
 import com.slin.weixin.pojo.AccessToken;
 

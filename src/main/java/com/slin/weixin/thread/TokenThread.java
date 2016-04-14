@@ -1,8 +1,8 @@
 package com.slin.weixin.thread;
 
 import com.slin.weixin.pojo.AccessToken;
-import com.slin.weixin.Util.CommonUtil;
-import com.slin.weixin.Util.TokenUtil;
+import com.slin.weixin.util.CommonUtil;
+import com.slin.weixin.util.TokenUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
