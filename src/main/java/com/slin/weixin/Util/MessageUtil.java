@@ -1,4 +1,4 @@
-package com.slin.weixin.util;
+package com.slin.weixin.Util;
 
 import com.slin.weixin.message.resp.*;
 import com.thoughtworks.xstream.XStream;

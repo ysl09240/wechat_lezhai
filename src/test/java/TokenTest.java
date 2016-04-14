@@ -1,7 +1,7 @@
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
 import com.slin.weixin.pojo.WeixinUserInfo;
-import com.slin.weixin.util.*;
+import com.slin.weixin.Util.*;
 import com.slin.weixin.pojo.AccessToken;
 import org.junit.Test;
 import org.slf4j.Logger;

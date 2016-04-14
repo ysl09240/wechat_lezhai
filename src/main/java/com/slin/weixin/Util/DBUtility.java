@@ -1,4 +1,4 @@
-package com.slin.weixin.util;
+package com.slin.weixin.Util;
 
 import org.apache.commons.dbcp.BasicDataSource;
 

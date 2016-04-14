@@ -1,7 +1,7 @@
 package com.slin.weixin.pojo;
 
 import com.alibaba.fastjson.JSONObject;
-import com.slin.weixin.util.CommonUtil;
+import com.slin.weixin.Util.CommonUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

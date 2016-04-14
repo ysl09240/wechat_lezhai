@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 import org.junit.Test;
 
-import com.slin.weixin.util.DBUtility;
+import com.slin.weixin.Util.DBUtility;
 
 public class TestDBUtility {
 

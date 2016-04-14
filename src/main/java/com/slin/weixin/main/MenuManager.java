@@ -5,9 +5,9 @@ import com.slin.weixin.menu.CommonButton;
 import com.slin.weixin.menu.ComplexButton;
 import com.slin.weixin.menu.Menu;
 import com.slin.weixin.pojo.AccessToken;
-import com.slin.weixin.util.CommonUtil;
-import com.slin.weixin.util.ConfigUtil;
-import com.slin.weixin.util.MenuUtil;
+import com.slin.weixin.Util.CommonUtil;
+import com.slin.weixin.Util.ConfigUtil;
+import com.slin.weixin.Util.MenuUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

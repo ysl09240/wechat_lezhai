@@ -1,6 +1,6 @@
 package com.slin.weixin.service;
 
-import com.slin.weixin.util.MessageUtil;
+import com.slin.weixin.Util.MessageUtil;
 import com.slin.weixin.message.resp.TextMessage;
 
 import javax.servlet.http.HttpServletRequest;

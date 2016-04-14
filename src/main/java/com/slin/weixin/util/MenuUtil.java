@@ -1,4 +1,4 @@
-package com.slin.weixin.util;
+package com.slin.weixin.Util;
 
 import com.alibaba.fastjson.JSONObject;
 import com.slin.weixin.menu.Menu;

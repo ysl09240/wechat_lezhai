@@ -1,8 +1,8 @@
 package com.slin.weixin.servlet;
 
 import com.slin.weixin.thread.TokenThread;
-import com.slin.weixin.util.CommonUtil;
-import com.slin.weixin.util.ConfigUtil;
+import com.slin.weixin.Util.CommonUtil;
+import com.slin.weixin.Util.ConfigUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

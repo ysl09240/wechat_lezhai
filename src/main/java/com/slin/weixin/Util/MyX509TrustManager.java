@@ -1,4 +1,4 @@
-package com.slin.weixin.util;
+package com.slin.weixin.Util;
 
 
 import javax.net.ssl.X509TrustManager;
