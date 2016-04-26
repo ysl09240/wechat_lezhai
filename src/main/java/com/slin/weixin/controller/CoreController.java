@@ -2,10 +2,10 @@ package com.slin.weixin.controller;
 
 import com.slin.weixin.pojo.SNSUserInfo;
 import com.slin.weixin.pojo.WeixinOauth2Token;
+import com.slin.weixin.service.CoreService;
 import com.slin.weixin.util.CommonUtil;
 import com.slin.weixin.util.ConfigUtil;
 import com.slin.weixin.util.SignUtil;
-import com.slin.weixin.service.CoreService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -47,7 +47,7 @@ public class CoreController extends BaseController {
         String result = "error";
         //如果带有echostr
         if(echostr !=null && StringUtils.isNotBlank(echostr)){
-            if(SignUtil.checkSignature(signature,timestamp,nonce)){
+            if(SignUtil.checkSignature(signature, timestamp, nonce)){
                 //第一次认证的时候创建菜单
 //                weChatService.menuCreate(wechatName);
                 result = echostr;

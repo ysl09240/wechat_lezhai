@@ -107,7 +107,7 @@ public class TokenTest {
         /**
          * 获取用户信息
          */
-        WeixinUserInfo user = WeixinUserInfo.getUserInfo(accessToken, "ooK-yuJvd9gEegH6nRIen-gnLrVw");
+        WeixinUserInfo user = CommonUtil.getUserInfo(accessToken, "ooK-yuJvd9gEegH6nRIen-gnLrVw");
         System.out.println("OpenID：" + user.getOpenId());
         System.out.println("关注状态：" + user.getSubscribe());
         System.out.println("关注时间：" + user.getSubscribeTime());
