@@ -13,12 +13,12 @@ import java.util.Arrays;
 public class SignUtil {
 
     // 与接口配置信息中的Token要一致
-    private static String token = "souvcweixin";
+    private static String token = "dasenglin";
 
     /**
      * 方法名：checkSignature</br>
      * 详述：验证签名</br>
-     * 开发人员：souvc</br>
+     * 开发人员：slin</br>
      * 创建时间：2015-9-29  </br>
      * @param signature
      * @param timestamp
