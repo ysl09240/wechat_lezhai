@@ -20,12 +20,13 @@ public class UserController extends BaseController {
     @Resource
     private IUserService userService;
 
+    @RequestMapping("/getUserById")
     public ModelAndView showUser(HttpServletRequest request){
 
         ModelAndView mv = new ModelAndView();
 
         User user = userService.getUser(1);
-        mv.setViewName("index");
+        mv.setViewName("login");
 
         return mv;
     }

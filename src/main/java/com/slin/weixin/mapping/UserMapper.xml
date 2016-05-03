@@ -2,15 +2,15 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
-
-        <!-- namespace用于java代码调用时识别指定xml的mapper文件 -->
-<mapper namespace="com.slin.weixin.mapping.UserMapper">
+<!-- namespace用于java代码调用时识别指定xml的mapper文件 -->
+<mapper namespace="com.slin.weixin.dao.UserMapper">
     <select id="getUser" resultType="com.slin.weixin.pojo.User">
+        <![CDATA[
         select
           *
         from t_user where
         id= #{id}
+        ]]>
     </select>
 
     <insert id="addWorker">
