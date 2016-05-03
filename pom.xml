@@ -195,41 +195,25 @@
             <artifactId>dom4j</artifactId>
             <version>1.6.1</version>
         </dependency>
-
     </dependencies>
 
     <build>
-        <finalName>weixin-mp-webapp</finalName>
-        <plugins>
-            <plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>9.1.3.v20140225</version>
-                <configuration>
-                    <scanIntervalSeconds>5</scanIntervalSeconds>
-                    <reload>automatic</reload>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
-                </configuration>
-            </plugin>
-        </plugins>
-
     <!--原因是： idea不会编译src的java目录的xml文件-->
     <!--所以解决思路就是：将IDEA maven项目中src源代码下的xml等资源文件编译进classes文件夹-->
     <!--具体操作方法就是：配置maven的pom文件配置，在<build>节点下添加<resources>代码：-->
-        <!--<resources>-->
-            <!--<resource>-->
-                <!--<directory>src/main/java</directory>-->
-                <!--<includes>-->
-                    <!--<include>**/*.xml</include>-->
-                <!--</includes>-->
-            <!--</resource>-->
-        <!--</resources>-->
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.*</include>
+                </includes>
+            </resource>
+        </resources>
     </build>
 </project>

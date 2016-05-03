@@ -4,18 +4,18 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace用于java代码调用时识别指定xml的mapper文件 -->
 <mapper namespace="com.slin.weixin.dao.UserMapper">
-    <select id="getUser" resultType="com.slin.weixin.pojo.User">
-        <![CDATA[
+    <select id="getUser" resultType="User">
         select
-          *
+          id,
+          user_name AS userName,
+          password,
+          age
         from t_user where
         id= #{id}
-        ]]>
     </select>
 
     <insert id="addWorker">
         insert into worker (
-        <include refid="field" />
         ) values(#{id},#{name},#{age})
     </insert>
 
@@ -27,4 +27,5 @@
     <delete id="deleteWorkerById">
         delete from worker where id=#{id};
     </delete>
+
 </mapper>

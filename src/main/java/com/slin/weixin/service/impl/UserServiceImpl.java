@@ -1,13 +1,11 @@
 package com.slin.weixin.service.impl;
 
-import com.slin.weixin.dao.IUserDao;
+import com.slin.weixin.dao.UserMapper;
 import com.slin.weixin.pojo.User;
 import com.slin.weixin.service.IUserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * @author SongLin.Yang
@@ -17,10 +15,9 @@ import javax.annotation.Resource;
 public class UserServiceImpl implements IUserService {
 
     @Autowired
-    @Qualifier("UserMapper")
-    private IUserDao userDao;
-    @Override
+    private UserMapper userMapper;
+
     public User getUser(int id) {
-        return userDao.getUser(id);
+        return userMapper.getUser(id);
     }
 }
